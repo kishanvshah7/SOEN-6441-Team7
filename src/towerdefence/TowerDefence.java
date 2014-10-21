@@ -16,7 +16,7 @@ import javax.swing.*;
  *
  * @author Rahul K Kikani
  * 
- * @author Nitish GIT Testing
+ * 
  */
 public class TowerDefence extends JFrame{
 
