@@ -8,6 +8,7 @@ package tdgame.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import tdgame.model.MainScreenModel;
 import tdgame.model.MapCreationModel;
 import tdgame.view.MainScreenView;
@@ -25,19 +26,18 @@ public class MainScreenController {
     public MainScreenController(MainScreenView view, MainScreenModel model){
         this.theView = view;
         this.theModel = model;
-        
         this.theView.addButtonClickEventListner(new ButtonActionDetector());
     }
     
     public void initMapCreationController(){
         MapCreationView theView1 = new MapCreationView();
-    MapCreationModel theModel1 = new MapCreationModel();
+        MapCreationModel theModel1 = new MapCreationModel();
         theView1.setVisible(true);
-        theView.setEnabled(false);
+        //theView.setEnabled(false);
         theView.setAlwaysOnTop(false);
         theView1.setAlwaysOnTop(true);
         theView1.setFocusable(true);
-        //theMapCreation = new MapCreationController(theView1, theModel1);
+        theMapCreation = new MapCreationController(theView1, theModel1);
         //theMapCreation.startMapCreation();
     }
     
@@ -45,10 +45,21 @@ public class MainScreenController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //theView.displayMessage("Button Clicked");
-            System.out.println("Button Clicked");
-            initMapCreationController();
+            String tempBtnStr = e.getActionCommand();
+            if(e.getSource() instanceof JButton)
+            {
+                if(tempBtnStr.equals("Play")){
+                    theView.displayMessage("Game Play Button Clicked.");
+                }
+
+                if(tempBtnStr.equals("Create Map")){
+                    initMapCreationController();
+                }
+
+                if(tempBtnStr.equals("Exit")){
+                    theView.displayMessage("Game Exit Button Clicked.");
+                }
+            }
         }
-        
     }
 }
