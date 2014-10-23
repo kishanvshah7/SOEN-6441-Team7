@@ -57,8 +57,8 @@ public class MapCreationView extends JFrame{
         xLabel = new JLabel("xBlock: ");
         yLabel = new JLabel("yBlock: ");
         
-        xBlock = new JTextField("",20);
-        yBlock = new JTextField("");
+        xBlock = new JTextField("5",20);
+        yBlock = new JTextField("5");
         
         submitBtn = new JButton("Set Grid");
         entryPBtn = new JButton("Entry Point");
@@ -70,7 +70,7 @@ public class MapCreationView extends JFrame{
         entryPBtn.setEnabled(false);
         pathBtn.setEnabled(false);
         exitPBtn.setEnabled(false);
-        saveMapBtn.setEnabled(false);
+
         
         map_object_panel.setLayout(new GridLayout(0,6,5,5));
         map_object_panel.setBackground(Color.GRAY);
@@ -117,8 +117,10 @@ public class MapCreationView extends JFrame{
     
     public void addGridMap(MapBoxController mbCont){
         this.mbCont = mbCont;
-        System.out.println("1");
-        map_grid_panel.add(new MapBoxView(mbCont.getXBlockCount(),mbCont.getYBlockCount()));
+        System.out.println("xbc"+mbCont.getXBlockCount());
+        MapBoxView x = this.mbCont.getView();
+        map_grid_panel.add(x);
+        this.mbCont.setBtnGridClickListner();
         map_grid_panel.validate();
     }
     
@@ -131,7 +133,21 @@ public class MapCreationView extends JFrame{
         exitBtn.addActionListener(ListnerForButton);
     }
     
+    public void disableSubmitButton(){
+        submitBtn.setEnabled(false);
+        xBlock.setEnabled(false);
+        yBlock.setEnabled(false);
+        entryPBtn.setEnabled(true);
+        pathBtn.setEnabled(true);
+        exitPBtn.setEnabled(true);
+        saveMapBtn.setEnabled(true);
+    }
+    
     public void displayMessage(String str){
         JOptionPane.showMessageDialog(this, str);
+    }
+    
+    public String getFileName(){
+        return JOptionPane.showInputDialog(this, "Enter File Name");
     }
 }

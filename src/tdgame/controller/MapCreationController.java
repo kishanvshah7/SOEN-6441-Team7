@@ -47,11 +47,11 @@ public class MapCreationController {
                     if(xC == 0 || yC ==0){
                         errMsg += "Input is Invalid.";
                     }
-                    if(xC > 10){
-                        errMsg += "Sorry, Your X Block Size is bigger then 10. Please use small value.\n";
+                    if(xC > 15){
+                        errMsg += "Sorry, Your X Block Size is bigger then 15. Please use small value.\n";
                     }
-                    if(yC > 10){
-                        errMsg += "Sorry, Your Y Block Size is bigger then 10. Please use small value.\n";
+                    if(yC > 15){
+                        errMsg += "Sorry, Your Y Block Size is bigger then 15. Please use small value.\n";
                     }
                     
                     if(errMsg.equals("")){
@@ -59,7 +59,9 @@ public class MapCreationController {
                         mbCon = new MapBoxController();
                         mbCon.setXBlockCount(xC);
                         mbCon.setYBlockCount(yC);
+                        mbCon.setGridArray();
                         theView.addGridMap(mbCon);
+                        theView.disableSubmitButton();
                     }
                     else
                     {
@@ -68,19 +70,20 @@ public class MapCreationController {
                 }
                 
                 if(tempBtnStr.equals("Entry Point")){
-                    theView.displayMessage("Game Play Button Clicked.");
+                    mbCon.setEntryPointFlag();
                 }
                 
                 if(tempBtnStr.equals("Draw Path")){
-                    theView.displayMessage("Game Play Button Clicked.");
+                    mbCon.setPathPointFlag();
                 }
                 
                 if(tempBtnStr.equals("Exit Point")){
-                    theView.displayMessage("Game Play Button Clicked.");
+                    mbCon.setExitPointFlag();
                 }
 
                 if(tempBtnStr.equals("Save Map")){
-                    
+                    mbCon.saveMap(theView.getFileName());
+                    //mbCon.validPath();
                 }
 
                 if(tempBtnStr.equals("Exit")){
