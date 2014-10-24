@@ -33,6 +33,7 @@ public class MapCreationView extends JFrame{
     JButton exitPBtn;
     JButton pathBtn;
     JButton submitBtn;
+    JButton loadMapBtn;
     JButton saveMapBtn;
     JButton exitBtn;
     
@@ -65,12 +66,13 @@ public class MapCreationView extends JFrame{
         pathBtn = new JButton("Draw Path");
         exitPBtn = new JButton("Exit Point");
         saveMapBtn = new JButton("Save Map");
+        loadMapBtn = new JButton("Load Map");
         exitBtn = new JButton("Exit");
         
         entryPBtn.setEnabled(false);
         pathBtn.setEnabled(false);
         exitPBtn.setEnabled(false);
-
+        saveMapBtn.setEnabled(false);
         
         map_object_panel.setLayout(new GridLayout(0,6,5,5));
         map_object_panel.setBackground(Color.GRAY);
@@ -80,19 +82,21 @@ public class MapCreationView extends JFrame{
         map_object_panel.add(new JLabel(""));
         map_object_panel.add(entryPBtn);
         map_object_panel.add(new JLabel(""));
-        map_object_panel.add(saveMapBtn);
+        map_object_panel.add(loadMapBtn);
         
         map_object_panel.add(yLabel);
         map_object_panel.add(yBlock);
         map_object_panel.add(new JLabel(""));
         map_object_panel.add(pathBtn);
         map_object_panel.add(new JLabel(""));
-        map_object_panel.add(exitBtn);
+        map_object_panel.add(saveMapBtn);
         
         map_object_panel.add(new JLabel(""));
         map_object_panel.add(submitBtn);
         map_object_panel.add(new JLabel(""));
         map_object_panel.add(exitPBtn);
+        map_object_panel.add(new JLabel(""));
+        map_object_panel.add(exitBtn);
         
         this.add(map_object_panel,BorderLayout.NORTH);
         this.add(map_grid_panel,BorderLayout.CENTER);
@@ -129,6 +133,7 @@ public class MapCreationView extends JFrame{
         entryPBtn.addActionListener(ListnerForButton);
         pathBtn.addActionListener(ListnerForButton);
         exitPBtn.addActionListener(ListnerForButton);
+        loadMapBtn.addActionListener(ListnerForButton);
         saveMapBtn.addActionListener(ListnerForButton);
         exitBtn.addActionListener(ListnerForButton);
     }
@@ -145,6 +150,14 @@ public class MapCreationView extends JFrame{
     
     public void displayMessage(String str){
         JOptionPane.showMessageDialog(this, str);
+    }
+    
+    public void setdisabledloadMapBtn(){
+       loadMapBtn.setEnabled(false);
+    }
+    
+    public void setdisabledsubmitBtn(){
+       submitBtn.setEnabled(false);
     }
     
     public String getFileName(){

@@ -33,48 +33,66 @@ public class MapBoxView extends JPanel {
     }
     
     public MapBoxView(MapBoxController mbCon,int xC, int yC) {
+        System.out.println("XC:"+xC+" yC:"+yC);
         this.mbCon = mbCon;
+        boolean FileLoadedFlag = mbCon.getFileFlag();
+        int[][] temp_MapGridArray = new int[yC][xC];
+        temp_MapGridArray = mbCon.getMapGirdArray();
         this.xC = xC;
         this.yC = yC;
-        cellBtn = new JButton[xC][yC];
+        cellBtn = new JButton[yC][xC];
       GridBagLayout layout = new GridBagLayout();
       this.setLayout(layout);        
       GridBagConstraints gbc = new GridBagConstraints();
-
-      for(int x=0;x<xC;x++){
+      
+      for(int y=0;y<yC;y++){
+            for(int x=0;x<xC;x++){
+                cellBtn[y][x] = new JButton();
+                cellBtn[y][x].setName(x+"_"+y);
+                cellBtn[y][x].setBackground(Color.green);
+          }
+      }
+        for(int y=0;y<yC;y++){
           gbc.fill = GridBagConstraints.HORIZONTAL;
-          for(int y=0;y<yC;y++){
+            for(int x=0;x<xC;x++){
                 gbc.gridx = x;
                 gbc.gridy = y;
                 gbc.ipady = 20;
-                cellBtn[x][y] = new JButton();
-                cellBtn[x][y].setName(x+"_"+y);
-                this.add(cellBtn[x][y],gbc);
+                this.add(cellBtn[y][x],gbc);
+                if(FileLoadedFlag){
+                    System.out.println("X:"+x+" y:"+y+" "+temp_MapGridArray[y][x]);
+                    if(temp_MapGridArray[y][x] == 7)
+                        setEntryPoint(y, x);
+                    if(temp_MapGridArray[y][x] == 8)
+                        setExitPoint(y, x);
+                    if(temp_MapGridArray[y][x] == 1)
+                        setPathPoint(y, x);
+                }
           }
       }
     }
     
     public void addButtonClickEventListner(ActionListener ListnerForButton){
+        //x,y order doesn't matter becuase array already init
         for(int x=0;x<mbCon.getXBlockCount();x++){
           for(int y=0;y<mbCon.getYBlockCount();y++){
-                cellBtn[x][y].addActionListener(ListnerForButton);
-                cellBtn[x][y].setBackground(Color.green);
-                cellBtn[x][y].setEnabled(false);
+                cellBtn[y][x].addActionListener(ListnerForButton);
+                cellBtn[y][x].setEnabled(false);
           }
       }
     }
     
     public void setEntryPointFlag(){
-        System.out.println(""+mbCon.getEentryPointData());
-        for(int x=0;x<mbCon.getXBlockCount();x++){
-          for(int y=0;y<mbCon.getYBlockCount();y++){
+        System.out.println("setEntryPointFlag: "+mbCon.getEentryPointData());
+        for(int y=0;y<mbCon.getYBlockCount();y++){
+            for(int x=0;x<mbCon.getXBlockCount();x++){
               if(x==0){
-                  cellBtn[0][y].setBackground(Color.gray);
-                  cellBtn[0][y].setEnabled(true);
+                  cellBtn[y][0].setBackground(Color.gray);
+                  cellBtn[y][0].setEnabled(true);
               }
               else{
-                  cellBtn[x][y].setEnabled(false);
-                  cellBtn[x][y].setBackground(Color.white);
+                  cellBtn[y][x].setEnabled(false);
+                  cellBtn[y][x].setBackground(Color.white);
               }
             }
         }
@@ -82,19 +100,19 @@ public class MapBoxView extends JPanel {
     }
     
     public void setPathPointFlag(){
-        for(int x=0;x<mbCon.getXBlockCount();x++){
-          for(int y=0;y<mbCon.getYBlockCount();y++){
+        for(int y=0;y<mbCon.getYBlockCount();y++){
+            for(int x=0;x<mbCon.getXBlockCount();x++){
               if(x==0){
-                  cellBtn[0][y].setBackground(Color.white);
-                  cellBtn[0][y].setEnabled(false);
+                  cellBtn[y][0].setBackground(Color.white);
+                  cellBtn[y][0].setEnabled(false);
               } else if(x==mbCon.getXBlockCount()-1)
               {
-                  cellBtn[mbCon.getXBlockCount()-1][y].setBackground(Color.white);
-                  cellBtn[mbCon.getXBlockCount()-1][y].setEnabled(false);
+                  cellBtn[y][mbCon.getXBlockCount()-1].setBackground(Color.white);
+                  cellBtn[y][mbCon.getXBlockCount()-1].setEnabled(false);
               }
               else{
-                  cellBtn[x][y].setEnabled(true);
-                  cellBtn[x][y].setBackground(Color.green);
+                  cellBtn[y][x].setEnabled(true);
+                  cellBtn[y][x].setBackground(Color.green);
               }
             }
         }
@@ -106,12 +124,12 @@ public class MapBoxView extends JPanel {
           for(int y=0;y<mbCon.getYBlockCount();y++){
               if(x==mbCon.getXBlockCount()-1)
               {
-                  cellBtn[mbCon.getXBlockCount()-1][y].setBackground(Color.gray);
-                  cellBtn[mbCon.getXBlockCount()-1][y].setEnabled(true);
+                  cellBtn[y][mbCon.getXBlockCount()-1].setBackground(Color.gray);
+                  cellBtn[y][mbCon.getXBlockCount()-1].setEnabled(true);
               }
               else{
-                  cellBtn[x][y].setEnabled(false);
-                  cellBtn[x][y].setBackground(Color.white);
+                  cellBtn[y][x].setEnabled(false);
+                  cellBtn[y][x].setBackground(Color.white);
               }
             }
         }
@@ -120,34 +138,42 @@ public class MapBoxView extends JPanel {
     
     public void setSlectedCell(){
         if(mbCon.getEentryPointData() != 9)
-            cellBtn[0][mbCon.getEentryPointData()].setBackground(new Color(165, 42, 42));
+            cellBtn[mbCon.getEentryPointData()][0].setBackground(new Color(165, 42, 42));
         if(mbCon.getExitPointData() != 9)
-            cellBtn[mbCon.getXBlockCount()-1][mbCon.getExitPointData()].setBackground(new Color(165, 42, 42));
+            cellBtn[mbCon.getExitPointData()][mbCon.getXBlockCount()-1].setBackground(new Color(165, 42, 42));
         int[][] temp = mbCon.getMapGirdArray();
         for(int x=0;x<mbCon.getXBlockCount();x++){
             for(int y=0;y<mbCon.getYBlockCount();y++){
-                if(temp[x][y] == 1)
-                    cellBtn[x][y].setBackground(Color.yellow);
+                if(temp[y][x] == 1)
+                    cellBtn[y][x].setBackground(Color.yellow);
             }
         }
     }
     
-    public void setEntryPoint(int xC, int yC){
+    public void setEntryPoint(int yC, int xC){
         for(int y=0;y<mbCon.getYBlockCount();y++){
-            cellBtn[0][y].setBackground(Color.gray);
+            cellBtn[y][0].setBackground(Color.gray);
         }
-        cellBtn[xC][yC].setBackground(new Color(165, 42, 42));
+        cellBtn[yC][xC].setBackground(new Color(165, 42, 42));
     }
     
-    public void setPathPoint(int xC, int yC){
-        cellBtn[xC][yC].setBackground(Color.yellow);
+    public void setPathPoint(int yC, int xC){
+        int[][] temp = mbCon.getMapGirdArray();
+        for(int x=0;x<mbCon.getXBlockCount();x++){
+            for(int y=0;y<mbCon.getYBlockCount();y++){
+                if(temp[yC][xC] == 1)
+                    cellBtn[yC][xC].setBackground(Color.yellow);
+                else
+                    cellBtn[yC][xC].setBackground(Color.green);
+            }
+        }
     }
     
-    public void setExitPoint(int xC, int yC){
+    public void setExitPoint(int yC, int xC){
         for(int y=0;y<mbCon.getYBlockCount();y++){
-            cellBtn[mbCon.getXBlockCount()-1][y].setBackground(Color.gray);
+            cellBtn[y][mbCon.getXBlockCount()-1].setBackground(Color.gray);
         }
-        cellBtn[xC][yC].setBackground(new Color(165, 42, 42));
+        cellBtn[yC][xC].setBackground(new Color(165, 42, 42));
     }
     
     public void displayMessage(String str){

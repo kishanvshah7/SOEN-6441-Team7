@@ -37,8 +37,12 @@ public class MainScreenController {
         theView.setAlwaysOnTop(false);
         theView1.setAlwaysOnTop(true);
         theView1.setFocusable(true);
-        theMapCreation = new MapCreationController(theView1, theModel1);
+        theMapCreation = new MapCreationController(theView1, theModel1, this);
         //theMapCreation.startMapCreation();
+    }
+    
+    public void setTopEnabled(){
+        theView.setTopEnabled();
     }
     
     class ButtonActionDetector implements ActionListener{
@@ -57,7 +61,8 @@ public class MainScreenController {
                 }
 
                 if(tempBtnStr.equals("Exit")){
-                    theView.displayMessage("Game Exit Button Clicked.");
+                    theView.dispose();
+                    //System.exit(0);
                 }
             }
         }

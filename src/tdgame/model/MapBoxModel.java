@@ -16,6 +16,8 @@ public class MapBoxModel {
     public int yBlockCount;
     public int[][] mapGirdArray;
     
+    boolean fileFlag = false;
+    
     public MapBoxModel()
     {
        System.out.println("MapBoxModel");
@@ -37,26 +39,50 @@ public class MapBoxModel {
         yBlockCount = y;
     }
     
-    public void setmapGirdArrayElement(int x, int y, int val){
+    public void setmapGirdArrayElement(int y, int x, int val){
         if(val == 7){
             for(int yt=0;yt<yBlockCount;yt++){
-                mapGirdArray[0][yt] = 0;
+                mapGirdArray[yt][0] = 0;
             }
         }else if(val == 8){
             for(int yt=0;yt<yBlockCount;yt++){
-                mapGirdArray[xBlockCount-1][yt] = 0;
+                mapGirdArray[yt][xBlockCount-1] = 0;
             }
-        }
-        mapGirdArray[x][y] = val;
+        } 
+        if(mapGirdArray[y][x] == 1)
+            mapGirdArray[y][x] = 0;
+        else
+            mapGirdArray[y][x] = val;
     }
     
-    public int getmapGirdArrayElement(int x, int y){
-        return mapGirdArray[x][y];
+    public void setmapGirdArrayElementF(int y, int x, int val){
+        if(x == 0){
+            for(int yt=0;yt<yBlockCount;yt++){
+                if(mapGirdArray[yt][0] != 7)
+                    mapGirdArray[yt][0] = 0;
+            }
+            if(val == 7)
+                mapGirdArray[y][x] = val;
+        }else if(x == xBlockCount-1){
+            for(int yt=0;yt<yBlockCount;yt++){
+                if(mapGirdArray[yt][xBlockCount-1] != 8)
+                    mapGirdArray[yt][xBlockCount-1] = 0;
+            }
+            if(val == 8)
+                mapGirdArray[y][x] = val;
+        }
+        else{
+            mapGirdArray[y][x] = val;
+        }
+    }
+    
+    public int getmapGirdArrayElement(int y, int x){
+        return mapGirdArray[y][x];
     }
     
     public int getEntryPointData(){
         for(int y=0;y<yBlockCount;y++){
-            if(mapGirdArray[0][y] == 7)
+            if(mapGirdArray[y][0] == 7)
                 return y;
         }
         return 9;
@@ -64,7 +90,7 @@ public class MapBoxModel {
     
     public int getExitPointData(){
         for(int y=0;y<yBlockCount;y++){
-            if(mapGirdArray[xBlockCount-1][y] == 8)
+            if(mapGirdArray[y][xBlockCount-1] == 8)
                 return y;
         }
         return 9;
@@ -75,11 +101,20 @@ public class MapBoxModel {
     }
     
     public void setGridArray(){
-        mapGirdArray = new int[xBlockCount][yBlockCount];
+        mapGirdArray = new int[yBlockCount][xBlockCount];
+        System.out.println("MapBoxModel.setGridArray()");
         for(int x=0;x<xBlockCount;x++){
           for(int y=0;y<yBlockCount;y++){
-                mapGirdArray[x][y] = 0;
+                mapGirdArray[y][x] = 0;
           }
       }
+    }
+    
+    public boolean getFileFlag(){
+        return fileFlag;
+    }
+    
+    public void setFileFlag(boolean b){
+        fileFlag = b;
     }
 }

@@ -90,6 +90,26 @@ public class MapBoxController {
         return this.theModel.getMapGirdArray();
     }
     
+    public void setmapGirdArrayElement(int y, int x, int val){
+        this.theModel.setmapGirdArrayElement(y, x, val);
+    }
+    
+    public void setmapGirdArrayElementF(int y, int x, int val){
+        this.theModel.setmapGirdArrayElementF(y, x, val);
+    }
+    
+    public int getmapGirdArrayElement(int x, int y){
+        return this.theModel.getmapGirdArrayElement(x, y);
+    }
+    
+    public boolean getFileFlag(){
+        return this.theModel.getFileFlag();
+    }
+    
+    public void setFileFlag(boolean b){
+        this.theModel.setFileFlag(b);
+    }
+
     public void validPath(){
         for(int x=0;x<theModel.getXBlockCount();x++){
             System.out.print("\n");
@@ -103,9 +123,11 @@ public class MapBoxController {
         Writer writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(
-                  new FileOutputStream("MapFiles/"+str+".txt"), "utf-8"));
-            for(int x=0;x<theModel.getXBlockCount();x++){
-                for(int y=0;y<theModel.getYBlockCount();y++){                 
+            new FileOutputStream("MapFiles/"+str+".txt"), "utf-8"));
+            writer.write(theModel.getXBlockCount()+" "+theModel.getYBlockCount());
+            writer.write(System.getProperty("line.separator"));
+            for(int y=0;y<theModel.getYBlockCount();y++){
+                for(int x=0;x<theModel.getXBlockCount();x++){                
                     writer.write(theModel.getmapGirdArrayElement(y, x)+" ");
                 }
                 writer.write(System.getProperty("line.separator"));
@@ -123,22 +145,22 @@ public class MapBoxController {
             String tempBtnStr = e.getActionCommand();
             if(e.getSource() instanceof JButton)
             {
-                System.out.println("You Clicked Grid.");
                 String btnName = ((JComponent)e.getSource()).getName();
+                System.out.println("You Clicked Grid."+btnName);
                 String[] temp = new String[2];
                 temp = btnName.split("_");
                 int x = Integer.parseInt(temp[0]);
                 int y = Integer.parseInt(temp[1]);
                 System.out.println("X: "+x+" Y:"+y);
                 if(x==0){
-                    theView.setEntryPoint(x, y);
-                    theModel.setmapGirdArrayElement( x, y, 7);
+                    theView.setEntryPoint(y, x);
+                    theModel.setmapGirdArrayElement( y, x, 7);
                 }else if(x==(theModel.getXBlockCount()-1)){
-                    theView.setExitPoint(x, y);
-                    theModel.setmapGirdArrayElement( x, y, 8);
-                }else if(x>0 && y < (theModel.getXBlockCount())){
-                    theView.setPathPoint(x, y);
-                    theModel.setmapGirdArrayElement( x, y, 1);
+                    theView.setExitPoint(y, x);
+                    theModel.setmapGirdArrayElement( y, x, 8);
+                }else if(x>0 && y <= (theModel.getYBlockCount())){
+                    theView.setPathPoint(y, x);
+                    theModel.setmapGirdArrayElement( y, x, 1);
                 }
             }
         }

@@ -45,6 +45,11 @@ public class MainScreenView extends JFrame {
         exit_btn.addActionListener(ListnerForButton);
     }
     
+    public void setTopEnabled(){
+        this.setAlwaysOnTop(true);
+        this.setEnabled(true);
+    }
+    
     public void displayMessage(String str){
         JOptionPane.showMessageDialog(this, str);
     }

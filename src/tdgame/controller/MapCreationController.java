@@ -8,7 +8,11 @@ package tdgame.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import tdgame.model.MapCreationModel;
 import tdgame.view.MapCreationView;
 
@@ -22,14 +26,17 @@ public class MapCreationController {
     MapCreationModel theModel;
     
     MapBoxController mbCon;
+    MainScreenController msCon;
     
     public MapCreationController(){
         
     }
     
-    public MapCreationController(MapCreationView view, MapCreationModel model){
+    public MapCreationController(MapCreationView view, MapCreationModel model, MainScreenController msCon){
+        System.out.println("MapCreationController");
         this.theView = view;
         this.theModel = model;
+        this.msCon = msCon;
         this.theView.addButtonClickEventListner(new ButtonActionDetector());
     }
     
@@ -55,7 +62,8 @@ public class MapCreationController {
                     }
                     
                     if(errMsg.equals("")){
-                        System.out.println("0");
+                        theView.setdisabledloadMapBtn();
+                        System.out.println("Map Grid is Created.");
                         mbCon = new MapBoxController();
                         mbCon.setXBlockCount(xC);
                         mbCon.setYBlockCount(yC);
@@ -80,14 +88,40 @@ public class MapCreationController {
                 if(tempBtnStr.equals("Exit Point")){
                     mbCon.setExitPointFlag();
                 }
+                
+                if(tempBtnStr.equals("Load Map")){
+                    System.out.println("Load Map: Clicked");
+                    final JFileChooser  fileDialog = new JFileChooser();
+                    FileFilter filter = new FileNameExtensionFilter("TDMap file", "txt");
+                    fileDialog.addChoosableFileFilter(filter);
+                    int returnVal = fileDialog.showOpenDialog(theView);
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
+                       File file = fileDialog.getSelectedFile();
+                       theView.setdisabledsubmitBtn();
+                       mbCon = new MapBoxController();
+                       theView.displayMessage("File Selected :" + file.getName());
+                       if(theModel.readFile(mbCon, file.getName(), file)){
+                        System.out.println("Map Grid is Created from file.");
+                        theView.addGridMap(mbCon);
+                        theView.disableSubmitButton();
+                       }
+                    }
+                    else{
+                       theView.displayMessage("Open command cancelled by user." );           
+                    } 
+                }
 
                 if(tempBtnStr.equals("Save Map")){
                     mbCon.saveMap(theView.getFileName());
+                    theView.displayMessage("Thank You, Your Map is successfully saved.");
+                    theView.dispose();
+                    msCon.setTopEnabled();
                     //mbCon.validPath();
                 }
 
                 if(tempBtnStr.equals("Exit")){
-                    theView.displayMessage("Create Map Exit Button Clicked.");
+                    theView.dispose();
+                    msCon.setTopEnabled();
                 }
             }
         }
