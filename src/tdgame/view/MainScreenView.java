@@ -28,8 +28,8 @@ public class MainScreenView extends JFrame {
         this.setBackground(Color.DARK_GRAY);
         
         //
-        start_game = new JButton("Play");
-        map_creation = new JButton("Create Map");
+        start_game = new JButton("Start");
+        map_creation = new JButton("Map Creation");
         exit_btn = new JButton("Exit");
         
         this.setLayout(new FlowLayout(10));
@@ -46,6 +46,6 @@ public class MainScreenView extends JFrame {
     }
     
     public void displayMessage(String str){
-        JOptionPane.showMessageDialog(this, str);
+        //JOptionPane.showMessageDialog(this, str);
     }
 }
