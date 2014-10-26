@@ -10,8 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import tdgame.model.MainScreenModel;
+import tdgame.model.MapChooserModel;
 import tdgame.model.MapCreationModel;
 import tdgame.view.MainScreenView;
+import tdgame.view.MapChooserView;
 import tdgame.view.MapCreationView;
 
 /**
@@ -53,7 +55,9 @@ public class MainScreenController {
             if(e.getSource() instanceof JButton)
             {
                 if(tempBtnStr.equals("Play")){
-                    theView.displayMessage("Game Play Button Clicked.");
+                    MapChooserModel mcModel = new MapChooserModel();
+                    MapChooserView mcView = new MapChooserView(theView, mcModel.getMapFileList());
+                    MapChooserController mp = new MapChooserController(mcView,mcModel);
                 }
 
                 if(tempBtnStr.equals("Create Map")){
