@@ -6,11 +6,8 @@
 
 package tdgame.controller;
 
-import java.util.Arrays;
-import jdk.nashorn.internal.parser.TokenType;
-
 /**
- *
+ * This controller will used to validation of Map.
  * @author Kishan V. Shah
  */
 public class MapValidation {
@@ -29,6 +26,10 @@ public class MapValidation {
     public static int[][] GridArray_temp;
     boolean validFlag = false;
     
+    /**
+     * This method is constructor for Map Validation.
+     * @param GridA the grid map array
+     */
     public MapValidation(int[][] GridA){
         width = GridA.length;
         height = GridA[0].length;
@@ -54,14 +55,25 @@ public class MapValidation {
         start();
     }
     
+    /**
+     * This method will return pathValidFlag
+     * @return the validFlag
+     */
     public boolean isValid(){
         return validFlag;
     }
-
+    
+    /**
+     * This method will set validFalg
+     * @param f the validFalg
+     */
     public void setValid(boolean f){
         validFlag = f;
     }
-     
+    
+    /**
+     * This method will start map validation.
+     */
     public void start(){
             if(!flag.equals("e")){
                 lastCheckX = enX;
@@ -81,6 +93,9 @@ public class MapValidation {
             }
     }
     
+    /**
+     * This method will moved pointer to right.
+     */
     public void right(){
         if(!flag.equals("l") && !flag.equals("e" )){
                 flag = "r";
@@ -101,6 +116,9 @@ public class MapValidation {
             }
     }
     
+    /**
+     * This method will moved pointer to left.
+     */
     public void left(){
         if(!flag.equals("r") && !flag.equals("e" )){
                 flag = "l";
@@ -117,6 +135,9 @@ public class MapValidation {
             }
     }
     
+    /**
+     * This method will moved pointer to up.
+     */
     public void up(){
         System.out.println(""+flag.equals("d"));
         if(!flag.equals("d") && !flag.equals("e" )){
@@ -138,6 +159,9 @@ public class MapValidation {
             }
     }
     
+    /**
+     * This method will moved pointer to down.
+     */
     public void down(){
         if(!flag.equals("u") && !flag.equals("e" )){
                 flag = "d";
@@ -158,7 +182,10 @@ public class MapValidation {
                 }
             }
     }
-    
+    /**
+     * This method will check ending point on right direction
+     * @return the value of cell
+     */
     public int checkRight(){
         if(lastCheckY+1 < height){
             if(GridArray_temp[lastCheckX][lastCheckY+1] != 3){
@@ -178,7 +205,10 @@ public class MapValidation {
         else
             return 0;
     }
-    
+    /**
+     * This method will check ending point on left direction
+     * @return the value of cell
+     */
     public int checkLeft(){
         if(lastCheckY-1 > 0){
             if(GridArray_temp[lastCheckX][lastCheckY-1] != 3){
@@ -196,7 +226,10 @@ public class MapValidation {
         else
             return 0;
     }
-    
+    /**
+     * This method will check ending point on up direction
+     * @return the value of cell
+     */
     public int checkUp(){
         if(lastCheckX-1 >= 0){
             if(GridArray_temp[lastCheckX-1][lastCheckY] != 3){
@@ -214,7 +247,10 @@ public class MapValidation {
         else
             return 0;
     }
-    
+    /**
+     * This method will check ending point on down direction
+     * @return the value of cell
+     */
     public int checkDown(){
         if(lastCheckX+1 < width){
             if(GridArray_temp[lastCheckX+1][lastCheckY] != 3){
