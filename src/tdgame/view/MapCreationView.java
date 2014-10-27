@@ -136,14 +136,13 @@ public class MapCreationView extends JFrame{
         }
     }
     
-    public boolean addGridMap(MapBoxController mbCont){
+    public void addGridMap(MapBoxController mbCont){
         this.mbCont = mbCont;
         System.out.println("xbc"+mbCont.getXBlockCount());
         MapBoxView x = this.mbCont.getView();
         map_grid_panel.add(x);
         this.mbCont.setBtnGridClickListner();
         map_grid_panel.validate();
-        return true;
     }
     
     public void addButtonClickEventListner(ActionListener ListnerForButton){
