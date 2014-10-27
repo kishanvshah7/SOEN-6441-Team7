@@ -56,11 +56,17 @@ public class MapCreationController {
                     if(xC == 0 || yC ==0){
                         errMsg += "Input is Invalid.";
                     }
-                    if(xC > 15){
-                        errMsg += "Sorry, Your X Block Size is bigger then 15. Please use small value.\n";
+                    if(xC < 7){
+                        errMsg += "Sorry, Your X Block Size is smaller than 7. Please use big value.\n";
+                    }
+                    if(yC < 7){
+                        errMsg += "Sorry, Your Y Block Size is smaller than 7. Please use big value.\n";
+                    }
+                    if(xC > 20){
+                        errMsg += "Sorry, Your X Block Size is bigger than 20. Please use small value.\n";
                     }
                     if(yC > 15){
-                        errMsg += "Sorry, Your Y Block Size is bigger then 15. Please use small value.\n";
+                        errMsg += "Sorry, Your Y Block Size is bigger than 15. Please use small value.\n";
                     }
                     
                     if(errMsg.equals("")){
@@ -84,6 +90,12 @@ public class MapCreationController {
                 }
                 
                 if(tempBtnStr.equals("Draw Path")){
+                    for(int y=0;y<mbCon.getYBlockCount();y++){
+                        for(int x=0;x<mbCon.getXBlockCount();x++){                
+                            System.out.print(mbCon.getmapGirdArrayElement(y, x)+" ");
+                        }
+                        System.out.print("\n");
+                    }
                     mbCon.setPathPointFlag();
                 }
                 
@@ -116,21 +128,28 @@ public class MapCreationController {
                 }
 
                 if(tempBtnStr.equals("Save Map")){
-                    String file_name =theView.getFileName();
-                    if(file_name.isEmpty()){
-                         Date date = new Date();
-                         SimpleDateFormat ft =  new SimpleDateFormat ("dd.MM.yyyy hh_mm_ss a");
-                        System.out.println(""+ft.format(date));
-                        mbCon.saveMap(ft.format(date));
-                        theView.displayMessage("Thank You, Your Map is successfully saved.");
-                        theView.dispose();
-                        msCon.setTopEnabled();
+                    System.out.println("Save Clicked");
+                    if(mbCon.validPath(mbCon.getMapGirdArray()).equals("Done")){
+                        String file_name = theView.getFileName();
+                        System.out.println("file "+file_name);
+                        if(file_name == null){
+                            
+                        }else if(file_name.isEmpty()){
+                             Date date = new Date();
+                             SimpleDateFormat ft =  new SimpleDateFormat ("dd.MM.yyyy hh_mm_ss a");
+                            System.out.println(""+ft.format(date));
+                            mbCon.saveMap(ft.format(date));
+                            theView.displayMessage("Thank You, Your Map is successfully saved with "+ft.format(date));
+                            theView.dispose();
+                            msCon.setTopEnabled();
+                        }else{
+                            mbCon.saveMap(file_name);
+                            theView.displayMessage("Thank You, Your Map is successfully saved with "+file_name);
+                            theView.dispose();
+                            msCon.setTopEnabled();
+                        }
                     }else{
-                        mbCon.saveMap(file_name);
-                        theView.displayMessage("Thank You, Your Map is successfully saved.");
-                        theView.dispose();
-                        msCon.setTopEnabled();
-                        //mbCon.validPath();
+                        theView.displayMessage("Sorry, Your Path is invalid.");
                     }
                 }
 

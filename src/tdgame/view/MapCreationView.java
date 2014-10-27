@@ -45,7 +45,7 @@ public class MapCreationView extends JFrame{
     
     public MapCreationView(){
         this.setTitle("Map Creation Window");
-        this.setSize(800,700);
+        this.setSize(1000,700);
         this.setLocationRelativeTo(null);
         this.setBackground(Color.BLUE);
         this.setLayout(new BorderLayout(5, 5));
@@ -60,7 +60,7 @@ public class MapCreationView extends JFrame{
         yLabel = new JLabel("yBlock: ");
         
         xBlock = new JTextField("5",20);
-        yBlock = new JTextField("5");
+        yBlock = new JTextField("5",20);
         
         submitBtn = new JButton("Set Grid");
         entryPBtn = new JButton("Entry Point");
@@ -108,16 +108,32 @@ public class MapCreationView extends JFrame{
         if(xBlock.getText().equals("")){
             return 0;
         }
-        else
-            return Integer.parseInt(xBlock.getText());
+        else{
+            int temp = 0;
+            try{
+                temp  = Integer.parseInt(xBlock.getText());
+            } catch(Exception e){
+                System.out.println("Inter exception");
+                temp = 0;
+            }
+            return temp;
+        }
     }
     
     public int getYBlockInput(){
         if(yBlock.getText().equals("")){
             return 0;
         }
-        else
-            return Integer.parseInt(yBlock.getText());
+        else{
+            int temp = 0;
+            try{
+                temp  = Integer.parseInt(yBlock.getText());
+            } catch(Exception e){
+                System.out.println("Inter exception");
+                temp = 0;
+            }
+            return temp;
+        }
     }
     
     public void addGridMap(MapBoxController mbCont){

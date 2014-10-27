@@ -158,6 +158,7 @@ public class MapBoxView extends JPanel {
     }
     
     public void setPathPoint(int yC, int xC){
+        System.out.println("setPathPoint()");
         int[][] temp = mbCon.getMapGirdArray();
         for(int x=0;x<mbCon.getXBlockCount();x++){
             for(int y=0;y<mbCon.getYBlockCount();y++){

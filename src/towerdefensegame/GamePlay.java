@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tdgame.controller.CellContainerController;
 import tdgame.controller.GridCellController;
+import tdgame.controller.MapValidation;
 import tdgame.controller.PlayScreenController;
 import tdgame.model.CellContainerModel;
 import tdgame.model.GridCellModel;
@@ -33,8 +34,8 @@ public class GamePlay extends JFrame {
     
     public GamePlay(File f, int w, int h)
     {
-        int width = w*40 + 300;
-        int height = h*40 + 90;
+        int width = w*40 + 350;
+        int height = h*40 + 120;
         this.setTitle("Tower Defence Game");
         this.setSize(width,height);
         this.setResizable(false);
@@ -51,26 +52,33 @@ public class GamePlay extends JFrame {
         PlayScreenModel psModel = new PlayScreenModel();
                         boolean temp = psModel.LoadMap(f);
                         if(temp){
-                            configModel cModel = new configModel(); 
+                            MapValidation mv = new MapValidation(psModel.getGridCellArray());
+                            if(mv.isValid()){
+                                System.out.println("Map is Valid");
+                                configModel cModel = new configModel(); 
                             
-                            psModel.initCellContainerModel();
-                            psModel.setGridCellVal();
-                            
-                            ShopModel sModel = new ShopModel(psModel.getStartX(),psModel.getStartY());
-                            ShopView sView = new ShopView();
-                            
-                            CellContainerView ccView = new CellContainerView();
-                            CellContainerModel ccModel = psModel.getCellContainerModel();
-                            
-                            GridCellView gcView = new GridCellView();
-                            GridCellModel[][] gcModel = ccModel.getGcModel();
-                            
-                            PlayScreenView psView = new PlayScreenView(this);
-                            add(psView);
-                            PlayScreenController psCont = new PlayScreenController(psView, psModel, gcView, gcModel, ccView, ccModel, sView, sModel);
-                            psView.setController(psCont);
-                            psView.startGame();
-                         this.setVisible(true);   
+                                psModel.initCellContainerModel();
+                                psModel.setGridCellVal();
+
+                                ShopModel sModel = new ShopModel(psModel.getStartX(),psModel.getStartY());
+                                ShopView sView = new ShopView();
+
+                                CellContainerView ccView = new CellContainerView();
+                                CellContainerModel ccModel = psModel.getCellContainerModel();
+
+                                GridCellView gcView = new GridCellView();
+                                GridCellModel[][] gcModel = ccModel.getGcModel();
+
+                                PlayScreenView psView = new PlayScreenView(this);
+                                add(psView);
+                                PlayScreenController psCont = new PlayScreenController(psView, psModel, gcView, gcModel, ccView, ccModel, sView, sModel);
+                                psView.setController(psCont);
+                                psView.startGame();
+                                this.setVisible(true); 
+                            }else{
+                                System.out.println("Map Is Invalid");
+                                JOptionPane.showMessageDialog(this,"Map is Invalid", null, WIDTH);
+                            }  
                         }else{
                             this.dispose();
                             JOptionPane.showMessageDialog(this, "Invalid Map File", null, WIDTH);

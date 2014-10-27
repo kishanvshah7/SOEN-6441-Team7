@@ -110,12 +110,13 @@ public class MapBoxController {
         this.theModel.setFileFlag(b);
     }
 
-    public void validPath(){
-        for(int x=0;x<theModel.getXBlockCount();x++){
-            System.out.print("\n");
-            for(int y=0;y<theModel.getYBlockCount();y++){
-                System.out.print(""+theModel.getmapGirdArrayElement(y, x));
-            }
+    public String validPath(int[][] ga){
+        MapValidation mapV = new MapValidation(ga);
+        System.out.println("Path Validation: "+mapV.isValid());
+        if(mapV.isValid()){
+            return "Done";
+        }else{
+            return "Invalid";
         }
     }
     
@@ -123,7 +124,7 @@ public class MapBoxController {
         Writer writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(
-            new FileOutputStream("MapFiles/"+str+".txt"), "utf-8"));
+            new FileOutputStream("MapFiles/"+str+".team7"), "utf-8"));
             writer.write(theModel.getXBlockCount()+" "+theModel.getYBlockCount());
             writer.write(System.getProperty("line.separator"));
             for(int y=0;y<theModel.getYBlockCount();y++){
@@ -159,8 +160,8 @@ public class MapBoxController {
                     theView.setExitPoint(y, x);
                     theModel.setmapGirdArrayElement( y, x, 8);
                 }else if(x>0 && y <= (theModel.getYBlockCount())){
-                    theView.setPathPoint(y, x);
                     theModel.setmapGirdArrayElement( y, x, 1);
+                    theView.setPathPoint(y, x);
                 }
             }
         }

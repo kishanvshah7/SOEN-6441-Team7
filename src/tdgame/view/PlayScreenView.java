@@ -38,7 +38,7 @@ public class PlayScreenView extends JPanel implements Runnable {
         j.addMouseMotionListener(new KeyController());
         for(int i=0;i<ground_level.length;i++){
             ground_level[i] = new ImageIcon("resources/grass_tile1.png").getImage();
-            ground_level[i] = createImage(new FilteredImageSource(ground_level[i].getSource(), new CropImageFilter(0, 22*i, 22, 22)));
+            ground_level[i] = createImage(new FilteredImageSource(ground_level[i].getSource(), new CropImageFilter(0, 40*i, 40, 40)));
         }
         
         for(int i=0;i<air_level.length;i++){

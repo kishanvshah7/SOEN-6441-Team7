@@ -24,7 +24,7 @@ public class GridCellView {
     public void draw(GridCellModel gcModel,Graphics g){
         //System.out.println("abcd");
         g.drawImage(configModel.ground_level[gcModel.gID], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
-        g.drawRect(gcModel.x, gcModel.y, gcModel.width, gcModel.height);
+        //g.drawRect(gcModel.x, gcModel.y, gcModel.width, gcModel.height);
         //System.out.println("airID"+gcModel.airID);
         
         if(gcModel.airID != configModel.airAir && (gcModel.airID ==8)){

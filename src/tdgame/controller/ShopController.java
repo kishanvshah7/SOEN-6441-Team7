@@ -90,7 +90,8 @@ public class ShopController {
                                     if(ccCont.getgcModelObj(y, x).airID == configModel.airTowerLaser[i]){
                                         ccCont.getgcModelObj(y, x).airID = -1;
                                         //ccCont.getgcModelObj(y, x).airID = sModel.getHeldID();
-                                        sModel.setMoney(sModel.getMoney() + sModel.getButtonPrice(i));
+                                        double refund_amount = sModel.getButtonPrice(i) * 0.8;
+                                        sModel.setMoney(sModel.getMoney() + (int)refund_amount );
                                     }
                                 }
                             }

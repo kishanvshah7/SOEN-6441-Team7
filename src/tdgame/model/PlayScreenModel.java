@@ -41,7 +41,7 @@ public class PlayScreenModel {
     
     public static CellContainerModel ccModel;
     
-    public int[][] gridCellArray;
+    private int[][] gridCellArray;
     
     public PlayScreenModel(){
         System.out.println("PlayScreenModel()");
@@ -68,7 +68,7 @@ public class PlayScreenModel {
              System.out.println("ABCXD");
             for(int y=0;y<getyC();y++){
                 for(int x=0;x<getxC();x++){
-                    System.out.print(gridCellArray[y][x]+" ");
+                    System.out.print(getGridCellArray()[y][x]+" ");
                 }
                 System.out.println("\n");
             }
@@ -82,25 +82,25 @@ public class PlayScreenModel {
 
     public void initCellContainerModel() {
         //System.out.println(""+gridCellArray.length+" "+gridCellArray[0].length);
-        ccModel = new CellContainerModel(gridCellArray.length,gridCellArray[0].length);
+        ccModel = new CellContainerModel(getGridCellArray().length,getGridCellArray()[0].length);
     }
     
     public void setGridCellVal(){
-        for(int y=0;y<gridCellArray.length;y++){
-            for(int x=0;x<gridCellArray[0].length;x++){
-                if(gridCellArray[y][x] == 7 || gridCellArray[y][x] == 8){
+        for(int y=0;y<getGridCellArray().length;y++){
+            for(int x=0;x<getGridCellArray()[0].length;x++){
+                if(getGridCellArray()[y][x] == 7 || getGridCellArray()[y][x] == 8){
                     System.out.println("ExitPoint");
-                    ccModel.setGcModelObj(y, x, 1, gridCellArray[y][x]);
+                    ccModel.setGcModelObj(y, x, 1, getGridCellArray()[y][x]);
                 }
                 else
-                    ccModel.setGcModelObj(y, x, gridCellArray[y][x],-1);
+                    ccModel.setGcModelObj(y, x, getGridCellArray()[y][x],-1);
             }
             System.out.println("\n");
         }
     }
     
     public int getStartX(){
-        return ((gridCellArray[0].length * 40)) + 60;
+        return ((getGridCellArray()[0].length * 40)) + 100;
     }
     
     public int getStartY(){
@@ -123,5 +123,12 @@ public class PlayScreenModel {
      */
     public int getyC() {
         return yC;
+    }
+
+    /**
+     * @return the gridCellArray
+     */
+    public int[][] getGridCellArray() {
+        return gridCellArray;
     }
 }

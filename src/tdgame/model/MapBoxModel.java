@@ -14,7 +14,7 @@ public class MapBoxModel {
     
     public int xBlockCount;
     public int yBlockCount;
-    public int[][] mapGirdArray;
+    private static int[][] mapGirdArray;
     
     boolean fileFlag = false;
     
@@ -38,6 +38,7 @@ public class MapBoxModel {
         System.out.println("MapBoxModel.setYBlockCount()");
         yBlockCount = y;
     }
+    
     
     public void setmapGirdArrayElement(int y, int x, int val){
         if(val == 7){
