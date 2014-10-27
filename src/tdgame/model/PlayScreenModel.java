@@ -13,7 +13,7 @@ import java.util.Scanner;
 import tdgame.controller.CellContainerController;
 
 /**
- *
+ * This is model for Play Screen Module.
  * @author Rahul K Kikani
  */
 public class PlayScreenModel {
@@ -21,32 +21,39 @@ public class PlayScreenModel {
     private int xC;
     private int yC;
     
-    public static int myWidth, myHeight;
-    public static int money = 20, health = 50;
-    public static int killed =0, killsToWin =0, Level =1, maxLevel =3;
-    public static int winTime = 4000, winFrame =0;
+    private static int myWidth, myHeight;
+    private static int money = 20, health = 50;
+    private static int killed =0, killsToWin =0, Level =1, maxLevel =3;
+    private static int winTime = 4000, winFrame =0;
     
     private static boolean isFirst = true;
-    public static boolean isDebug = false;
+    private static boolean isDebug = false;
     private static boolean isDead = false;
-    public static boolean isWin = false;
+    private static boolean isWin = false;
     
-    public static Image[] ground_level = new Image[100];
-    public static Image[] air_level = new Image[100];
-    public static Image[] tileset_res = new Image[100];
-    public static Image[] tileset_mob = new Image[100];
-    public static Image[] tileset_air = new Image[100];
+    private static Image[] ground_level = new Image[100];
+    private static Image[] air_level = new Image[100];
+    private static Image[] tileset_res = new Image[100];
+    private static Image[] tileset_mob = new Image[100];
+    private static Image[] tileset_air = new Image[100];
     
-    public static Point mse = new Point(0, 0);
+    private static Point mse = new Point(0, 0);
     
-    public static CellContainerModel ccModel;
+    private static CellContainerModel ccModel;
     
     private int[][] gridCellArray;
     
+    /**
+     * This is constructor method for Play Screen Model
+     */
     public PlayScreenModel(){
-        System.out.println("PlayScreenModel()");
     }
 
+    /**
+     * This method load file, validate the map and trigger the view to draw map.
+     * @param file map file path.
+     * @return return true if map file is valid.
+     */
     public boolean LoadMap(File file) {
         try{
             Scanner loadScanner = new Scanner(file);
@@ -80,11 +87,16 @@ public class PlayScreenModel {
          }
     }
 
+    /**
+     * this method will initialize Cell Container Model to crate map grid.
+     */
     public void initCellContainerModel() {
-        //System.out.println(""+gridCellArray.length+" "+gridCellArray[0].length);
         ccModel = new CellContainerModel(getGridCellArray().length,getGridCellArray()[0].length);
     }
     
+    /**
+     * This method will set entryPoint, ExitPoint, PathPoint in map and draw Map.
+     */
     public void setGridCellVal(){
         for(int y=0;y<getGridCellArray().length;y++){
             for(int x=0;x<getGridCellArray()[0].length;x++){
@@ -99,19 +111,32 @@ public class PlayScreenModel {
         }
     }
     
+    /**
+     * this method will return startX
+     * @return the starting x point
+     */
     public int getStartX(){
         return ((getGridCellArray()[0].length * 40)) + 100;
     }
     
+    /**
+     * this method will return startY
+     * @return the starting y point
+     */
     public int getStartY(){
         return 0;
     }
     
+    /**
+     * this method will return Cell Container Model
+     * @return the Cell Container Model
+     */
     public CellContainerModel getCellContainerModel(){
         return ccModel;
     }
 
     /**
+     * this method will return xC
      * @return the xC
      */
     public int getxC() {
@@ -119,6 +144,7 @@ public class PlayScreenModel {
     }
 
     /**
+     * this method will return yC
      * @return the yC
      */
     public int getyC() {
@@ -126,6 +152,7 @@ public class PlayScreenModel {
     }
 
     /**
+     * this method will return Grid Cell Array
      * @return the gridCellArray
      */
     public int[][] getGridCellArray() {

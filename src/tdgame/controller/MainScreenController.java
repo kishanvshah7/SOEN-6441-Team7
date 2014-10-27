@@ -17,7 +17,7 @@ import tdgame.view.MapChooserView;
 import tdgame.view.MapCreationView;
 
 /**
- *
+ * This Class will bind and initialize Model-View of Main Screen Module.
  * @author Rahul K Kikani
  */
 public class MainScreenController {
@@ -25,28 +25,43 @@ public class MainScreenController {
     MainScreenView theView;
     MainScreenModel theModel;
     MapCreationController theMapCreation;
+    
+    /**
+     * This method initialize view and model object.
+     * @param view Main Screen View object
+     * @param model Main Screen Model object 
+     */
     public MainScreenController(MainScreenView view, MainScreenModel model){
         this.theView = view;
         this.theModel = model;
         this.theView.addButtonClickEventListner(new ButtonActionDetector());
     }
     
+    /**
+     * This method will initialize Model, View and Controller for Map Creation Module.
+     */
     public void initMapCreationController(){
-        MapCreationView theView1 = new MapCreationView();
-        MapCreationModel theModel1 = new MapCreationModel();
-        theView1.setVisible(true);
+        MapCreationView mcView = new MapCreationView();
+        MapCreationModel mcModel = new MapCreationModel();
+        mcView.setVisible(true);
         //theView.setEnabled(false);
         theView.setAlwaysOnTop(false);
-        theView1.setAlwaysOnTop(true);
-        theView1.setFocusable(true);
-        theMapCreation = new MapCreationController(theView1, theModel1, this);
+        mcView.setAlwaysOnTop(true);
+        mcView.setFocusable(true);
+        theMapCreation = new MapCreationController(mcView, mcModel, this);
         //theMapCreation.startMapCreation();
     }
     
+    /**
+     * This method will call setTopEnabled() from view class.
+     */
     public void setTopEnabled(){
         theView.setTopEnabled();
     }
     
+    /**
+     * This class will perform action based on button pressed on Main Screen.
+     */
     class ButtonActionDetector implements ActionListener{
 
         @Override

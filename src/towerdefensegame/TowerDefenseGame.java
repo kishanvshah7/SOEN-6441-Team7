@@ -9,19 +9,18 @@ package towerdefensegame;
 import tdgame.controller.MainScreenController;
 import tdgame.model.MainScreenModel;
 import tdgame.view.MainScreenView;
-import tdgame.view.MapCreationView;
 
 /**
- *
+ * Main Class to start game.
  * @author Rahul K Kikani
  */
 public class TowerDefenseGame {
 
     /**
+     * Main Method to initialize the game View, Model and Controller of first screen of game.
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         
         MainScreenView theView = new MainScreenView();
         MainScreenModel theModel = new MainScreenModel();

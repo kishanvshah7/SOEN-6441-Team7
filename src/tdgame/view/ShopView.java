@@ -13,15 +13,23 @@ import tdgame.model.ShopModel;
 import tdgame.model.configModel;
 
 /**
- *
+  * This is GUI class of Shop(Tower) Module.
  * @author Rahul K Kikani
  */
 public class ShopView {
     
+    /**
+     * This method is initialize GUI components for Shop(Tower).
+     */
     public ShopView(){
         
     }
     
+    /**
+     * This method will draw GUI Components. It will used in tower buying, selling and deleting.
+     * @param g the Graphics
+     * @param sModel the shop model object
+     */
     public void draw(ShopModel sModel, Graphics g){ 
         
         for(int i=0;i<sModel.button.length;i++){

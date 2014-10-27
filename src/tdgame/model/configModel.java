@@ -8,11 +8,8 @@ package tdgame.model;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.image.CropImageFilter;
-import java.awt.image.FilteredImageSource;
-import javax.swing.ImageIcon;
 /**
- *
+ * This is Default Value Model. To load Different images, tower properties, game levels.
  * @author Rahul K Kikani
  */
 public class configModel {
@@ -40,8 +37,5 @@ public class configModel {
     public static Image[] air_level = new Image[100];
     
     public static Image[] tileset_res = new Image[100];
-
-    public configModel() {
-    }
     
 }

@@ -17,7 +17,7 @@ import tdgame.view.PlayScreenView;
 import tdgame.view.ShopView;
 
 /**
- *
+ * This Class will bind and initialize Model-View of Play Screen Module.
  * @author Rahul K Kikani
  */
 public class PlayScreenController {
@@ -36,6 +36,18 @@ public class PlayScreenController {
     ShopModel sModel;
     ShopView sView;
     ShopController sCont;
+    
+    /**
+     * This method is constructor for Play Screen Controller. It will initialize different views,model and controller.
+     * @param psView the PlayScreenView
+     * @param psModel the PlayScreenModel
+     * @param gcView the GridCellView
+     * @param gcModel the GridCellModel
+     * @param ccView the CellContainerView
+     * @param ccModel the CellContainerModel
+     * @param sView the ShopView
+     * @param sModel the ShopModel
+     */
     
     public PlayScreenController(PlayScreenView psView, PlayScreenModel psModel, GridCellView gcView, GridCellModel[][] gcModel, CellContainerView ccView, CellContainerModel ccModel, ShopView sView, ShopModel sModel) {
         theModel = psModel;
@@ -60,18 +72,18 @@ public class PlayScreenController {
         sCont.setccCont(ccCont);
     }
 
-    public void logic() {
-            for(int y=0;y<ccModel.getyC();y++){
-                for(int x=0;x<ccModel.getxC();x++){
-                    gcCont.logic(x, y);
-                }
-            }
-    }
-
+    
+    /**
+     * This method will call draw() method of Cell Container Controller
+     * @param g the Graphics
+     */
     public void getccDraw(Graphics g){
             ccCont.getDraw(g);
     }
-    
+    /**
+     * This method will call draw() method of Shop View
+     * @param g the Graphics
+     */
     public void getshopDraw(Graphics g){
         sCont.getshopDraw(sModel, g);
     }

@@ -12,7 +12,7 @@ import javax.swing.*;
 import tdgame.controller.MapBoxController;
 
 /**
- *
+ * This is GUI class of Map Box Module.
  * @author Rahul K Kikani
  */
 public class MapBoxView extends JPanel {
@@ -27,11 +27,21 @@ public class MapBoxView extends JPanel {
     
     MapBoxController mbCon;
     
+    /**
+     * This method will initialize Map Box Controller
+     * @param mbCon the Map Box Controller
+     */
     public MapBoxView(MapBoxController mbCon){
         this.mbCon = mbCon;
         System.out.println("MapBoxView");
     }
     
+    /**
+     * This method will initialize GUI components for Map Box and Controller
+     * @param mbCon the Map Box Controller
+     * @param xC x coordinate
+     * @param yC y coordinate
+     */
     public MapBoxView(MapBoxController mbCon,int xC, int yC) {
         System.out.println("XC:"+xC+" yC:"+yC);
         this.mbCon = mbCon;
@@ -72,6 +82,10 @@ public class MapBoxView extends JPanel {
       }
     }
     
+    /**
+     * This method will add button action listener to all different buttons that used in view.
+     * @param ListnerForButton the ActionListener
+     */
     public void addButtonClickEventListner(ActionListener ListnerForButton){
         //x,y order doesn't matter becuase array already init
         for(int x=0;x<mbCon.getXBlockCount();x++){
@@ -82,6 +96,9 @@ public class MapBoxView extends JPanel {
       }
     }
     
+    /**
+     * This method will enable Entry Point Grid cells
+     */
     public void setEntryPointFlag(){
         System.out.println("setEntryPointFlag: "+mbCon.getEentryPointData());
         for(int y=0;y<mbCon.getYBlockCount();y++){
@@ -99,6 +116,9 @@ public class MapBoxView extends JPanel {
         setSlectedCell();
     }
     
+    /**
+     * This method will enable Path Point Grid cells
+     */
     public void setPathPointFlag(){
         for(int y=0;y<mbCon.getYBlockCount();y++){
             for(int x=0;x<mbCon.getXBlockCount();x++){
@@ -119,6 +139,9 @@ public class MapBoxView extends JPanel {
         setSlectedCell();
     }
     
+    /**
+     * This method will enable Exit Point Grid cells
+     */
     public void setExitPointFlag(){
         for(int x=0;x<mbCon.getXBlockCount();x++){
           for(int y=0;y<mbCon.getYBlockCount();y++){
@@ -136,6 +159,9 @@ public class MapBoxView extends JPanel {
         setSlectedCell();
     }
     
+    /**
+     * This method will set color of all grid cells
+     */
     public void setSlectedCell(){
         if(mbCon.getEentryPointData() != 9)
             cellBtn[mbCon.getEentryPointData()][0].setBackground(new Color(165, 42, 42));
@@ -150,6 +176,11 @@ public class MapBoxView extends JPanel {
         }
     }
     
+    /**
+     * This method will set Entry Point
+     * @param yC y coordinate
+     * @param xC x coordinate
+     */
     public void setEntryPoint(int yC, int xC){
         for(int y=0;y<mbCon.getYBlockCount();y++){
             cellBtn[y][0].setBackground(Color.gray);
@@ -157,8 +188,12 @@ public class MapBoxView extends JPanel {
         cellBtn[yC][xC].setBackground(new Color(165, 42, 42));
     }
     
+    /**
+     * This method will set Path Point
+     * @param yC y coordinate
+     * @param xC x coordinate
+     */
     public void setPathPoint(int yC, int xC){
-        System.out.println("setPathPoint()");
         int[][] temp = mbCon.getMapGirdArray();
         for(int x=0;x<mbCon.getXBlockCount();x++){
             for(int y=0;y<mbCon.getYBlockCount();y++){
@@ -170,6 +205,11 @@ public class MapBoxView extends JPanel {
         }
     }
     
+    /**
+     * This method will set Exit Point
+     * @param yC y coordinate
+     * @param xC x coordinate
+     */
     public void setExitPoint(int yC, int xC){
         for(int y=0;y<mbCon.getYBlockCount();y++){
             cellBtn[y][mbCon.getXBlockCount()-1].setBackground(Color.gray);
@@ -177,6 +217,10 @@ public class MapBoxView extends JPanel {
         cellBtn[yC][xC].setBackground(new Color(165, 42, 42));
     }
     
+    /**
+     * This method create Message show dialog box.
+     * @param str message string.
+     */
     public void displayMessage(String str){
         JOptionPane.showMessageDialog(this, str);
     }
