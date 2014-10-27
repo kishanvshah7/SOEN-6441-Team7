@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- *
+ * This is GUI class for Main Screen. It will show buttons(Play, Create Map, Exit).
  * @author Rahul K Kikani
  */
 public class MainScreenView extends JFrame {
@@ -24,6 +24,9 @@ public class MainScreenView extends JFrame {
     JButton map_creation;
     JButton exit_btn;
     
+    /**
+     * This method will initialize GUI components like button and Main Screen Panel.
+     */
     public MainScreenView(){
         this.setTitle("Tower Defense Game");
         this.setSize(600, 600);
@@ -47,17 +50,28 @@ public class MainScreenView extends JFrame {
         
     }
     
+    /**
+     * This method will add ActionListener to the buttons like Play, Create Map and Exit.
+     * @param ListnerForButton ActionListner object.
+     */
     public void addButtonClickEventListner(ActionListener ListnerForButton){
         start_game.addActionListener(ListnerForButton);
         map_creation.addActionListener(ListnerForButton);
         exit_btn.addActionListener(ListnerForButton);
     }
     
+    /**
+     * This method will set Main Screen on top.
+     */
     public void setTopEnabled(){
         this.setAlwaysOnTop(true);
         this.setEnabled(true);
     }
     
+    /**
+     * This method create Message show dialog box.
+     * @param str message string.
+     */
     public void displayMessage(String str){
         JOptionPane.showMessageDialog(this, str);
     }

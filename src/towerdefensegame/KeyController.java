@@ -14,16 +14,23 @@ import tdgame.controller.ShopController;
 import tdgame.model.configModel;
 
 /**
- *
+ * This class will take input from user via mouse and trigger the appropriate function.
  * @author Rahul K Kikani
  */
 public class KeyController implements MouseMotionListener, MouseListener {
 
+    /**
+     * This Method will listen mouse dragged movement and store x,y coordinates in point variable.
+     * @param e the MouseEvent
+     */
     public void mouseDragged(MouseEvent e) {
-        configModel.mse = new Point((e.getX()) + 10, e.getY() + 20);
+        //configModel.mse = new Point((e.getX()) + 10, e.getY() + 20);
     }
 
-    
+    /**
+     * This Method will listen mouse moved movement and store x,y coordinates in point variable.
+     * @param e the MouseEvent
+     */
     public void mouseMoved(MouseEvent e) {
         configModel.mse = new Point((e.getX()) - 4, e.getY() - 25);
     }
@@ -33,7 +40,10 @@ public class KeyController implements MouseMotionListener, MouseListener {
         
     }
 
-    
+    /**
+     * This Method will listen mouse pressed movement and call appropriate method;
+     * @param e the MouseEvent
+     */
     public void mousePressed(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON1)
 	    {

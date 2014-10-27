@@ -19,7 +19,7 @@ import tdgame.model.MapCreationModel;
 import tdgame.view.MapCreationView;
 
 /**
- *
+ * This Class will bind and initialize Model-View of Main Creation Module.
  * @author Rahul K Kikani
  */
 public class MapCreationController {
@@ -30,10 +30,19 @@ public class MapCreationController {
     MapBoxController mbCon;
     MainScreenController msCon;
     
+    /**
+     * This method is constructor.
+     */
     public MapCreationController(){
         
     }
     
+    /**
+     * This method will bind and initialize Model-View of Map Creation Model. It will also initialize Main Screen Controller object which will be used in this class.
+     * @param view view object of Map Creation
+     * @param model model object of Map Creation
+     * @param msCon  Controller object of Main Screen
+     */
     public MapCreationController(MapCreationView view, MapCreationModel model, MainScreenController msCon){
         System.out.println("MapCreationController");
         this.theView = view;
@@ -42,6 +51,9 @@ public class MapCreationController {
         this.theView.addButtonClickEventListner(new ButtonActionDetector());
     }
     
+    /**
+     * This class will perform action based on buttons pressed in Map Creation GUI.
+     */
     class ButtonActionDetector implements ActionListener{
 
         @Override
@@ -90,12 +102,6 @@ public class MapCreationController {
                 }
                 
                 if(tempBtnStr.equals("Draw Path")){
-                    for(int y=0;y<mbCon.getYBlockCount();y++){
-                        for(int x=0;x<mbCon.getXBlockCount();x++){                
-                            System.out.print(mbCon.getmapGirdArrayElement(y, x)+" ");
-                        }
-                        System.out.print("\n");
-                    }
                     mbCon.setPathPointFlag();
                 }
                 
@@ -161,19 +167,41 @@ public class MapCreationController {
         }
     }
     
+    /**
+     * This method will call setVisible() from View.
+     */
     public void startMapCreation(){
         this.theView.setVisible(true);
     }
     
+    /**
+     * This method will call setXBlockCount(x) from Model.
+     * @param x  the x to set
+     */
     public void setXBlockCount(int x){
         theModel.setXBlockCount(x);
     }
+    
+    /**
+     * This method will call setYBlockCount(y) from Model.
+     * @param y the y to set
+     */
     public void setYBlockCount(int y){
         theModel.setYBlockCount(y);
     }
+    
+    /**
+     * This method will call getXBlockCount() from Model.
+     * @return the x to get
+     */
     public int getXBlockCount(){
         return theModel.getXBlockCount();
     }
+    
+    /**
+     * This method will call getYBlockCount() from Model.
+     * @return the y to get
+     */
     public int getYBlockCount(){
         return theModel.getYBlockCount();
     }

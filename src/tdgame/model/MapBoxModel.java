@@ -7,39 +7,62 @@
 package tdgame.model;
 
 /**
- *
+ * This is model for Map Box Module.
  * @author Rahul K Kikani
  */
 public class MapBoxModel {
     
-    public int xBlockCount;
-    public int yBlockCount;
+    private int xBlockCount;
+    private int yBlockCount;
     private static int[][] mapGirdArray;
     
-    boolean fileFlag = false;
-    
-    public MapBoxModel()
-    {
-       System.out.println("MapBoxModel");
+    private boolean fileFlag = false;
+    /**
+     * This is constructor method for Map Box Model.
+     */
+    public MapBoxModel(){
     }
     
+    /**
+     * this method will return xBlockCount
+     * @return the xBlockCount
+     */
     public int getXBlockCount(){
         return xBlockCount;
     }
+    
+    /**
+     * this method will return yBlockCount
+     * @return the yBlockCount
+     */
     public int getYBlockCount(){
         return yBlockCount;
     }
     
+    /**
+     * This method will set value to xBlockCount
+     * @param x the xBlockCount
+     */
     public void setXBlockCount(int x){
         System.out.println("MapBoxModel.setXBlockCount()");
         xBlockCount = x;
     }
+    
+    /**
+     * This method will set value to yBlockCount
+     * @param y the yBlockCount
+     */
     public void setYBlockCount(int y){
         System.out.println("MapBoxModel.setYBlockCount()");
         yBlockCount = y;
     }
     
-    
+    /**
+     * This method will set value to Grid Cell with respect to x,y index.
+     * @param y y index
+     * @param x x index
+     * @param val value of cell
+     */
     public void setmapGirdArrayElement(int y, int x, int val){
         if(val == 7){
             for(int yt=0;yt<yBlockCount;yt++){
@@ -56,6 +79,12 @@ public class MapBoxModel {
             mapGirdArray[y][x] = val;
     }
     
+    /**
+     * This method will set value to Grid Cell with respect to x,y index.
+     * @param y y index
+     * @param x x index
+     * @param val value of cell
+     */
     public void setmapGirdArrayElementF(int y, int x, int val){
         if(x == 0){
             for(int yt=0;yt<yBlockCount;yt++){
@@ -77,10 +106,20 @@ public class MapBoxModel {
         }
     }
     
+    /**
+     * this method will return mapGirdArray[y][x]
+     * @return the mapGirdArray[y][x]
+     * @param x x index
+     * @param y y index
+     */
     public int getmapGirdArrayElement(int y, int x){
         return mapGirdArray[y][x];
     }
     
+    /**
+     * this method will return entryPoint y index
+     * @return the entryPoint y index
+     */
     public int getEntryPointData(){
         for(int y=0;y<yBlockCount;y++){
             if(mapGirdArray[y][0] == 7)
@@ -89,6 +128,10 @@ public class MapBoxModel {
         return 9;
     }
     
+    /**
+     * this method will return exitPoint y index
+     * @return the exitPoint y index
+     */
     public int getExitPointData(){
         for(int y=0;y<yBlockCount;y++){
             if(mapGirdArray[y][xBlockCount-1] == 8)
@@ -97,10 +140,17 @@ public class MapBoxModel {
         return 9;
     }
     
+    /**
+     * this method will return Grid Map Array
+     * @return the Grid Map Array
+     */
     public int[][] getMapGirdArray(){
         return mapGirdArray;
     }
     
+    /**
+     * This method will set Grid Array and 0 to all grid cells
+     */
     public void setGridArray(){
         mapGirdArray = new int[yBlockCount][xBlockCount];
         System.out.println("MapBoxModel.setGridArray()");
@@ -111,10 +161,18 @@ public class MapBoxModel {
       }
     }
     
+    /**
+     * this method will return fileFlag
+     * @return the fileFlag
+     */
     public boolean getFileFlag(){
         return fileFlag;
     }
     
+    /**
+     * This method will set FileFlag
+     * @param b the file flag
+     */
     public void setFileFlag(boolean b){
         fileFlag = b;
     }

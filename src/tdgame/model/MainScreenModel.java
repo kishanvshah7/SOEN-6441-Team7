@@ -7,7 +7,7 @@
 package tdgame.model;
 
 /**
- *
+ * This is model for Main Screen.
  * @author Rahul K Kikani
  */
 public class MainScreenModel {

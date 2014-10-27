@@ -9,7 +9,7 @@ package tdgame.model;
 import tdgame.controller.GridCellController;
 
 /**
- *
+ * This is model class of Cell Container
  * @author Rahul K Kikani
  */
 public class CellContainerModel {
@@ -19,6 +19,11 @@ public class CellContainerModel {
     
     private static GridCellModel[][] gcModel;
     
+    /**
+     * this method is constructor for Cell Container Model. It will set xC and xY.
+     * @param yC the y coordinate
+     * @param xC the x coordinate
+     */
     public CellContainerModel(int yC, int xC) {
         this.xC = xC;
         this.yC = yC;
@@ -68,13 +73,22 @@ public class CellContainerModel {
     
     /**
      * @return the gcModel
+     * @param x xCo-ordinates
+     * @param y yCo-ordinates
      */
     public GridCellModel getGcModelObj(int y, int x) {
         return gcModel[y][x];
     }
     
+    /**
+     * this method will set gid and airId for gcModel object
+     * @param x xCo-ordinates
+     * @param y yCo-ordinates
+     * @param gVal the gVal
+     * @param airVal the airVal
+     */
     public void setGcModelObj(int y, int x, int gVal, int airVal) {
-        gcModel[y][x].gID = gVal;
-        gcModel[y][x].airID = airVal;
+        gcModel[y][x].setgID(gVal);
+        gcModel[y][x].setAirID(airVal);
     }
 }

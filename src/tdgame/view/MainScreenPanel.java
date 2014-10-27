@@ -16,20 +16,26 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
- *
+ * This is GUI class of Main Screen Panel Module.
  * @author Rahul K Kikani
  */
 public class MainScreenPanel extends JPanel{
     public static Image[] backImage = new Image[1];
     
+    /**
+     * This method will initialize GUI components for Main Screen Panel.
+     */
     public MainScreenPanel() {
         this.setSize(1167, 700);
         backImage[0] = new ImageIcon("res/first_screen.jpg").getImage();
     }
     
+    /**
+     * This method will draw GUI Components.
+     * @param g the Graphics
+     */
     @Override
     public void paintComponent(Graphics g){
-        System.out.println("asdf");
         g.drawImage(backImage[0], 0, 0, 1167, 700, null);
     }
 }

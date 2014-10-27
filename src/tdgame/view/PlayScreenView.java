@@ -8,12 +8,10 @@ package tdgame.view;
 
 import towerdefensegame.*;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import tdgame.controller.PlayScreenController;
 import static tdgame.model.configModel.air_level;
@@ -21,7 +19,7 @@ import static tdgame.model.configModel.ground_level;
 import static tdgame.model.configModel.tileset_res;
 
 /**
- *
+  * This is GUI class of Play Screen Module.
  * @author Rahul K Kikani
  */
 public class PlayScreenView extends JPanel implements Runnable {
@@ -33,6 +31,10 @@ public class PlayScreenView extends JPanel implements Runnable {
     boolean rFlag =false;
     PlayScreenController psCont;
     
+    /**
+     * This method will initialize GUI components for Play Screen.
+     * @param j the GamePlay object
+     */
     public PlayScreenView(GamePlay j){
         j.addMouseListener(new KeyController());
         j.addMouseMotionListener(new KeyController());
@@ -51,20 +53,26 @@ public class PlayScreenView extends JPanel implements Runnable {
         tileset_res[2] = new ImageIcon("resources/coin_icon.png").getImage();
     }
     
+    /**
+     * This method will start thread.
+     */
     public void startGame(){
         gameLoop.start();
     }
     
+    /**
+     * This method will set          
+     * @param cont the Play Screen Controller
+     */
     public void setController(PlayScreenController cont){
         psCont = cont;
         rFlag = true;
     }
     
-    public void initGameComponents(){
-        
-    }
-    
-    
+    /**
+     * This method will draw GUI Components.
+     * @param g the Graphics
+     */
     public void paintComponent(Graphics g){
         //System.out.println("xyz");
         if(psCont !=null){
@@ -78,12 +86,15 @@ public class PlayScreenView extends JPanel implements Runnable {
         }
     }
     
+    /**
+     * This is run method for Thread.
+     */
     @Override
     public void run() {
         while(true){
             if(rFlag){
                 //System.out.println("Gamp Loop!");
-                psCont.logic();
+                //psCont.logic();
                 repaint();
                 //System.out.println("Test Loop!");
                 try{

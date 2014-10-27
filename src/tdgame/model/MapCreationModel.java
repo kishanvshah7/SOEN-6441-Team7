@@ -11,63 +11,82 @@ import java.util.Scanner;
 import tdgame.controller.MapBoxController;
 
 /**
- *
+ * This is model class of Map Creation Module.
  * @author Rahul K Kikani
  */
 public class MapCreationModel {
     
-    int xBlockCount = 0;
-    int yBlockCount = 0;
-    String FileName;
-    String FilePath;
+    private int xBlockCount = 0;
+    private int yBlockCount = 0;
+    private String FileName;
+    private String FilePath;
     
+    /**
+     * This method will set value of xBlockCount.
+     * @param x the x to set
+     */
     public void setXBlockCount(int x){
         xBlockCount = x;
     }
+    
+    /**
+     * This method will set value of yBlockCount.
+     * @param y the y to set
+     */
     public void setYBlockCount(int y){
         yBlockCount = y;
     }
+    
+    /**
+     * This method will return value of xBlockCount.
+     * @return the XBlockCount
+     */
     public int getXBlockCount(){
         return xBlockCount;
     }
+    
+    /**
+     * This method will return value of xBlockCount.
+     * @return the yBlockCount
+     */
     public int getYBlockCount(){
         return yBlockCount;
     }
     
+    /**
+     * This method reads map file.
+     * @param mbCon the object of Map Box Controller
+     * @param name the name of file
+     * @param path the path of file
+     * @return file validation result
+     */
     public boolean readFile(MapBoxController mbCon, String name, File path){
         System.out.println("Selected FilePath: "+path);
-        
         try{
             Scanner loadScanner = new Scanner(path);
             int xC = loadScanner.nextInt();
             int yC = loadScanner.nextInt();
-            System.out.println("MapCreationModel X: "+xC+" Y:"+yC);
+            
              while(loadScanner.hasNext()){
                 mbCon.setXBlockCount(xC);
                 mbCon.setYBlockCount(yC);
                 mbCon.setGridArray();
                  Thread.sleep(100);
-                 System.out.println("asdf");
+                 
                 for(int y=0;y<yC;y++){
                     for(int x=0;x<xC;x++){
                         int val = loadScanner.nextInt();
                         mbCon.setmapGirdArrayElementF(y, x, val);
-                        System.out.println("XY X: "+x+" Y:"+y+" val:"+val);
+                        
                     }
                 }
              }
-             System.out.println("ABCXD");
-            for(int y=0;y<yC;y++){
-                for(int x=0;x<xC;x++){
-                    System.out.print(mbCon.getmapGirdArrayElement(y, x)+" ");
-                }
-                System.out.println("\n");
-            }
+
              loadScanner.close();
              mbCon.setFileFlag(true);
              return true;
          } catch(Exception e){
-             System.out.println("Hey Buddy, Somtething is wrong in file.");
+             System.out.println("Hey, Somtething is wrong in file.");
              return false;
          }
     }

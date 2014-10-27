@@ -11,15 +11,22 @@ import tdgame.controller.CellContainerController;
 import tdgame.controller.GridCellController;
 
 /**
- *
+ * This is GUI class of Cell Container Module.
  * @author Rahul K Kikani
  */
 public class CellContainerView {
     private CellContainerController ccCont;
     
+    /**
+     * This is constructor.
+     */
     public CellContainerView(){
     }
     
+    /**
+     * This method will draw GUI Components.
+     * @param g the Graphics
+     */
     public void draw(Graphics g){
         //Draw Block
         for(int y=0;y<ccCont.getyC();y++){

@@ -11,31 +11,38 @@ import tdgame.model.GridCellModel;
 import tdgame.view.GridCellView;
 
 /**
- *
+ * This Class will bind and initialize Model-View of Play Screen Module.
  * @author Rahul K Kikani
  */
 public class GridCellController {
 
     GridCellView theView;
     GridCellModel[][] theModel;
-    
-    public GridCellController(int i, int i0, int cellPixels, int cellPixels0, int groundGrass, int airAir) {
-        
-    }
-
+   
+    /**
+     * This method will set GridCellView and GridCellModel
+     * @param gcView the GridCellView
+     * @param gcModel the GridCellModel
+     */
     public GridCellController(GridCellView gcView, GridCellModel[][] gcModel) {
         this.theModel = gcModel;
         this.theView = gcView;
     }
     
+    /**
+     * This method will call fireRangeOutline() method of Cell Container view
+     * @param gcModelObj the GridCellModel
+     * @param g the Graphics
+     */
     public void getfireRangeOutline(GridCellModel gcModelObj, Graphics g){
         this.theView.fireRangeOutline(gcModelObj, g);
     }
     
-    public void logic(int x, int y){
-        //System.out.println("GridCellController.logic(): X:"+x+" Y:"+y);
-    }
-
+    /**
+     * This method will call draw() method of Cell Container view
+     * @param g the Graphics
+     * @param gcModelObj the GridCellModel
+     */
     public void getDraw(GridCellModel gcModelObj, Graphics g) {
         this.theView.draw(gcModelObj,g);
     }
