@@ -46,6 +46,7 @@ public class MapCreationView extends JFrame{
     public MapCreationView(){
         this.setTitle("Map Creation Window");
         this.setSize(800,700);
+        this.setLocationRelativeTo(null);
         this.setBackground(Color.BLUE);
         this.setLayout(new BorderLayout(5, 5));
         //setUndecorated(true);
@@ -146,6 +147,10 @@ public class MapCreationView extends JFrame{
         pathBtn.setEnabled(true);
         exitPBtn.setEnabled(true);
         saveMapBtn.setEnabled(true);
+    }
+    
+    public void disableLoadButton(){
+        loadMapBtn.setEnabled(false);
     }
     
     public void displayMessage(String str){

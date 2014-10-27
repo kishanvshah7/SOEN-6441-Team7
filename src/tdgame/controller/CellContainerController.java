@@ -19,9 +19,11 @@ public class CellContainerController {
 
     CellContainerModel theModel;
     CellContainerView theView;
-    private GridCellModel[][] cgModel;
+    private GridCellModel[][] gcModel;
     private GridCellController gcCont;
-    public CellContainerController() {
+    public CellContainerController(CellContainerView ccView, CellContainerModel ccModel) {
+        this.theModel = ccModel;
+        this.theView = ccView;
     }
     
     public void setCCView(CellContainerView ccView){
@@ -68,16 +70,21 @@ public class CellContainerController {
         theModel.setyC(yC);
     }
 
-    public void setcGModel(GridCellModel[][] cgModel) {
-        this.cgModel = cgModel;
+    public void setgCModel(GridCellModel[][] gcModel) {
+        this.gcModel = gcModel;
     }
 
     public void setgcCont(GridCellController gcCont) {
         this.gcCont = gcCont;
+        this.gcModel = gcCont.theModel;
     }
     
     public GridCellController getgcCont() {
         return gcCont;
+    }
+    
+    public GridCellModel getgcModelObj(int y, int x){
+            return theModel.getGcModelObj(y, x);
     }
     
     public void getDraw(Graphics g){

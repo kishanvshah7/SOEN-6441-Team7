@@ -10,15 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JButton;
-import tdgame.model.CellContainerModel;
-import tdgame.model.GridCellModel;
 import tdgame.model.MapChooserModel;
 import tdgame.model.PlayScreenModel;
-import tdgame.view.CellContainerView;
-import tdgame.view.GridCellView;
 import tdgame.view.MapChooserView;
-import tdgame.view.PlayScreenFrame;
-import tdgame.view.PlayScreenView;
+import towerdefensegame.*;
 
 /**
  *
@@ -53,31 +48,14 @@ public class MapChooserController {
                         PlayScreenModel psModel = new PlayScreenModel();
                         boolean temp = psModel.LoadMap(new File("MapFiles/"+theView.getSelectedFile()));
                         if(temp){
-                            psModel.initCellContainerModel();
-                            CellContainerModel ccModel = psModel.getCellContainerModel();
-                            CellContainerController ccCont = new CellContainerController();
-                            ccCont.setCCModel(ccModel);
-                            
-                            GridCellController gcCont = new GridCellController();
-                            ccCont.setgcCont(gcCont);
-                            
-                            GridCellView gcView = new GridCellView();
-                            
-                            CellContainerView ccView = new CellContainerView(ccCont);
-                            
-                            PlayScreenView psView = new PlayScreenView();
-                            
-                            PlayScreenFrame psf = new PlayScreenFrame(psView);
-                            PlayScreenController psCont = new PlayScreenController(psView, psModel);
-                            psCont.setCcCont(ccCont);
-                            psView.setController(psCont);
-                            
-                            
-                        }else{
-                            System.out.println("Map is not loaded.");
+                            GamePlay gp = new GamePlay(new File("MapFiles/"+theView.getSelectedFile()), psModel.getxC(), psModel.getyC());
+                            theView.setMSTOp(false);
+                            theView.dispose();
                         }
-                        theView.dispose();
-                        System.out.println(" : "+theView.getSelectedFile());
+                        else{
+                            theView.displayMessage("Incorrect Map File");
+                        }
+                        
                     }
                 }
             }

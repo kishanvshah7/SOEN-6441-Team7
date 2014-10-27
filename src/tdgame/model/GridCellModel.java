@@ -14,7 +14,7 @@ import java.awt.Rectangle;
  */
 public class GridCellModel extends Rectangle{
     
-    public Rectangle towerRange;
+    public Rectangle[] towerRange;
     public int towerRangeSize = 100;
     public int gID;
     public int airID;
@@ -25,7 +25,10 @@ public class GridCellModel extends Rectangle{
 
     GridCellModel(int x, int y, int width, int height, int gId, int airId) {
         setBounds(x, y, width, height);
-        towerRange = new Rectangle(x - (towerRangeSize/2), y - (towerRangeSize/2), width + towerRangeSize, height + towerRangeSize);
+        towerRange = new Rectangle[configModel.airTowerLaser.length];
+        for(int i=0;i<configModel.airTowerLaser.length;i++){
+            towerRange[i] = new Rectangle(x - ((configModel.airTowerRanger[i])/2), y - ((configModel.airTowerRanger[i])/2), width + configModel.airTowerRanger[i], height + configModel.airTowerRanger[i]);
+        }
         this.gID = gID;
         this.airID = airID;
     }

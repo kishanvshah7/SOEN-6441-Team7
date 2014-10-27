@@ -6,12 +6,19 @@
 
 package tdgame.view;
 
+import towerdefensegame.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import tdgame.controller.PlayScreenController;
+import static tdgame.model.configModel.air_level;
+import static tdgame.model.configModel.ground_level;
+import static tdgame.model.configModel.tileset_res;
 
 /**
  *
@@ -26,10 +33,27 @@ public class PlayScreenView extends JPanel implements Runnable {
     boolean rFlag =false;
     PlayScreenController psCont;
     
-    public PlayScreenView(){
-        gameLoop.start();
+    public PlayScreenView(GamePlay j){
+        j.addMouseListener(new KeyController());
+        j.addMouseMotionListener(new KeyController());
+        for(int i=0;i<ground_level.length;i++){
+            ground_level[i] = new ImageIcon("resources/grass_tile1.png").getImage();
+            ground_level[i] = createImage(new FilteredImageSource(ground_level[i].getSource(), new CropImageFilter(0, 22*i, 22, 22)));
+        }
+        
+        for(int i=0;i<air_level.length;i++){
+            air_level[i] = new ImageIcon("resources/air_tile1.png").getImage();
+            air_level[i] = createImage(new FilteredImageSource(air_level[i].getSource(), new CropImageFilter(0, 40*i, 40, 40)));
+        }
+        
+        tileset_res[0] = new ImageIcon("resources/cell.png").getImage();
+        tileset_res[1] = new ImageIcon("resources/heart.png").getImage();
+        tileset_res[2] = new ImageIcon("resources/coin_icon.png").getImage();
     }
     
+    public void startGame(){
+        gameLoop.start();
+    }
     
     public void setController(PlayScreenController cont){
         psCont = cont;
@@ -42,12 +66,13 @@ public class PlayScreenView extends JPanel implements Runnable {
     
     
     public void paintComponent(Graphics g){
-        System.out.println("xyz");
+        //System.out.println("xyz");
         if(psCont !=null){
             g.setColor(new Color(50,50,50));
             g.fillRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.white);
             psCont.getccDraw(g);
+            psCont.getshopDraw(g);
             //g.drawRect(100, 100, 400, 400);
             //roomObj.draw(g); //Drawing from room
         }
@@ -57,7 +82,7 @@ public class PlayScreenView extends JPanel implements Runnable {
     public void run() {
         while(true){
             if(rFlag){
-                System.out.println("Gamp Loop!");
+                //System.out.println("Gamp Loop!");
                 psCont.logic();
                 repaint();
                 //System.out.println("Test Loop!");

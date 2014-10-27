@@ -18,6 +18,9 @@ import tdgame.controller.CellContainerController;
  */
 public class PlayScreenModel {
     
+    private int xC;
+    private int yC;
+    
     public static int myWidth, myHeight;
     public static int money = 20, health = 50;
     public static int killed =0, killsToWin =0, Level =1, maxLevel =3;
@@ -39,19 +42,23 @@ public class PlayScreenModel {
     public static CellContainerModel ccModel;
     
     public int[][] gridCellArray;
+    
+    public PlayScreenModel(){
+        System.out.println("PlayScreenModel()");
+    }
 
     public boolean LoadMap(File file) {
         try{
             Scanner loadScanner = new Scanner(file);
-            int xC = loadScanner.nextInt();
-            int yC = loadScanner.nextInt();
-            gridCellArray = new int[yC][xC];
+            this.xC = loadScanner.nextInt();
+            this.yC = loadScanner.nextInt();
+            gridCellArray = new int[getyC()][getxC()];
             //System.out.println("MapCreationModel X: "+xC+" Y:"+yC);
              while(loadScanner.hasNext()){
                  Thread.sleep(100);
                  System.out.println("asdf");
-                for(int y=0;y<yC;y++){
-                    for(int x=0;x<xC;x++){
+                for(int y=0;y<getyC();y++){
+                    for(int x=0;x<getxC();x++){
                         int val = loadScanner.nextInt();
                         gridCellArray[y][x] = val;
                         //System.out.println("XY X: "+x+" Y:"+y+" val:"+val);
@@ -59,8 +66,8 @@ public class PlayScreenModel {
                 }
              }
              System.out.println("ABCXD");
-            for(int y=0;y<yC;y++){
-                for(int x=0;x<xC;x++){
+            for(int y=0;y<getyC();y++){
+                for(int x=0;x<getxC();x++){
                     System.out.print(gridCellArray[y][x]+" ");
                 }
                 System.out.println("\n");
@@ -78,7 +85,43 @@ public class PlayScreenModel {
         ccModel = new CellContainerModel(gridCellArray.length,gridCellArray[0].length);
     }
     
+    public void setGridCellVal(){
+        for(int y=0;y<gridCellArray.length;y++){
+            for(int x=0;x<gridCellArray[0].length;x++){
+                if(gridCellArray[y][x] == 7 || gridCellArray[y][x] == 8){
+                    System.out.println("ExitPoint");
+                    ccModel.setGcModelObj(y, x, 1, gridCellArray[y][x]);
+                }
+                else
+                    ccModel.setGcModelObj(y, x, gridCellArray[y][x],-1);
+            }
+            System.out.println("\n");
+        }
+    }
+    
+    public int getStartX(){
+        return ((gridCellArray[0].length * 40)) + 60;
+    }
+    
+    public int getStartY(){
+        return 0;
+    }
+    
     public CellContainerModel getCellContainerModel(){
         return ccModel;
+    }
+
+    /**
+     * @return the xC
+     */
+    public int getxC() {
+        return xC;
+    }
+
+    /**
+     * @return the yC
+     */
+    public int getyC() {
+        return yC;
     }
 }

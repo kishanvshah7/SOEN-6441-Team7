@@ -15,24 +15,30 @@ import tdgame.controller.GridCellController;
  * @author Rahul K Kikani
  */
 public class CellContainerView {
-    public CellContainerController ccCont;
+    private CellContainerController ccCont;
     
-    public CellContainerView(CellContainerController ccCont){
-        this.ccCont = ccCont;
+    public CellContainerView(){
     }
     
     public void draw(Graphics g){
         //Draw Block
         for(int y=0;y<ccCont.getyC();y++){
             for(int x=0;x<ccCont.getxC();x++){
-                ccCont.getgcCont().getDraw(x, y, x, x, g);
+                ccCont.getgcCont().getDraw(ccCont.getgcModelObj(y, x),g);
             }
         }
         
         for(int y=0;y<ccCont.getyC();y++){
             for(int x=0;x<ccCont.getxC();x++){
-                ccCont.getgcCont().getfireRangeOutline(g);
+                ccCont.getgcCont().getfireRangeOutline(ccCont.getgcModelObj(y, x), g);
             }
         }
+    }
+
+    /**
+     * @param ccCont the ccCont to set
+     */
+    public void setCcCont(CellContainerController ccCont) {
+        this.ccCont = ccCont;
     }
 }

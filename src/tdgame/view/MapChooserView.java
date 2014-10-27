@@ -28,15 +28,22 @@ public class MapChooserView extends JFrame {
     
     private JButton showButton;
     private JList fruitList;
+    MainScreenView msView;
     public MapChooserView(){
     }
     
     public MapChooserView(MainScreenView msView, String[] fileList){
         this.setTitle("Select Your Map");
         this.setSize(200,300);
+        this.msView = msView;
         listMapFiles(fileList);
+        this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
         this.setVisible(true);
+    }
+    
+    public void setMSTOp(boolean f){
+        msView.setAlwaysOnTop(f);
     }
     
     public void listMapFiles(String[] fileList){

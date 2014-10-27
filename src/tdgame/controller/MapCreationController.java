@@ -9,6 +9,8 @@ package tdgame.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -99,24 +101,37 @@ public class MapCreationController {
                        File file = fileDialog.getSelectedFile();
                        theView.setdisabledsubmitBtn();
                        mbCon = new MapBoxController();
-                       theView.displayMessage("File Selected :" + file.getName());
                        if(theModel.readFile(mbCon, file.getName(), file)){
                         System.out.println("Map Grid is Created from file.");
                         theView.addGridMap(mbCon);
                         theView.disableSubmitButton();
+                        theView.disableLoadButton();
+                       }else{
+                           theView.displayMessage("Invalid Map File");
                        }
                     }
                     else{
-                       theView.displayMessage("Open command cancelled by user." );           
+                       //theView.displayMessage("Open command cancelled by user." );           
                     } 
                 }
 
                 if(tempBtnStr.equals("Save Map")){
-                    mbCon.saveMap(theView.getFileName());
-                    theView.displayMessage("Thank You, Your Map is successfully saved.");
-                    theView.dispose();
-                    msCon.setTopEnabled();
-                    //mbCon.validPath();
+                    String file_name =theView.getFileName();
+                    if(file_name.isEmpty()){
+                         Date date = new Date();
+                         SimpleDateFormat ft =  new SimpleDateFormat ("dd.MM.yyyy hh_mm_ss a");
+                        System.out.println(""+ft.format(date));
+                        mbCon.saveMap(ft.format(date));
+                        theView.displayMessage("Thank You, Your Map is successfully saved.");
+                        theView.dispose();
+                        msCon.setTopEnabled();
+                    }else{
+                        mbCon.saveMap(file_name);
+                        theView.displayMessage("Thank You, Your Map is successfully saved.");
+                        theView.dispose();
+                        msCon.setTopEnabled();
+                        //mbCon.validPath();
+                    }
                 }
 
                 if(tempBtnStr.equals("Exit")){

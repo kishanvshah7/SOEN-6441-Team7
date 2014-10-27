@@ -17,25 +17,26 @@ import tdgame.view.GridCellView;
 public class GridCellController {
 
     GridCellView theView;
-    GridCellModel theModel;
+    GridCellModel[][] theModel;
     
-    GridCellController(int i, int i0, int cellPixels, int cellPixels0, int groundGrass, int airAir) {
+    public GridCellController(int i, int i0, int cellPixels, int cellPixels0, int groundGrass, int airAir) {
         
     }
 
-    GridCellController() {
-        
+    public GridCellController(GridCellView gcView, GridCellModel[][] gcModel) {
+        this.theModel = gcModel;
+        this.theView = gcView;
     }
     
-    public void getDraw(int x, int y, int width, int height, Graphics g){
-        this.theView.draw(x, y, width, height, g);
-    }
-    
-    public void getfireRangeOutline(Graphics g){
-        this.theView.fireRangeOutline(g);
+    public void getfireRangeOutline(GridCellModel gcModelObj, Graphics g){
+        this.theView.fireRangeOutline(gcModelObj, g);
     }
     
     public void logic(int x, int y){
-        System.out.println("GridCellController.logic(): X:"+x+" Y:"+y);
+        //System.out.println("GridCellController.logic(): X:"+x+" Y:"+y);
+    }
+
+    public void getDraw(GridCellModel gcModelObj, Graphics g) {
+        this.theView.draw(gcModelObj,g);
     }
 }

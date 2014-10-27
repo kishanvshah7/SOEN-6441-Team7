@@ -17,10 +17,7 @@ public class CellContainerModel {
     private int yC = 10;
     private int cellPixels = 44;
     
-    public static int groundGrass = 0;
-    public static int airAir = -1;
-    
-    private GridCellModel[][] gcModel;
+    private static GridCellModel[][] gcModel;
     
     public CellContainerModel(int yC, int xC) {
         this.xC = xC;
@@ -29,7 +26,7 @@ public class CellContainerModel {
         
         for(int y=0;y<gcModel.length;y++){
             for(int x=0;x<gcModel[0].length;x++){
-                gcModel[y][x] = new GridCellModel(x*cellPixels+10, y*cellPixels+10, cellPixels, cellPixels, groundGrass, airAir);
+                gcModel[y][x] = new GridCellModel(x*cellPixels+10, y*cellPixels+10, cellPixels, cellPixels, configModel.groundGrass, configModel.airAir);
             }
         }
     }
@@ -67,5 +64,17 @@ public class CellContainerModel {
      */
     public GridCellModel[][] getGcModel() {
         return gcModel;
+    }
+    
+    /**
+     * @return the gcModel
+     */
+    public GridCellModel getGcModelObj(int y, int x) {
+        return gcModel[y][x];
+    }
+    
+    public void setGcModelObj(int y, int x, int gVal, int airVal) {
+        gcModel[y][x].gID = gVal;
+        gcModel[y][x].airID = airVal;
     }
 }
