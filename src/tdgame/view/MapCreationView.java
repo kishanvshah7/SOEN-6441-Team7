@@ -33,6 +33,7 @@ public class MapCreationView extends JFrame{
     JButton exitPBtn;
     JButton pathBtn;
     JButton submitBtn;
+    JButton loadMapBtn;
     JButton saveMapBtn;
     JButton exitBtn;
     
@@ -44,7 +45,8 @@ public class MapCreationView extends JFrame{
     
     public MapCreationView(){
         this.setTitle("Map Creation Window");
-        this.setSize(800,700);
+        this.setSize(1000,700);
+        this.setLocationRelativeTo(null);
         this.setBackground(Color.BLUE);
         this.setLayout(new BorderLayout(5, 5));
         //setUndecorated(true);
@@ -57,14 +59,15 @@ public class MapCreationView extends JFrame{
         xLabel = new JLabel("xBlock: ");
         yLabel = new JLabel("yBlock: ");
         
-        xBlock = new JTextField("",20);
-        yBlock = new JTextField("");
+        xBlock = new JTextField("5",20);
+        yBlock = new JTextField("5",20);
         
         submitBtn = new JButton("Set Grid");
         entryPBtn = new JButton("Entry Point");
         pathBtn = new JButton("Draw Path");
         exitPBtn = new JButton("Exit Point");
         saveMapBtn = new JButton("Save Map");
+        loadMapBtn = new JButton("Load Map");
         exitBtn = new JButton("Exit");
         
         entryPBtn.setEnabled(false);
@@ -80,19 +83,21 @@ public class MapCreationView extends JFrame{
         map_object_panel.add(new JLabel(""));
         map_object_panel.add(entryPBtn);
         map_object_panel.add(new JLabel(""));
-        map_object_panel.add(saveMapBtn);
+        map_object_panel.add(loadMapBtn);
         
         map_object_panel.add(yLabel);
         map_object_panel.add(yBlock);
         map_object_panel.add(new JLabel(""));
         map_object_panel.add(pathBtn);
         map_object_panel.add(new JLabel(""));
-        map_object_panel.add(exitBtn);
+        map_object_panel.add(saveMapBtn);
         
         map_object_panel.add(new JLabel(""));
         map_object_panel.add(submitBtn);
         map_object_panel.add(new JLabel(""));
         map_object_panel.add(exitPBtn);
+        map_object_panel.add(new JLabel(""));
+        map_object_panel.add(exitBtn);
         
         this.add(map_object_panel,BorderLayout.NORTH);
         this.add(map_grid_panel,BorderLayout.CENTER);
@@ -103,23 +108,42 @@ public class MapCreationView extends JFrame{
         if(xBlock.getText().equals("")){
             return 0;
         }
-        else
-            return Integer.parseInt(xBlock.getText());
+        else{
+            int temp = 0;
+            try{
+                temp  = Integer.parseInt(xBlock.getText());
+            } catch(Exception e){
+                System.out.println("Inter exception");
+                temp = 0;
+            }
+            return temp;
+        }
     }
     
     public int getYBlockInput(){
         if(yBlock.getText().equals("")){
             return 0;
         }
-        else
-            return Integer.parseInt(yBlock.getText());
+        else{
+            int temp = 0;
+            try{
+                temp  = Integer.parseInt(yBlock.getText());
+            } catch(Exception e){
+                System.out.println("Inter exception");
+                temp = 0;
+            }
+            return temp;
+        }
     }
     
-    public void addGridMap(MapBoxController mbCont){
+    public boolean addGridMap(MapBoxController mbCont){
         this.mbCont = mbCont;
-        System.out.println("1");
-        map_grid_panel.add(new MapBoxView(mbCont.getXBlockCount(),mbCont.getYBlockCount()));
+        System.out.println("xbc"+mbCont.getXBlockCount());
+        MapBoxView x = this.mbCont.getView();
+        map_grid_panel.add(x);
+        this.mbCont.setBtnGridClickListner();
         map_grid_panel.validate();
+        return true;
     }
     
     public void addButtonClickEventListner(ActionListener ListnerForButton){
@@ -127,11 +151,38 @@ public class MapCreationView extends JFrame{
         entryPBtn.addActionListener(ListnerForButton);
         pathBtn.addActionListener(ListnerForButton);
         exitPBtn.addActionListener(ListnerForButton);
+        loadMapBtn.addActionListener(ListnerForButton);
         saveMapBtn.addActionListener(ListnerForButton);
         exitBtn.addActionListener(ListnerForButton);
     }
     
+    public void disableSubmitButton(){
+        submitBtn.setEnabled(false);
+        xBlock.setEnabled(false);
+        yBlock.setEnabled(false);
+        entryPBtn.setEnabled(true);
+        pathBtn.setEnabled(true);
+        exitPBtn.setEnabled(true);
+        saveMapBtn.setEnabled(true);
+    }
+    
+    public void disableLoadButton(){
+        loadMapBtn.setEnabled(false);
+    }
+    
     public void displayMessage(String str){
         JOptionPane.showMessageDialog(this, str);
+    }
+    
+    public void setdisabledloadMapBtn(){
+       loadMapBtn.setEnabled(false);
+    }
+    
+    public void setdisabledsubmitBtn(){
+       submitBtn.setEnabled(false);
+    }
+    
+    public String getFileName(){
+        return JOptionPane.showInputDialog(this, "Enter File Name");
     }
 }
