@@ -8,7 +8,9 @@ package tdgame.view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
+
 import tdgame.controller.MapBoxController;
 
 /**
@@ -82,7 +84,7 @@ public class MapBoxView extends JPanel {
       }
     }
     
-    public void setEntryPointFlag(){
+    public boolean setEntryPointFlag(){
         System.out.println("setEntryPointFlag: "+mbCon.getEentryPointData());
         for(int y=0;y<mbCon.getYBlockCount();y++){
             for(int x=0;x<mbCon.getXBlockCount();x++){
@@ -97,9 +99,10 @@ public class MapBoxView extends JPanel {
             }
         }
         setSlectedCell();
+        return true;
     }
     
-    public void setPathPointFlag(){
+    public boolean setPathPointFlag(){
         for(int y=0;y<mbCon.getYBlockCount();y++){
             for(int x=0;x<mbCon.getXBlockCount();x++){
               if(x==0){
@@ -117,9 +120,10 @@ public class MapBoxView extends JPanel {
             }
         }
         setSlectedCell();
+        return true;
     }
     
-    public void setExitPointFlag(){
+    public boolean setExitPointFlag(){
         for(int x=0;x<mbCon.getXBlockCount();x++){
           for(int y=0;y<mbCon.getYBlockCount();y++){
               if(x==mbCon.getXBlockCount()-1)
@@ -134,9 +138,10 @@ public class MapBoxView extends JPanel {
             }
         }
         setSlectedCell();
+        return true;
     }
     
-    public void setSlectedCell(){
+    public boolean setSlectedCell(){
         if(mbCon.getEentryPointData() != 9)
             cellBtn[mbCon.getEentryPointData()][0].setBackground(new Color(165, 42, 42));
         if(mbCon.getExitPointData() != 9)
@@ -148,13 +153,19 @@ public class MapBoxView extends JPanel {
                     cellBtn[y][x].setBackground(Color.yellow);
             }
         }
+        return true;
     }
     
-    public void setEntryPoint(int yC, int xC){
-        for(int y=0;y<mbCon.getYBlockCount();y++){
+    public boolean setEntryPoint(int yC, int xC){
+        if(xC != 0)
+        {
+        	return false;
+        }
+    	for(int y=0;y<mbCon.getYBlockCount();y++){
             cellBtn[y][0].setBackground(Color.gray);
         }
         cellBtn[yC][xC].setBackground(new Color(165, 42, 42));
+        return true;
     }
     
     public void setPathPoint(int yC, int xC){
@@ -170,11 +181,21 @@ public class MapBoxView extends JPanel {
         }
     }
     
-    public void setExitPoint(int yC, int xC){
+ public boolean setExitPoint(int yC, int xC){
+    	
+    	System.out.println("Nitish "+this.xC);
+    	
+    	if(xC != (this.xC-1) )
+    	{
+    		
+    		return false;
+    	}
+    	
         for(int y=0;y<mbCon.getYBlockCount();y++){
             cellBtn[y][mbCon.getXBlockCount()-1].setBackground(Color.gray);
         }
         cellBtn[yC][xC].setBackground(new Color(165, 42, 42));
+        return true;
     }
     
     public void displayMessage(String str){
