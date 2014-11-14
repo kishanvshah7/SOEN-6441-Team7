@@ -7,6 +7,7 @@
 package tdgame.model;
 
 import java.awt.Rectangle;
+import tdgame.view.PlayScreenView;
 
 /**
  * This is model for Grid Cells Module.
@@ -40,6 +41,56 @@ public class GridCellModel extends Rectangle{
         }
         this.gID = gID;
         this.airID = airID;
+    }
+    
+    public void physic(CreatureModel[] cModel){
+        
+        for(int i=0;i<configModel.airTowerLaser.length;i++){
+            //for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
+                if(getShotMob() != -1 && towerRange[gID].intersects(cModel[getShotMob()])){
+                    firing = true;
+                }
+                else{
+                    //System.out.println("Firing stop");
+                    firing = false;
+                }
+            //}
+        }
+
+        if(!isFiring()){
+            for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
+                if(airID == configModel.airTowerLaser[tid]){
+                    for(int i=0;i<cModel.length;i++){
+                        if(cModel[i].isInGame()){
+                            if(towerRange[tid].intersects(cModel[i])){
+                                firing = true;
+                                shotMob = i;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if(isFiring()){
+            if(loseFrame >= loseTime){
+                cModel[getShotMob()].loseHealth(1);
+                loseFrame = 0;
+            }else {
+                loseFrame +=1;
+            }
+           
+            if(cModel[getShotMob()].isDead()){
+                //getMoney(cModel[getShotMob()].getMobID());
+                firing = false;
+                shotMob = -1;
+                
+                configModel.killed +=1;
+                PlayScreenView.hasWon();
+                //System.out.println("Killed: "+configModel.killed);
+                //System.out.println("KilledToWin: x");
+            }
+        }
     }
 
     /**
@@ -78,4 +129,22 @@ public class GridCellModel extends Rectangle{
         return towerRange[x];
     }
     
+    public void getMoney(int mobID){
+        System.out.println("Money Is increased");
+        configModel.money += configModel.deathReward[0];
+    }
+
+    /**
+     * @return the shotMob
+     */
+    public int getShotMob() {
+        return shotMob;
+    }
+
+    /**
+     * @return the firing
+     */
+    public boolean isFiring() {
+        return firing;
+    }
 }

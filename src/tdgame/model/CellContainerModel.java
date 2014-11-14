@@ -35,6 +35,14 @@ public class CellContainerModel {
             }
         }
     }
+    
+    public void physic(CreatureModel[] cModel){
+        for(int y=0;y<gcModel.length;y++){
+            for(int x=0;x<gcModel[0].length;x++){
+                gcModel[y][x].physic(cModel);
+            }
+        }
+    }
 
     /**
      * @return the xC

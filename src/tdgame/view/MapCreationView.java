@@ -147,6 +147,7 @@ public class MapCreationView extends JFrame{
     /**
      * This method will add gridMap in Map Creation Screen.
      * @param  mbCont the controller object of map box controller.
+     * @return flag
      */
     public boolean addGridMap(MapBoxController mbCont){
         this.mbCont = mbCont;

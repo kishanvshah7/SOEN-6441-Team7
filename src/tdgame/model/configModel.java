@@ -14,6 +14,19 @@ import java.awt.Point;
  */
 public class configModel {
     
+    public static int money = 150;
+    public static int health = 3;
+    public static int killed = 0;
+    public static int killsToWin = 5;
+    
+    public static int level = 1;
+    
+    public static int gridX = 7;
+    public static int gridY = 7;
+    public static int cellPixels = 44;
+    
+    public static int walkFrame = 0, walkSpeed = 20;
+    
     public static Point mse = new Point(0, 0);
     
     public static int groundGrass = 0;
@@ -37,5 +50,6 @@ public class configModel {
     public static Image[] air_level = new Image[100];
     
     public static Image[] tileset_res = new Image[100];
+    public static Image[] tileset_mob = new Image[100];
     
 }

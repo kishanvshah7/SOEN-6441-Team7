@@ -14,8 +14,11 @@ import java.awt.image.FilteredImageSource;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import tdgame.controller.PlayScreenController;
+import tdgame.model.CreatureModel;
+import tdgame.model.configModel;
 import static tdgame.model.configModel.air_level;
 import static tdgame.model.configModel.ground_level;
+import static tdgame.model.configModel.tileset_mob;
 import static tdgame.model.configModel.tileset_res;
 
 /**
@@ -28,6 +31,10 @@ public class PlayScreenView extends JPanel implements Runnable {
     
     private static boolean isFirst = true;
     
+    public static CreatureModel[] Creatures = new CreatureModel[100];
+    CreatureView cView = new CreatureView();
+    
+    public static boolean isWin = false;
     boolean rFlag =false;
     PlayScreenController psCont;
     
@@ -51,6 +58,18 @@ public class PlayScreenView extends JPanel implements Runnable {
         tileset_res[0] = new ImageIcon("resources/cell.png").getImage();
         tileset_res[1] = new ImageIcon("resources/heart.png").getImage();
         tileset_res[2] = new ImageIcon("resources/coin_icon.png").getImage();
+        tileset_mob[0] = new ImageIcon("resources/mob_level1.png").getImage();
+    }
+    
+    public void initCreatures(){
+        if(psCont != null){
+            for(int i=0;i<Creatures.length;i++){
+                Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
+                //mobs[i].spawnMob(0);
+            }
+            isFirst = false;
+        } else
+                System.out.println("psCont not initialized");
     }
     
     /**
@@ -58,6 +77,13 @@ public class PlayScreenView extends JPanel implements Runnable {
      */
     public void startGame(){
         gameLoop.start();
+    }
+    
+    public static void hasWon() {
+        if(configModel.killed == configModel.killsToWin){
+            isWin = true;
+            configModel.killed = 0;
+        }
     }
     
     /**
@@ -75,14 +101,40 @@ public class PlayScreenView extends JPanel implements Runnable {
      */
     public void paintComponent(Graphics g){
         //System.out.println("xyz");
+        
+        if(isFirst)
+        {
+            initCreatures();
+        }
+        
         if(psCont !=null){
             g.setColor(new Color(50,50,50));
             g.fillRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.white);
             psCont.getccDraw(g);
+            
+            for(int i=0; i< Creatures.length;i++){
+                if(Creatures[i].isInGame()){
+                    cView.draw(Creatures[i], i, g);
+                }
+            }
+            
             psCont.getshopDraw(g);
-            //g.drawRect(100, 100, 400, 400);
-            //roomObj.draw(g); //Drawing from room
+        }
+    }
+    
+    public int spawnTime = 2000, spawnFrame = 0;
+    public void mobSpawner(){
+        if(spawnFrame >= spawnTime){
+            for(int i=0;i<Creatures.length;i++){
+                if(!Creatures[i].isInGame()){
+                    Creatures[i].spawnCreature(configModel.mobGreeny);
+                    break;
+                }
+            }
+            spawnFrame = 0;
+        }else{
+            spawnFrame += 1;
         }
     }
     
@@ -92,8 +144,20 @@ public class PlayScreenView extends JPanel implements Runnable {
     @Override
     public void run() {
         while(true){
-            if(rFlag){
+            
+            if(isFirst){
+                initCreatures();
+            }
+            
+            if(rFlag && !isFirst){
                 //System.out.println("Gamp Loop!");
+                psCont.getCcModel().physic(Creatures);
+                mobSpawner();
+                for(int i=0;i<Creatures.length;i++){
+                    if(Creatures[i].isInGame()){
+                        Creatures[i].physic();
+                    }
+                }
                 //psCont.logic();
                 repaint();
                 //System.out.println("Test Loop!");
@@ -102,6 +166,8 @@ public class PlayScreenView extends JPanel implements Runnable {
                 } catch (Exception e){
                     System.out.println("Some Error");
                 }
+            } else {
+                //System.out.println("isFirst is true");
             }
         }
     }
