@@ -60,7 +60,7 @@ public class ShopController {
                 if(sModel.getButtonObj(i).contains(configModel.mse)){
                     if(sModel.getButtonId(i) != configModel.airAir)
                     {
-                        if(sModel.getMoney() >= sModel.getButtonPrice(i)){
+                        if(configModel.money >= sModel.getButtonPrice(i)){
                             sModel.setHeldID(sModel.getButtonId(i));
                             sModel.setRealID(i);
                             sModel.setHoldsItem(true);
@@ -70,13 +70,13 @@ public class ShopController {
             }
             
             if(sModel.isHoldsItem()){
-                if(sModel.getMoney() >= sModel.getButtonPrice(sModel.getRealID())){
+                if(configModel.money >= sModel.getButtonPrice(sModel.getRealID())){
                     for(int y=0;y<ccCont.getyC();y++){
                         for(int x=0;x<ccCont.getxC();x++){
                             if(ccCont.getgcModelObj(y, x).contains(configModel.mse)){
                                 if(ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
                                     ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
-                                    sModel.setMoney(sModel.getMoney() - sModel.getButtonPrice(sModel.getRealID()));
+                                    configModel.money = configModel.money - sModel.getButtonPrice(sModel.getRealID());
                                     System.out.println("Tower Placed"+sModel.getHeldID());
                                     sModel.setHoldsItem(false);
                                 }
@@ -106,10 +106,14 @@ public class ShopController {
                             if(ccCont.getgcModelObj(y, x).contains(configModel.mse)){
                                 for(int i=0;i<configModel.airTowerLaser.length;i++){
                                     if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
+                                        System.out.println("Firing: "+ccCont.getgcModelObj(y, x).isFiring());
+                                        ccCont.getgcModelObj(y, x).setFiring(false);
+                                        System.out.println("Firing2: "+ccCont.getgcModelObj(y, x).isFiring());
                                         ccCont.getgcModelObj(y, x).setAirID(-1);
                                         //ccCont.getgcModelObj(y, x).airID = sModel.getHeldID();
                                         double refund_amount = sModel.getButtonPrice(i) * 0.8;
-                                        sModel.setMoney(sModel.getMoney() + (int)refund_amount );
+                                        sModel.setMoney(configModel.money + (int)refund_amount );
+                                        configModel.money = configModel.money + (int)refund_amount;
                                     }
                                 }
                             }

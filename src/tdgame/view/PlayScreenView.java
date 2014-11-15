@@ -8,6 +8,7 @@ package tdgame.view;
 
 import towerdefensegame.*;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
@@ -31,12 +32,14 @@ public class PlayScreenView extends JPanel implements Runnable {
     
     private static boolean isFirst = true;
     
-    public static CreatureModel[] Creatures = new CreatureModel[100];
+    public static CreatureModel[] Creatures = new CreatureModel[configModel.creaturesNo];
     CreatureView cView = new CreatureView();
     
     public static boolean isWin = false;
     boolean rFlag =false;
-    PlayScreenController psCont;
+    static PlayScreenController psCont;
+    
+    public static int winTime = 4000, winFrame =0;
     
     /**
      * This method will initialize GUI components for Play Screen.
@@ -62,6 +65,7 @@ public class PlayScreenView extends JPanel implements Runnable {
     }
     
     public void initCreatures(){
+        System.out.println("initCreatures");
         if(psCont != null){
             for(int i=0;i<Creatures.length;i++){
                 Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
@@ -69,7 +73,7 @@ public class PlayScreenView extends JPanel implements Runnable {
             }
             isFirst = false;
         } else
-                System.out.println("psCont not initialized");
+            System.out.println("psCont not initialized");
     }
     
     /**
@@ -81,8 +85,19 @@ public class PlayScreenView extends JPanel implements Runnable {
     
     public static void hasWon() {
         if(configModel.killed == configModel.killsToWin){
-            isWin = true;
+            //isWin = true;
+            //configModel.killed = 0;
+        }
+        
+        if(configModel.killed == configModel.creaturesNo){
+            configModel.creaturesNo = 10;
             configModel.killed = 0;
+            configModel.waveLap++;
+            Creatures = new CreatureModel[configModel.creaturesNo];
+            for(int i=0;i<Creatures.length;i++){
+                Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
+                //mobs[i].spawnMob(0);
+            }
         }
     }
     
@@ -126,10 +141,13 @@ public class PlayScreenView extends JPanel implements Runnable {
     public int spawnTime = 2000, spawnFrame = 0;
     public void mobSpawner(){
         if(spawnFrame >= spawnTime){
-            for(int i=0;i<Creatures.length;i++){
-                if(!Creatures[i].isInGame()){
-                    Creatures[i].spawnCreature(configModel.mobGreeny);
+            int i =0;
+            for(i=0;i<Creatures.length;i++){
+                if(!Creatures[i].isInGame() && Creatures[i].getHealth() == 100){
+                    Creatures[i].spawnCreature(i);
                     break;
+                } else{     
+                    //System.out.println("In Game: "+i);
                 }
             }
             spawnFrame = 0;
@@ -149,7 +167,7 @@ public class PlayScreenView extends JPanel implements Runnable {
                 initCreatures();
             }
             
-            if(rFlag && !isFirst){
+            if(rFlag && !isFirst && !isWin){
                 //System.out.println("Gamp Loop!");
                 psCont.getCcModel().physic(Creatures);
                 mobSpawner();
@@ -167,7 +185,20 @@ public class PlayScreenView extends JPanel implements Runnable {
                     System.out.println("Some Error");
                 }
             } else {
-                //System.out.println("isFirst is true");
+                if(isWin){
+                    if(winFrame >= winTime){
+                        if(configModel.level == configModel.maxLevel){
+                            //System.exit(0);
+                        }else{
+                            configModel.level +=1;
+                            //initCreatures();
+                            isWin = false;
+                        }
+                        winFrame =0;
+                    }else {
+                        winFrame +=1;
+                    }
+                }
             }
         }
     }

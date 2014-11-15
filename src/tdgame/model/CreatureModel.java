@@ -52,16 +52,20 @@ public class CreatureModel extends Rectangle{
         this.mobID = mobID;
         this.health = getMobSize();
         inGame = true;
-        //System.out.println(""+mobID);
+        //System.out.println("Mob Id"+this.mobID);
     }
     
     public void deleteCreature(){
         this.inGame = false;
+        //System.out.println("Not in Game: "+mobID);
+        //this.health = 0;
         direction = right;
         mobWalk = 0;
         if(health <= 0){
             ccModel.getGcModelObj(yC, 0).getMoney(getMobID());
+            configModel.killed +=1;
         }
+        this.health = 0;
     }
 
     /**
@@ -175,7 +179,7 @@ public class CreatureModel extends Rectangle{
                 }
                 
                 if(ccCont.getgcModelObj(yC, xC).getAirID()== configModel.airCave){
-                    System.out.println("Delete+loosHealth "+getMobID());
+                    //System.out.println("Delete+loosHealth "+getMobID());
                     deleteCreature();
                     loosHealth();
                 }

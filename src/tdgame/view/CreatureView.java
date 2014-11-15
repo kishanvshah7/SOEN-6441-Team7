@@ -18,7 +18,7 @@ import tdgame.model.configModel;
 public class CreatureView {
     
     public void draw(CreatureModel cModel,int mobID, Graphics g){
-        //System.out.println("Mob ID"+mobID);
+        //System.out.println("Mob ID: "+mobID+ "F: "+cModel.isInGame());
         //g.drawRect(cModel.x, cModel.y, cModel.width, cModel.height);
         g.drawImage(configModel.tileset_mob[0], cModel.x, cModel.y, cModel.width, cModel.height, null);
         

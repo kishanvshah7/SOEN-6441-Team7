@@ -18,6 +18,10 @@ public class configModel {
     public static int health = 3;
     public static int killed = 0;
     public static int killsToWin = 5;
+    public static int maxLevel = 5;
+    public static boolean roundSlot = true;
+    public static int creaturesNo = 5;
+    public static int waveLap = 1;
     
     public static int level = 1;
     

@@ -48,11 +48,11 @@ public class GridCellModel extends Rectangle{
         for(int i=0;i<configModel.airTowerLaser.length;i++){
             //for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
                 if(getShotMob() != -1 && towerRange[gID].intersects(cModel[getShotMob()])){
-                    firing = true;
+                    setFiring(true);
                 }
                 else{
                     //System.out.println("Firing stop");
-                    firing = false;
+                    setFiring(false);
                 }
             //}
         }
@@ -63,7 +63,7 @@ public class GridCellModel extends Rectangle{
                     for(int i=0;i<cModel.length;i++){
                         if(cModel[i].isInGame()){
                             if(towerRange[tid].intersects(cModel[i])){
-                                firing = true;
+                                setFiring(true);
                                 shotMob = i;
                             }
                         }
@@ -72,7 +72,7 @@ public class GridCellModel extends Rectangle{
             }
         }
         
-        if(isFiring()){
+        if(isFiring() && getAirID() != -1){
             if(loseFrame >= loseTime){
                 cModel[getShotMob()].loseHealth(1);
                 loseFrame = 0;
@@ -82,10 +82,8 @@ public class GridCellModel extends Rectangle{
            
             if(cModel[getShotMob()].isDead()){
                 //getMoney(cModel[getShotMob()].getMobID());
-                firing = false;
+                setFiring(false);
                 shotMob = -1;
-                
-                configModel.killed +=1;
                 PlayScreenView.hasWon();
                 //System.out.println("Killed: "+configModel.killed);
                 //System.out.println("KilledToWin: x");
@@ -146,5 +144,12 @@ public class GridCellModel extends Rectangle{
      */
     public boolean isFiring() {
         return firing;
+    }
+
+    /**
+     * @param firing the firing to set
+     */
+    public void setFiring(boolean firing) {
+        this.firing = firing;
     }
 }

@@ -35,8 +35,9 @@ public class ShopView {
         g.setColor(new Color(255, 255, 255));
         g.drawRect(sModel.btn_health.x - 5, sModel.btn_health.y -5, 226, 50);
         g.setFont(new Font("Courier New", Font.BOLD, 15));
-        g.drawString("Level: "+configModel.level, sModel.btn_health.x + 5, sModel.btn_health.height + 10);
-        g.drawString("Killed: "+configModel.killed + "/" + configModel.killsToWin, sModel.btn_coins.x + 5, sModel.btn_health.height + 10);
+        g.drawString("L:"+configModel.level, sModel.btn_health.x + 5, sModel.btn_health.height + 10);
+        g.drawString("R:"+configModel.waveLap+"/3", sModel.btn_health.x + 55, sModel.btn_health.height + 10);
+        g.drawString("K:"+configModel.killed + "/" + configModel.killsToWin, sModel.btn_coins.x + 5, sModel.btn_health.height + 10);
         
         for(int i=0;i<sModel.button.length;i++){
              if(sModel.button[i].contains(configModel.mse)){
