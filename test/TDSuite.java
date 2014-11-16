@@ -6,7 +6,7 @@ import tdgame.model.MapCreationModel;
 
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({MapCreationModelTest.class, MapBoxViewTest.class, MapCreationViewTest.class, PlayScreenViewTest.class, CreatureModelTest.class, MapValidationTest.class})
+@Suite.SuiteClasses({MapCreationModelTest.class, MapBoxViewTest.class, MapCreationViewTest.class, PlayScreenViewTest.class, ShopControllerTest.class, CreatureModelTest.class, MapValidationTest.class})
 public class TDSuite {
   //nothing
 }

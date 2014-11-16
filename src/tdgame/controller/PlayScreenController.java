@@ -33,9 +33,9 @@ public class PlayScreenController {
     GridCellView gcView;
     GridCellController gcCont;
     
-    ShopModel sModel;
+    private ShopModel sModel;
     ShopView sView;
-    ShopController sCont;
+    private ShopController sCont;
     
     /**
      * This method is constructor for Play Screen Controller. It will initialize different views,model and controller.
@@ -68,7 +68,7 @@ public class PlayScreenController {
         
         this.sModel = sModel;
         this.sView = sView;
-        sCont = new ShopController(this.sModel,this.sView);
+        sCont = new ShopController(this.getsModel(),this.sView);
         sCont.setccCont(ccCont);
     }
 
@@ -85,7 +85,7 @@ public class PlayScreenController {
      * @param g the Graphics
      */
     public void getshopDraw(Graphics g){
-        sCont.getshopDraw(sModel, g);
+        getsCont().getshopDraw(getsModel(), g);
     }
 
     /**
@@ -107,5 +107,19 @@ public class PlayScreenController {
      */
     public CellContainerController getCcCont() {
         return ccCont;
+    }
+
+    /**
+     * @return the sCont
+     */
+    public ShopController getsCont() {
+        return sCont;
+    }
+
+    /**
+     * @return the sModel
+     */
+    public ShopModel getsModel() {
+        return sModel;
     }
 }
