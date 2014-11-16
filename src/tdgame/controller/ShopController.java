@@ -62,7 +62,42 @@ public class ShopController implements Observer {
     public static void click(int button) {
         
     }
-
+    
+    public boolean placeTower(int y, int x){
+        if(ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
+            ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
+            configModel.money = configModel.money - sModel.getButtonPrice(sModel.getRealID());
+            System.out.println("Tower Placed"+sModel.getHeldID());
+            sModel.setHoldsItem(false);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean removeTower(int y, int x, int i){
+        if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
+            ccCont.getgcModelObj(y, x).setFiring(false);
+            ccCont.getgcModelObj(y, x).setAirID(-1);
+            double refund_amount = sModel.getButtonPrice(i) * 0.8;
+            sModel.setMoney(configModel.money + (int)refund_amount );
+            configModel.money = configModel.money + (int)refund_amount;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean isTowerHere(int y, int x, int i){
+        if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
+            System.out.println("Tower Is Here");
+            sModel.setTowerID(i);
+            sModel.setTowerInfo(true);
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     public void update(Observable o, Object arg) {
         //System.out.println("Bagha");
@@ -87,12 +122,7 @@ public class ShopController implements Observer {
                         for(int y=0;y<ccCont.getyC();y++){
                             for(int x=0;x<ccCont.getxC();x++){
                                 if(ccCont.getgcModelObj(y, x).contains(configModel.mse)){
-                                    if(ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
-                                        ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
-                                        configModel.money = configModel.money - sModel.getButtonPrice(sModel.getRealID());
-                                        System.out.println("Tower Placed"+sModel.getHeldID());
-                                        sModel.setHoldsItem(false);
-                                    }
+                                    placeTower(y, x);
                                 }
                             }
                         }
@@ -102,11 +132,7 @@ public class ShopController implements Observer {
                             for(int x=0;x<ccCont.getxC();x++){
                                 if(ccCont.getgcModelObj(y, x).contains(configModel.mse)){
                                     for(int i=0;i<configModel.airTowerLaser.length;i++){
-                                        if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
-                                            System.out.println("Tower Is Here");
-                                            sModel.setTowerID(i);
-                                            sModel.setTowerInfo(true);
-                                        }
+                                        isTowerHere(y, x, i);
                                     }
                                 }
                             }
@@ -119,19 +145,7 @@ public class ShopController implements Observer {
                                 if(ccCont.getgcModelObj(y, x).contains(configModel.mse)){
                                     for(int i=0;i<configModel.airTowerLaser.length;i++){
                                         if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
-                                            ccCont.getgcModelObj(y, x).setFiring(false);
-                                            ccCont.getgcModelObj(y, x).setAirID(-1);
-                                            //ccCont.getgcModelObj(y, x).airID = sModel.getHeldID();
-                                            double refund_amount = sModel.getButtonPrice(i) * 0.8;
-                                            sModel.setMoney(configModel.money + (int)refund_amount );
-                                            configModel.money = configModel.money + (int)refund_amount;
-//                                            ccCont.get
-//                                            for(int x=0;x<cModel.length;x++){
-//                                                if(cModel[i].isInGame()){
-//                                                        cModel[i].walkSpeed = 20;
-//                                                }
-//                                            }
-
+                                            removeTower(y, x , i);
                                         }
                                     }
                                 }
