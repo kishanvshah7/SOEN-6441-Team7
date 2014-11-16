@@ -22,11 +22,10 @@ public class TowerDefenseGame {
      */
     public static void main(String[] args) {
         
-        MainScreenView theView = new MainScreenView();
-        MainScreenModel theModel = new MainScreenModel();
-        
-        MainScreenController theController = new MainScreenController(theView, theModel);
-        theView.setVisible(true);
+        TowerDefenseGame_SingleObject Singleobject = TowerDefenseGame_SingleObject.getInstance();
+
+        MainScreenController theController = new MainScreenController(Singleobject.getTheView(), Singleobject.getTheModel());
+        Singleobject.getTheView().setVisible(true);
     }
     
 }

@@ -27,7 +27,7 @@ public class CreatureView {
         g.fillRect(cModel.x + cModel.getMobSize(), cModel.y, cModel.getHealthWidth(), cModel.height);
         
         g.setColor(new Color(50, 180, 50));
-        g.fillRect(cModel.x + cModel.getMobSize(), cModel.y, cModel.getHealthWidth(), cModel.getHealth());
+        g.fillRect(cModel.x + cModel.getMobSize(), cModel.y, cModel.getHealthWidth(), cModel.getHealthHeight());
         
         
         g.setColor(Color.BLACK);

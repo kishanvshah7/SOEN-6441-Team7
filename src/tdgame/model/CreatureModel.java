@@ -16,8 +16,8 @@ import tdgame.controller.CellContainerController;
 public class CreatureModel extends Rectangle{
     
     private int xC, yC;
-    private int health = 100;
-    private int healthSize =3, healthWidth =5;
+    private int health = 44;
+    private int healthSize =3, healthWidth =5, healthHeight = 44;
     private int mobSize = 44;
     private int mobWalk = 0;
     private int upward =0,downward =1, right = 2, left = 3;
@@ -50,9 +50,9 @@ public class CreatureModel extends Rectangle{
             }
         }
         this.mobID = mobID;
-        this.health = getMobSize();
+        this.health = getHealth();
         inGame = true;
-        //System.out.println("Mob Id"+this.mobID);
+        System.out.println("Mob Id"+health);
     }
     
     public void deleteCreature(){
@@ -208,6 +208,20 @@ public class CreatureModel extends Rectangle{
      */
     public int getMobID() {
         return mobID;
+    }
+
+    /**
+     * @return the healthHeight
+     */
+    public int getHealthHeight() {
+        return health;
+    }
+
+    /**
+     * @param healthHeight the healthHeight to set
+     */
+    public void setHealthHeight(int healthHeight) {
+        this.healthHeight = healthHeight;
     }
     
 }

@@ -41,7 +41,7 @@ public class configModel {
     
     public static int removeTower = 11;
     public static int[] airTowerLaser  = new int[]{3,4,5,6};
-    public static int[] airTowerRanger  = new int[]{90,135,180,225};
+    public static int[] airTowerRanger  = new int[]{88,135,180,225};
     public static int[] TowerFiringRate = new int[]{10,15,20,25};
     public static int[] Towerhealth = new int[]{10,15,20,25};
     
@@ -55,5 +55,6 @@ public class configModel {
     
     public static Image[] tileset_res = new Image[100];
     public static Image[] tileset_mob = new Image[100];
-    
+    public static Image[] fire = new Image[1];
+    public static Image[] ice = new Image[1];
 }

@@ -7,6 +7,7 @@
 package tdgame.model;
 
 import java.awt.Rectangle;
+import java.util.Arrays;
 import tdgame.view.PlayScreenView;
 
 /**
@@ -22,6 +23,9 @@ public class GridCellModel extends Rectangle{
     private int loseTime = 100, loseFrame = 0;
     
     private int shotMob = -1;
+    private int[] MobList = new int[100];
+    private boolean freeze = false;
+    private boolean fire = false;
     private boolean firing = false;
 
     /**
@@ -34,6 +38,7 @@ public class GridCellModel extends Rectangle{
      * @param airId  air id of cell
      */
     GridCellModel(int x, int y, int width, int height, int gId, int airId) {
+        Arrays.fill(MobList, 0);
         setBounds(x, y, width, height);
         towerRange = new Rectangle[configModel.airTowerLaser.length];
         for(int i=0;i<configModel.airTowerLaser.length;i++){
@@ -49,14 +54,29 @@ public class GridCellModel extends Rectangle{
             //for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
                 if(getShotMob() != -1 && towerRange[gID].intersects(cModel[getShotMob()])){
                     setFiring(true);
+                    //cModel[i].walkSpeed = 40;
                 }
                 else{
-                    //System.out.println("Firing stop");
+                    //cModel[i].walkSpeed = 20;
                     setFiring(false);
                 }
             //}
         }
-
+        for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
+                if(airID == 5){
+                    for(int i=0;i<cModel.length;i++){
+                        if(cModel[i].isInGame()){
+                            if(towerRange[tid].intersects(cModel[i])){
+                                //setFiring(true);
+                                //shotMob = i;
+                                cModel[i].walkSpeed = 40;
+                            } else {
+                                cModel[i].walkSpeed = 20;
+                            }
+                        }
+                    }
+                }
+            }
         if(!isFiring()){
             for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
                 if(airID == configModel.airTowerLaser[tid]){
@@ -65,6 +85,9 @@ public class GridCellModel extends Rectangle{
                             if(towerRange[tid].intersects(cModel[i])){
                                 setFiring(true);
                                 shotMob = i;
+                                //cModel[i].walkSpeed = 40;
+                            } else {
+                                //cModel[i].walkSpeed = 20;
                             }
                         }
                     }

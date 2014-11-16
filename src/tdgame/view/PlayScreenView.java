@@ -6,7 +6,6 @@
 
 package tdgame.view;
 
-import towerdefensegame.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,12 +14,16 @@ import java.awt.image.FilteredImageSource;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import tdgame.controller.PlayScreenController;
+import tdgame.controller.ShopController;
 import tdgame.model.CreatureModel;
 import tdgame.model.configModel;
 import static tdgame.model.configModel.air_level;
 import static tdgame.model.configModel.ground_level;
 import static tdgame.model.configModel.tileset_mob;
 import static tdgame.model.configModel.tileset_res;
+import static tdgame.model.configModel.fire;
+import static tdgame.model.configModel.ice;
+import towerdefensegame.*;
 
 /**
   * This is GUI class of Play Screen Module.
@@ -46,8 +49,16 @@ public class PlayScreenView extends JPanel implements Runnable {
      * @param j the GamePlay object
      */
     public PlayScreenView(GamePlay j){
-        j.addMouseListener(new KeyController());
-        j.addMouseMotionListener(new KeyController());
+        final KeyController eventSource = new KeyController();
+ 
+        // create an observer
+        final ShopController responseHandler = new ShopController();
+ 
+        // subscribe the observer to the event source
+        eventSource.addObserver(responseHandler);
+        
+        j.addMouseListener(eventSource);
+        j.addMouseMotionListener(eventSource);
         for(int i=0;i<ground_level.length;i++){
             ground_level[i] = new ImageIcon("resources/grass_tile1.png").getImage();
             ground_level[i] = createImage(new FilteredImageSource(ground_level[i].getSource(), new CropImageFilter(0, 40*i, 40, 40)));
@@ -62,6 +73,8 @@ public class PlayScreenView extends JPanel implements Runnable {
         tileset_res[1] = new ImageIcon("resources/heart.png").getImage();
         tileset_res[2] = new ImageIcon("resources/coin_icon.png").getImage();
         tileset_mob[0] = new ImageIcon("resources/mob_level1.png").getImage();
+        fire[0] = new ImageIcon("resources/fire.gif").getImage();
+        ice[0] = new ImageIcon("resources/ice.png").getImage();
     }
     
     public void initCreatures(){
@@ -143,7 +156,7 @@ public class PlayScreenView extends JPanel implements Runnable {
         if(spawnFrame >= spawnTime){
             int i =0;
             for(i=0;i<Creatures.length;i++){
-                if(!Creatures[i].isInGame() && Creatures[i].getHealth() == 100){
+                if(!Creatures[i].isInGame() && Creatures[i].getHealth() == 44){
                     Creatures[i].spawnCreature(i);
                     break;
                 } else{     
