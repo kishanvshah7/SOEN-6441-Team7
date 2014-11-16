@@ -12,8 +12,6 @@ import java.awt.GridLayout;
 import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import tdgame.controller.CellContainerController;
-import tdgame.controller.GridCellController;
 import tdgame.controller.MapValidation;
 import tdgame.controller.PlayScreenController;
 import tdgame.model.CellContainerModel;
@@ -27,11 +25,17 @@ import tdgame.view.PlayScreenView;
 import tdgame.view.ShopView;
 
 /**
- *
+ * This class initialize the game play screen.
  * @author Rahul K Kikani
  */
 public class GamePlay extends JFrame {
     
+    /**
+     * This method will initialize JFrame and set some basic properties(Title, Size, Background Color, Location).
+     * @param f Map file which is selected by user from list box.
+     * @param w Width of Play screen based on map size
+     * @param h Height of Play screen based on map size
+     */
     public GamePlay(File f, int w, int h)
     {
         int width = w*40 + 350;
@@ -45,6 +49,10 @@ public class GamePlay extends JFrame {
         init_elements(f);
     }
     
+    /**
+     * This method will check the Map file and based on the type of map, it will bind the model to the controller and create the play view using the View.
+     * @param f Map file which is selected by user from list box.
+     */
     public void init_elements(File f)
     {
         this.setLayout(new GridLayout(1, 1, 0, 0));
@@ -84,16 +92,4 @@ public class GamePlay extends JFrame {
                             JOptionPane.showMessageDialog(this, "Invalid Map File", null, WIDTH);
                         }
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-    //public static void main(String[] args) {
-    //    GamePlay start_game  = new GamePlay("MapFiles/Rahul.txt");
-    //}
-    
-    public void paintComponent(Graphics g){
-        System.out.println("Main File");
-    } 
-    
 }

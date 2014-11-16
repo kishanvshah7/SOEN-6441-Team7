@@ -7,21 +7,17 @@
 package tdgame.view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 /**
- *
+ * This is GUI class of Map Chooser Module.
  * @author Rahul K Kikani
  */
 public class MapChooserView extends JFrame {
@@ -29,9 +25,18 @@ public class MapChooserView extends JFrame {
     private JButton showButton;
     private JList fruitList;
     MainScreenView msView;
+    
+    /**
+     * This method is constructor.
+     */
     public MapChooserView(){
     }
     
+    /**
+     * This method will initialize GUI components for Map Chooser.
+     * @param msView the view object Main Screen
+     * @param fileList array of map files
+     */
     public MapChooserView(MainScreenView msView, String[] fileList){
         this.setTitle("Select Your Map");
         this.setSize(200,300);
@@ -42,10 +47,18 @@ public class MapChooserView extends JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * this method will set top properties of JFrame.
+     * @param f the boolean value
+     */
     public void setMSTOp(boolean f){
         msView.setAlwaysOnTop(f);
     }
     
+    /**
+     * this method will read all files from MapFiles folder and list in JList Box.
+     * @param fileList the array of map files
+     */
     public void listMapFiles(String[] fileList){
         
         this.setLayout(new BorderLayout(5, 5));
@@ -66,11 +79,18 @@ public class MapChooserView extends JFrame {
         this.add(fruitListScrollPane,BorderLayout.CENTER);  
         this.add(showButton,BorderLayout.SOUTH);
     }
-    
+    /**
+     * this method will add button action listener to button.
+     * @param ListnerForButton the ActionListener
+     */
     public void addButtonClickEventListner(ActionListener ListnerForButton){
         showButton.addActionListener(ListnerForButton);
     }
     
+    /**
+     * This method will return the name of file that selected by user.
+     * @return the file name
+     */
     public String getSelectedFile(){
         if (fruitList.getSelectedIndex() != -1) {                     
                  return fruitList.getSelectedValue().toString();
@@ -79,6 +99,10 @@ public class MapChooserView extends JFrame {
             return "NONE";
     }
     
+    /**
+     * This method create Message show dialog box.
+     * @param str message string.
+     */
     public void displayMessage(String str){
         JOptionPane.showMessageDialog(this, str);
     }

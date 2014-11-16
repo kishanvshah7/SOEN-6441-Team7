@@ -37,7 +37,7 @@ public class MapCreationModelTest {
 	public void testReadFile() {
 		boolean ans = true;
 		File path = new File("MapFilesTest/Rahul.team7");
-		boolean org = mctest.readFile(mbtest,"dsfsdf" ,path);
+		boolean org = mctest.readFile(mbtest,"Rahul" ,path);
 		assertEquals(ans, org);
 	}	
 	

@@ -7,23 +7,38 @@
 package tdgame.model;
 
 import java.awt.Rectangle;
+import java.util.Arrays;
+import tdgame.view.PlayScreenView;
 
 /**
- *
+ * This is model for Grid Cells Module.
  * @author Rahul K Kikani
  */
 public class GridCellModel extends Rectangle{
     
-    public Rectangle[] towerRange;
-    public int towerRangeSize = 100;
-    public int gID;
-    public int airID;
-    public int loseTime = 100, loseFrame = 0;
+    private Rectangle[] towerRange;
+    private int towerRangeSize = 100;
+    private int gID;
+    private int airID;
+    private int loseTime = 100, loseFrame = 0;
     
-    public int shotMob = -1;
-    public boolean firing = false;
+    private int shotMob = -1;
+    private int[] MobList = new int[100];
+    private boolean freeze = false;
+    private boolean fire = false;
+    private boolean firing = false;
 
+    /**
+     * * This is constructor method for Grid Cell. It will set different properties for each grid cell.
+     * @param x x point
+     * @param y y point
+     * @param width width of cell
+     * @param height height of cell
+     * @param gId ground id of cell
+     * @param airId  air id of cell
+     */
     GridCellModel(int x, int y, int width, int height, int gId, int airId) {
+        Arrays.fill(MobList, 0);
         setBounds(x, y, width, height);
         towerRange = new Rectangle[configModel.airTowerLaser.length];
         for(int i=0;i<configModel.airTowerLaser.length;i++){
@@ -33,4 +48,137 @@ public class GridCellModel extends Rectangle{
         this.airID = airID;
     }
     
+    public void physic(CreatureModel[] cModel){
+        
+        for(int i=0;i<configModel.airTowerLaser.length;i++){
+            //for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
+                if(getShotMob() != -1 && towerRange[gID].intersects(cModel[getShotMob()])){
+                    setFiring(true);
+                    //cModel[i].walkSpeed = 40;
+                }
+                else{
+                    //cModel[i].walkSpeed = 20;
+                    setFiring(false);
+                }
+            //}
+        }
+        for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
+                if(airID == 5){
+                    for(int i=0;i<cModel.length;i++){
+                        if(cModel[i].isInGame()){
+                            if(towerRange[tid].contains(cModel[i])){
+                                setFiring(false);
+                                //shotMob = i;
+                                //cModel[i].walkSpeed = 40;
+                            } else {
+                                //cModel[i].walkSpeed = 20;
+                            }
+                        }
+                    }
+                }
+            }
+        if(!isFiring()){
+            for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
+                if(airID == configModel.airTowerLaser[tid]){
+                    for(int i=0;i<cModel.length;i++){
+                        if(cModel[i].isInGame()){
+                            if(towerRange[tid].intersects(cModel[i])){
+                                setFiring(true);
+                                shotMob = i;
+                                //cModel[i].walkSpeed = 40;
+                            } else {
+                                //cModel[i].walkSpeed = 20;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if(isFiring() && getAirID() != -1){
+            if(loseFrame >= loseTime){
+                if(getAirID() != 5){
+                    cModel[getShotMob()].loseHealth(1);
+                } else if(getAirID()==5) {
+                    if(cModel[getShotMob()].walkSpeed < 40){
+                        cModel[getShotMob()].walkSpeed++;
+                    }
+                }
+                loseFrame = 0;
+            }else {
+                loseFrame +=1;
+            }
+           
+            if(cModel[getShotMob()].isDead()){
+                //getMoney(cModel[getShotMob()].getMobID());
+                setFiring(false);
+                shotMob = -1;
+                PlayScreenView.hasWon();
+                //System.out.println("Killed: "+configModel.killed);
+                //System.out.println("KilledToWin: x");
+            }
+        }
+    }
+
+    /**
+     * @param gID the gID to set
+     */
+    public void setgID(int gID) {
+        this.gID = gID;
+    }
+
+    /**
+     * @param airID the airID to set
+     */
+    public void setAirID(int airID) {
+        this.airID = airID;
+    }
+
+    /**
+     * @return the gID
+     */
+    public int getgID() {
+        return gID;
+    }
+
+    /**
+     * @return the airID
+     */
+    public int getAirID() {
+        return airID;
+    }
+
+    /**
+     * @return the towerRange
+     * @param x x index
+     */
+    public Rectangle getTowerRange(int x) {
+        return towerRange[x];
+    }
+    
+    public void getMoney(int mobID){
+        System.out.println("Money Is increased");
+        configModel.money += configModel.deathReward[0];
+    }
+
+    /**
+     * @return the shotMob
+     */
+    public int getShotMob() {
+        return shotMob;
+    }
+
+    /**
+     * @return the firing
+     */
+    public boolean isFiring() {
+        return firing;
+    }
+
+    /**
+     * @param firing the firing to set
+     */
+    public void setFiring(boolean firing) {
+        this.firing = firing;
+    }
 }

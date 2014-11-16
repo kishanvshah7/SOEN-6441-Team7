@@ -8,14 +8,28 @@ package tdgame.model;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.image.CropImageFilter;
-import java.awt.image.FilteredImageSource;
-import javax.swing.ImageIcon;
 /**
- *
+ * This is Default Value Model. To load Different images, tower properties, game levels.
  * @author Rahul K Kikani
  */
 public class configModel {
+    
+    public static int money = 150;
+    public static int health = 3;
+    public static int killed = 0;
+    public static int killsToWin = 5;
+    public static int maxLevel = 5;
+    public static boolean roundSlot = true;
+    public static int creaturesNo = 5;
+    public static int waveLap = 1;
+    
+    public static int level = 1;
+    
+    public static int gridX = 7;
+    public static int gridY = 7;
+    public static int cellPixels = 44;
+    
+    public static int walkFrame = 0, walkSpeed = 20;
     
     public static Point mse = new Point(0, 0);
     
@@ -27,7 +41,7 @@ public class configModel {
     
     public static int removeTower = 11;
     public static int[] airTowerLaser  = new int[]{3,4,5,6};
-    public static int[] airTowerRanger  = new int[]{90,135,180,225};
+    public static int[] airTowerRanger  = new int[]{88,135,180,225};
     public static int[] TowerFiringRate = new int[]{10,15,20,25};
     public static int[] Towerhealth = new int[]{10,15,20,25};
     
@@ -40,8 +54,8 @@ public class configModel {
     public static Image[] air_level = new Image[100];
     
     public static Image[] tileset_res = new Image[100];
-
-    public configModel() {
-    }
-    
+    public static Image[] tileset_mob = new Image[100];
+    public static Image[] fire = new Image[1];
+    public static Image[] ice = new Image[1];
+    public static Image[] star = new Image[1];
 }

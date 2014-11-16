@@ -12,43 +12,70 @@ import tdgame.model.GridCellModel;
 import tdgame.model.configModel;
 
 /**
- *
+ * This is GUI class of Grid Cell Module.
  * @author Rahul K Kikani
  */
 public class GridCellView {
     
+    /**
+     * This is constructor.
+     */
     public GridCellView(){
         
     }
     
+    /**
+     * This method will draw GUI Components.
+     * @param g the Graphics
+     * @param gcModel the model object
+     */
     public void draw(GridCellModel gcModel,Graphics g){
         //System.out.println("abcd");
-        g.drawImage(configModel.ground_level[gcModel.gID], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
+        g.drawImage(configModel.ground_level[gcModel.getgID()], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
         //g.drawRect(gcModel.x, gcModel.y, gcModel.width, gcModel.height);
         //System.out.println("airID"+gcModel.airID);
         
-        if(gcModel.airID != configModel.airAir && (gcModel.airID ==8)){
+        if(gcModel.getAirID() != configModel.airAir && (gcModel.getAirID() ==8)){
            g.drawImage(configModel.air_level[0], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
        }
         
-        if(gcModel.airID != configModel.airAir && (gcModel.airID == 7)){
+        if(gcModel.getAirID() != configModel.airAir && (gcModel.getAirID() == 7)){
            g.drawImage(configModel.air_level[1], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
        }
         
-        if(gcModel.airID != configModel.airAir){
-           g.drawImage(configModel.air_level[gcModel.airID], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
+        if(gcModel.getAirID() != configModel.airAir){
+           g.drawImage(configModel.air_level[gcModel.getAirID()], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
        }
     }
     
+    /**
+     * This method will draw GUI Components.
+     * @param g the Graphics
+     * @param gcModel the model object
+     */
     public void fireRangeOutline(GridCellModel gcModel,Graphics g){
         if(true){
             for(int i=0;i<configModel.airTowerLaser.length;i++){
-                if(gcModel.airID == configModel.airTowerLaser[i]){
+                if(gcModel.getAirID() == configModel.airTowerLaser[i]){
                     g.setColor(Color.yellow);
-                    g.drawRect(gcModel.towerRange[i].x, gcModel.towerRange[i].y, gcModel.towerRange[i].width, gcModel.towerRange[i].height);
+                    g.drawRect(gcModel.getTowerRange(i).x, gcModel.getTowerRange(i).y, gcModel.getTowerRange(i).width, gcModel.getTowerRange(i).height);
                 }
             }
             g.setColor(Color.white);
+        }
+        if(gcModel.isFiring() && gcModel.getAirID() != -1){
+            if(gcModel.getAirID() == 4){
+                    g.drawImage(configModel.fire[0], PlayScreenView.Creatures[gcModel.getShotMob()].x, PlayScreenView.Creatures[gcModel.getShotMob()].y, gcModel.width, gcModel.height, null);
+            } else if(gcModel.getAirID() == 5){
+            } else {
+                g.drawImage(configModel.star[0], PlayScreenView.Creatures[gcModel.getShotMob()].x, PlayScreenView.Creatures[gcModel.getShotMob()].y, gcModel.width, gcModel.height, null);
+            }
+            
+               //PlayScreenView.Creatures[gcModel.getShotMob()].walkSpeed = 40;
+               //System.out.println("Firing Red: "+gcModel.getAirID());
+               g.setColor(Color.red);
+               //System.out.println(gcModel.getShotMob()+" - "+PlayScreenView.Creatures[gcModel.getShotMob()].x);
+               g.drawLine(gcModel.x + (gcModel.width/2), gcModel.y + (gcModel.height/2), PlayScreenView.Creatures[gcModel.getShotMob()].x + (PlayScreenView.Creatures[gcModel.getShotMob()].width/2), PlayScreenView.Creatures[gcModel.getShotMob()].y + (PlayScreenView.Creatures[gcModel.getShotMob()].height/2));
         }
     }
 }
