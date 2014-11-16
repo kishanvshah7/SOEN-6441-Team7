@@ -57,4 +57,5 @@ public class configModel {
     public static Image[] tileset_mob = new Image[100];
     public static Image[] fire = new Image[1];
     public static Image[] ice = new Image[1];
+    public static Image[] star = new Image[1];
 }

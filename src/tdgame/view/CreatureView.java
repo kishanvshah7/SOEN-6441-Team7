@@ -32,5 +32,9 @@ public class CreatureView {
         
         g.setColor(Color.BLACK);
         g.drawRect(cModel.x + cModel.getMobSize() - 1, cModel.y - 1, cModel.getHealthWidth(), cModel.height);
+        
+        if(cModel.walkSpeed > 20){
+            g.drawImage(configModel.ice[0], cModel.x, cModel.y, cModel.width, cModel.height, null);
+        }
     }
 }

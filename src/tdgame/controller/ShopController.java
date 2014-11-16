@@ -125,6 +125,13 @@ public class ShopController implements Observer {
                                             double refund_amount = sModel.getButtonPrice(i) * 0.8;
                                             sModel.setMoney(configModel.money + (int)refund_amount );
                                             configModel.money = configModel.money + (int)refund_amount;
+//                                            ccCont.get
+//                                            for(int x=0;x<cModel.length;x++){
+//                                                if(cModel[i].isInGame()){
+//                                                        cModel[i].walkSpeed = 20;
+//                                                }
+//                                            }
+
                                         }
                                     }
                                 }

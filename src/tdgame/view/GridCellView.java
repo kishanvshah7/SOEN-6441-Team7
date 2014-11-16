@@ -66,7 +66,11 @@ public class GridCellView {
         if(gcModel.isFiring() && gcModel.getAirID() != -1){
             if(gcModel.getAirID() == 4){
                     g.drawImage(configModel.fire[0], PlayScreenView.Creatures[gcModel.getShotMob()].x, PlayScreenView.Creatures[gcModel.getShotMob()].y, gcModel.width, gcModel.height, null);
+            } else if(gcModel.getAirID() == 5){
+            } else {
+                g.drawImage(configModel.star[0], PlayScreenView.Creatures[gcModel.getShotMob()].x, PlayScreenView.Creatures[gcModel.getShotMob()].y, gcModel.width, gcModel.height, null);
             }
+            
                //PlayScreenView.Creatures[gcModel.getShotMob()].walkSpeed = 40;
                //System.out.println("Firing Red: "+gcModel.getAirID());
                g.setColor(Color.red);

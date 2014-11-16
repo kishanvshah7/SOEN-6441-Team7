@@ -23,6 +23,7 @@ import static tdgame.model.configModel.tileset_mob;
 import static tdgame.model.configModel.tileset_res;
 import static tdgame.model.configModel.fire;
 import static tdgame.model.configModel.ice;
+import static tdgame.model.configModel.star;
 import towerdefensegame.*;
 
 /**
@@ -75,6 +76,7 @@ public class PlayScreenView extends JPanel implements Runnable {
         tileset_mob[0] = new ImageIcon("resources/mob_level1.png").getImage();
         fire[0] = new ImageIcon("resources/fire.gif").getImage();
         ice[0] = new ImageIcon("resources/ice.png").getImage();
+        star[0] = new ImageIcon("resources/star.gif").getImage();
     }
     
     public void initCreatures(){

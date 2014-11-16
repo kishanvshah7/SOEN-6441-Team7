@@ -9,6 +9,7 @@ package tdgame.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import tdgame.model.ShopModel;
 import tdgame.model.configModel;
 
@@ -78,6 +79,18 @@ public class ShopView {
             g.drawString("Tower Range: "+configModel.airTowerRanger[sModel.getTowerID()], sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 75);
             g.drawString("Tower Health: "+configModel.Towerhealth[sModel.getTowerID()], sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 90);
             g.drawString("Refund Rate: "+(int)x, sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 105);
+            
+            g.setColor(new Color(255, 255, 255, 100));            
+            Rectangle wx = new Rectangle(sModel.button[0].x - 5, 240, 226, 20);
+            if(wx.contains(configModel.mse)){
+                 g.setColor(new Color(200, 200, 200));
+                 g.fillRect(wx.x, wx.y, wx.width, wx.height);
+                 g.setColor(new Color(0, 0, 0));
+             } else {
+                g.fillRect(wx.x, wx.y, wx.width, wx.height);
+                g.setColor(new Color(255, 255, 255));
+            }
+            g.drawString("Upgrade Level", sModel.btn_health.x + 20 + sModel.icon_space, sModel.btn_health.height + 235);
         }
     }
 }

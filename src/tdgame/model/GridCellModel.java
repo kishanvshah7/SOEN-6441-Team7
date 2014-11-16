@@ -66,12 +66,12 @@ public class GridCellModel extends Rectangle{
                 if(airID == 5){
                     for(int i=0;i<cModel.length;i++){
                         if(cModel[i].isInGame()){
-                            if(towerRange[tid].intersects(cModel[i])){
-                                //setFiring(true);
+                            if(towerRange[tid].contains(cModel[i])){
+                                setFiring(false);
                                 //shotMob = i;
-                                cModel[i].walkSpeed = 40;
+                                //cModel[i].walkSpeed = 40;
                             } else {
-                                cModel[i].walkSpeed = 20;
+                                //cModel[i].walkSpeed = 20;
                             }
                         }
                     }
@@ -97,7 +97,13 @@ public class GridCellModel extends Rectangle{
         
         if(isFiring() && getAirID() != -1){
             if(loseFrame >= loseTime){
-                cModel[getShotMob()].loseHealth(1);
+                if(getAirID() != 5){
+                    cModel[getShotMob()].loseHealth(1);
+                } else if(getAirID()==5) {
+                    if(cModel[getShotMob()].walkSpeed < 40){
+                        cModel[getShotMob()].walkSpeed++;
+                    }
+                }
                 loseFrame = 0;
             }else {
                 loseFrame +=1;
