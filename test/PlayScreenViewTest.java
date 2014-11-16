@@ -2,6 +2,8 @@
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import tdgame.model.PlayScreenModel;
@@ -11,7 +13,7 @@ import towerdefensegame.GamePlay;
 public class PlayScreenViewTest {
 	
 	
-	GamePlay gptest = new GamePlay(null, 5, 5);
+	GamePlay gptest = new GamePlay(new File("MapFilesTest/Path4.team7"), 5, 5);
 	
 	PlayScreenView psviewtest = new PlayScreenView(gptest);
 	
