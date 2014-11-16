@@ -63,10 +63,10 @@ public class ShopController implements Observer {
         
     }
     
-    public boolean placeTower(int y, int x){
+    public boolean placeTower(int y, int x, int priceID){
         if(ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
             ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
-            configModel.money = configModel.money - sModel.getButtonPrice(sModel.getRealID());
+            configModel.money = configModel.money - sModel.getButtonPrice(priceID);
             System.out.println("Tower Placed"+sModel.getHeldID());
             sModel.setHoldsItem(false);
             return true;
@@ -75,28 +75,37 @@ public class ShopController implements Observer {
         }
     }
     
-    public boolean removeTower(int y, int x, int i){
-        if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
-            ccCont.getgcModelObj(y, x).setFiring(false);
-            ccCont.getgcModelObj(y, x).setAirID(-1);
-            double refund_amount = sModel.getButtonPrice(i) * 0.8;
-            sModel.setMoney(configModel.money + (int)refund_amount );
-            configModel.money = configModel.money + (int)refund_amount;
-            return true;
-        } else {
-            return false;
+    public boolean removeTower(int y, int x){
+        for(int i=0;i<configModel.airTowerLaser.length;i++){
+            if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
+                if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
+                    ccCont.getgcModelObj(y, x).setFiring(false);
+                    ccCont.getgcModelObj(y, x).setAirID(-1);
+                    //ccCont.getgcModelObj(y, x).setgID(0);
+                    double refund_amount = sModel.getButtonPrice(i) * 0.8;
+                    sModel.setMoney(configModel.money + (int)refund_amount );
+                    configModel.money = configModel.money + (int)refund_amount;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
+        return false;
     }
     
-    public boolean isTowerHere(int y, int x, int i){
-        if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
-            System.out.println("Tower Is Here");
-            sModel.setTowerID(i);
-            sModel.setTowerInfo(true);
-            return true;
-        } else {
-            return false;
+    public boolean isTowerHere(int y, int x){
+        for(int i=0;i<configModel.airTowerLaser.length;i++){
+            if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
+                System.out.println("Tower Is Here");
+                sModel.setTowerID(i);
+                sModel.setTowerInfo(true);
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
     }
     
     public void update(Observable o, Object arg) {
@@ -122,7 +131,7 @@ public class ShopController implements Observer {
                         for(int y=0;y<ccCont.getyC();y++){
                             for(int x=0;x<ccCont.getxC();x++){
                                 if(ccCont.getgcModelObj(y, x).contains(configModel.mse)){
-                                    placeTower(y, x);
+                                    placeTower(y, x, sModel.getRealID());
                                 }
                             }
                         }
@@ -131,9 +140,7 @@ public class ShopController implements Observer {
                         for(int y=0;y<ccCont.getyC();y++){
                             for(int x=0;x<ccCont.getxC();x++){
                                 if(ccCont.getgcModelObj(y, x).contains(configModel.mse)){
-                                    for(int i=0;i<configModel.airTowerLaser.length;i++){
-                                        isTowerHere(y, x, i);
-                                    }
+                                    isTowerHere(y, x);
                                 }
                             }
                         }
@@ -143,11 +150,7 @@ public class ShopController implements Observer {
                     for(int y=0;y<ccCont.getyC();y++){
                             for(int x=0;x<ccCont.getxC();x++){
                                 if(ccCont.getgcModelObj(y, x).contains(configModel.mse)){
-                                    for(int i=0;i<configModel.airTowerLaser.length;i++){
-                                        if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
-                                            removeTower(y, x , i);
-                                        }
-                                    }
+                                    removeTower(y, x);
                                 }
                             }
                         }
