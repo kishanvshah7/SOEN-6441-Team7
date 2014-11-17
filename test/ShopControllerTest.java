@@ -22,9 +22,16 @@ public class ShopControllerTest {
         }
 
 	@Test
-	public void testPlaceTower() {
+	public void testPlaceTower_entry() {
             boolean exp = false;
             boolean act = sctest.placeTower(0, 0, 0);
+            assertEquals(exp, act);
+	}
+	
+	@Test
+	public void testPlaceTower_exit() {
+            boolean exp = false;
+            boolean act = sctest.placeTower(0, 15, 0);
             assertEquals(exp, act);
 	}
         
