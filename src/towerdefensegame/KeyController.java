@@ -10,7 +10,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.Observable;
 import tdgame.controller.ShopController;
 import tdgame.model.configModel;
 
@@ -18,14 +17,14 @@ import tdgame.model.configModel;
  * This class will take input from user via mouse and trigger the appropriate function.
  * @author Rahul K Kikani
  */
-public class KeyController extends Observable implements MouseMotionListener, MouseListener {
+public class KeyController implements MouseMotionListener, MouseListener {
 
     /**
      * This Method will listen mouse dragged movement and store x,y coordinates in point variable.
      * @param e the MouseEvent
      */
     public void mouseDragged(MouseEvent e) {
-        configModel.mse = new Point((e.getX()) - 4, e.getY() - 25);
+        //configModel.mse = new Point((e.getX()) + 10, e.getY() + 20);
     }
 
     /**
@@ -48,18 +47,11 @@ public class KeyController extends Observable implements MouseMotionListener, Mo
     public void mousePressed(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON1)
 	    {
-                setChanged();
-                //System.out.println("Mouse Click1");
-                notifyObservers("1");
-                //System.out.println("Mouse Click2");
-	      //ShopController.click(1);
+	      ShopController.click(1);
 	    }	    
 	    else if(e.getButton() == MouseEvent.BUTTON3)
 	    {
-                //System.out.println("Mouse Click0");
-                setChanged();
-                notifyObservers("0");
-	      //ShopController.click(0);
+	      ShopController.click(0);
 	    }
         
     }

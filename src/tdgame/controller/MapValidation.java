@@ -21,41 +21,22 @@ public class MapValidation {
     static int height = 17;
     static int lastCheckX =0;
     static int lastCheckY =0;
-
-    /**
-     * @return the final_array
-     */
-    public int[][] getFinal_array() {
-        return final_array;
-    }
     String flag = "f";
     public static int[][] GridArray;
     public static int[][] GridArray_temp;
-    private static int[][] final_array;
-    public String[] stcn = new String[5000];
     boolean validFlag = false;
-    public static int ekInt = 0;
-    public static int ekInt2 = 0;
     
     /**
      * This method is constructor for Map Validation.
      * @param GridA the grid map array
      */
     public MapValidation(int[][] GridA){
-        stcn[0] = "s";
-        stcn[1] = "s";
-        stcn[2] = "s";
-        stcn[3] = "s";
-        ekInt = 3;
         width = GridA.length;
         height = GridA[0].length;
         GridArray = new int[width][height];
-        final_array = new int[width][height];
-        final_array = GridA;
         for(int y=0;y < width; y++){
                     for(int x=0;x < height; x++){
                         GridArray[y][x] = GridA[y][x];
-                        //final_array[y][x] = GridA[y][x];
                     }
                 }
         
@@ -116,14 +97,11 @@ public class MapValidation {
      * This method will moved pointer to right.
      */
     public void right(){
-        if(!flag.equals("l") && !flag.equals("e" ) && !flag.equals("f")){
+        if(!flag.equals("l") && !flag.equals("e" )){
                 flag = "r";
                 if(checkRight() == 1){
                     right();
                 }else if(checkRight() == 8){
-                    
-                    setArray();
-                    
                     System.out.println("Path Found.");
                     flag = "e";
                     setValid(true);
@@ -132,7 +110,7 @@ public class MapValidation {
                 }else if(checkDown() == 1){
                     down();
                 }else{
-                    GridArray[lastCheckX][lastCheckY] = -2;
+                    GridArray[lastCheckX][lastCheckY] = 0;
                     start();
                 }
             }
@@ -142,7 +120,7 @@ public class MapValidation {
      * This method will moved pointer to left.
      */
     public void left(){
-        if(!flag.equals("r") && !flag.equals("e") && !flag.equals("f")){
+        if(!flag.equals("r") && !flag.equals("e" )){
                 flag = "l";
                 if(checkUp() == 1){
                     up();
@@ -151,7 +129,7 @@ public class MapValidation {
                 }else if(checkLeft() == 1){
                     left();
                 }else{
-                    GridArray[lastCheckX][lastCheckY] = -2;
+                    GridArray[lastCheckX][lastCheckY] = 0;
                     start();
                 }
             }
@@ -162,21 +140,20 @@ public class MapValidation {
      */
     public void up(){
         System.out.println(""+flag.equals("d"));
-        if(!flag.equals("d") && !flag.equals("e" ) && !flag.equals("f")){
+        if(!flag.equals("d") && !flag.equals("e" )){
                 flag = "u";
                 if(checkUp() == 1){
                     up();
                 }else if(checkRight() == 1){
                     right();
                 }else if(checkRight()==8){
-                    setArray();
                 System.out.println("Path Found.");
                     flag = "e";
                     setValid(true);
                 }else if(checkLeft() == 1){
                     left();
                 }else{
-                    GridArray[lastCheckX][lastCheckY] = -2;
+                    GridArray[lastCheckX][lastCheckY] = 0;
                     start();
                 }
             }
@@ -186,14 +163,13 @@ public class MapValidation {
      * This method will moved pointer to down.
      */
     public void down(){
-        if(!flag.equals("u") && !flag.equals("e" ) && !flag.equals("f")){
+        if(!flag.equals("u") && !flag.equals("e" )){
                 flag = "d";
                 if(checkDown() == 1){
                     down();
                 }else if(checkRight()==1){
                     right();
                 }else if(checkRight() == 8){
-                    setArray();
                     System.out.println("Path Found.");
                     flag = "e";
                     setValid(true);
@@ -201,7 +177,7 @@ public class MapValidation {
                     left();
                 }
                 else{
-                    GridArray[lastCheckX][lastCheckY] = -2;
+                    GridArray[lastCheckX][lastCheckY] = 0;
                     start();
                 }
             }
@@ -213,10 +189,7 @@ public class MapValidation {
     public int checkRight(){
         if(lastCheckY+1 < height){
             if(GridArray_temp[lastCheckX][lastCheckY+1] != 3){
-                ekInt2 = ekInt -1;
-                if(GridArray[lastCheckX][lastCheckY+1] == 1 && !stcn[ekInt2].equals("l")){
-                    ekInt++;
-                    stcn[ekInt] = "r";
+                if(GridArray[lastCheckX][lastCheckY+1] == 1){
                     lastCheckY++;
                     GridArray_temp[lastCheckX][lastCheckY] = 3;
                     return 1;
@@ -239,10 +212,7 @@ public class MapValidation {
     public int checkLeft(){
         if(lastCheckY-1 > 0){
             if(GridArray_temp[lastCheckX][lastCheckY-1] != 3){
-                ekInt2 = ekInt - 1;
-                if(GridArray[lastCheckX][lastCheckY-1] == 1 && !stcn[ekInt2].equals("r")){
-                    ekInt++;
-                    stcn[ekInt] = "l";
+                if(GridArray[lastCheckX][lastCheckY-1] == 1){
                     lastCheckY--;
                     GridArray_temp[lastCheckX][lastCheckY] = 3;
                     return 1;
@@ -263,10 +233,7 @@ public class MapValidation {
     public int checkUp(){
         if(lastCheckX-1 >= 0){
             if(GridArray_temp[lastCheckX-1][lastCheckY] != 3){
-                ekInt2 = ekInt - 1;
-                if(GridArray[lastCheckX-1][lastCheckY] == 1 && !stcn[ekInt2].equals("d")){
-                    ekInt++;
-                    stcn[ekInt] = "u";
+                if(GridArray[lastCheckX-1][lastCheckY] == 1){
                     lastCheckX--;
                     GridArray_temp[lastCheckX][lastCheckY] = 3;
                     return 1;
@@ -287,10 +254,7 @@ public class MapValidation {
     public int checkDown(){
         if(lastCheckX+1 < width){
             if(GridArray_temp[lastCheckX+1][lastCheckY] != 3){
-                ekInt2 = ekInt -1;
-                if(GridArray[lastCheckX+1][lastCheckY] == 1 && !stcn[ekInt2].equals("u")){
-                    ekInt++;
-                    stcn[ekInt] = "d";
+                if(GridArray[lastCheckX+1][lastCheckY] == 1){
                     lastCheckX++;
                     GridArray_temp[lastCheckX][lastCheckY] = 3;
                     return 1;
@@ -303,26 +267,5 @@ public class MapValidation {
         }
         else
             return 0;
-    }
-    
-    public void setArray(){
-        for(int y = 0;y < width; y++){
-                    for(int x=0;x < height; x++){
-                        System.out.print("  "+GridArray_temp[y][x]);
-                    }
-                    System.out.println("");
-                }
-        for(int y=0;y < width ; y++){
-                        for(int x=0;x < height; x++){
-                            if(getFinal_array()[y][x] == 1){
-                                final_array[y][x] = 0;
-                            }
-                            
-                            if(GridArray_temp[y][x] == 3){
-                                GridArray_temp[y][x] = 1;
-                                final_array[y][x] = 1;
-                            }
-                        }
-                    }
     }
 }

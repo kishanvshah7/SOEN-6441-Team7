@@ -12,8 +12,6 @@ import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.*;
 import tdgame.controller.MapBoxController;
 import tdgame.controller.MapCreationController;
@@ -149,7 +147,6 @@ public class MapCreationView extends JFrame{
     /**
      * This method will add gridMap in Map Creation Screen.
      * @param  mbCont the controller object of map box controller.
-     * @return flag
      */
     public boolean addGridMap(MapBoxController mbCont){
         this.mbCont = mbCont;

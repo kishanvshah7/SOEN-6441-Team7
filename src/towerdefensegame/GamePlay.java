@@ -30,7 +30,6 @@ import tdgame.view.ShopView;
  */
 public class GamePlay extends JFrame {
     
-    private PlayScreenController psCont;
     /**
      * This method will initialize JFrame and set some basic properties(Title, Size, Background Color, Location).
      * @param f Map file which is selected by user from list box.
@@ -80,10 +79,10 @@ public class GamePlay extends JFrame {
 
                                 PlayScreenView psView = new PlayScreenView(this);
                                 add(psView);
-                                psCont = new PlayScreenController(psView, psModel, gcView, gcModel, ccView, ccModel, sView, sModel);
-                                psView.setController(getPsCont());
+                                PlayScreenController psCont = new PlayScreenController(psView, psModel, gcView, gcModel, ccView, ccModel, sView, sModel);
+                                psView.setController(psCont);
                                 psView.startGame();
-                                this.setVisible(true);
+                                this.setVisible(true); 
                             }else{
                                 System.out.println("Map Is Invalid");
                                 JOptionPane.showMessageDialog(this,"Map is Invalid", null, WIDTH);
@@ -92,12 +91,5 @@ public class GamePlay extends JFrame {
                             this.dispose();
                             JOptionPane.showMessageDialog(this, "Invalid Map File", null, WIDTH);
                         }
-    }
-
-    /**
-     * @return the psCont
-     */
-    public PlayScreenController getPsCont() {
-        return psCont;
     }
 }

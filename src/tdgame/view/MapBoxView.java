@@ -98,7 +98,6 @@ public class MapBoxView extends JPanel {
     
     /**
      * This method will enable Entry Point Grid cells
-     * @return flag
      */
     public boolean setEntryPointFlag(){
         System.out.println("setEntryPointFlag: "+mbCon.getEentryPointData());
@@ -120,7 +119,6 @@ public class MapBoxView extends JPanel {
     
     /**
      * This method will enable Path Point Grid cells
-     * @return flag
      */
     public boolean setPathPointFlag(){
         for(int y=0;y<mbCon.getYBlockCount();y++){
@@ -165,7 +163,6 @@ public class MapBoxView extends JPanel {
     
     /**
      * This method will set color of all grid cells
-     * @return flag
      */
     public boolean setSlectedCell(){
         if(mbCon.getEentryPointData() != 9)
@@ -186,7 +183,6 @@ public class MapBoxView extends JPanel {
      * This method will set Entry Point
      * @param yC y coordinate
      * @param xC x coordinate
-     * @return flag
      */
     public boolean setEntryPoint(int yC, int xC){
         if(xC != 0) {
@@ -220,7 +216,6 @@ public class MapBoxView extends JPanel {
      * This method will set Exit Point
      * @param yC y coordinate
      * @param xC x coordinate
-     * @return flag
      */
     public boolean setExitPoint(int yC, int xC){
         if(xC != (this.xC-1) ) {

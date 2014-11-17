@@ -197,8 +197,7 @@ public class MapBoxController {
     public String validPath(int[][] ga){
         MapValidation mapV = new MapValidation(ga);
         System.out.println("Path Validation: "+mapV.isValid());
-        if(mapV.isValid()){            
-            //ga = mapV.getFinal_array();
+        if(mapV.isValid()){
             return "Done";
         }else{
             return "Invalid";
