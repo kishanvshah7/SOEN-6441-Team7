@@ -40,10 +40,15 @@ public class PlayScreenView extends JPanel implements Runnable {
     CreatureView cView = new CreatureView();
     
     public static boolean isWin = false;
+    public static boolean isGameOver = false;
     boolean rFlag =false;
     static PlayScreenController psCont;
     
     public static int winTime = 4000, winFrame =0;
+    public Graphics w;
+    public Graphics getGraph(){
+    	return w;
+    }
     
     /**
      * This method will initialize GUI components for Play Screen.
@@ -79,7 +84,7 @@ public class PlayScreenView extends JPanel implements Runnable {
         star[0] = new ImageIcon("resources/star.gif").getImage();
     }
     
-    public void initCreatures(){
+    public boolean initCreatures(){
         System.out.println("initCreatures");
         if(psCont != null){
             for(int i=0;i<Creatures.length;i++){
@@ -87,8 +92,11 @@ public class PlayScreenView extends JPanel implements Runnable {
                 //mobs[i].spawnMob(0);
             }
             isFirst = false;
-        } else
-            System.out.println("psCont not initialized");
+            return true;
+        } else {
+        	System.out.println("psCont not initialized");
+        	return false;
+        }
     }
     
     /**
@@ -99,21 +107,24 @@ public class PlayScreenView extends JPanel implements Runnable {
         return true;
     }
     
-    public static void hasWon() {
+    public static boolean hasWon() {
+    	
         if(configModel.killed == configModel.killsToWin){
             //isWin = true;
             //configModel.killed = 0;
-        }
-        
-        if(configModel.killed == configModel.creaturesNo){
-            configModel.creaturesNo = 10;
-            configModel.killed = 0;
-            configModel.waveLap++;
-            Creatures = new CreatureModel[configModel.creaturesNo];
-            for(int i=0;i<Creatures.length;i++){
-                Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
-                //mobs[i].spawnMob(0);
+        	if(configModel.killed == configModel.creaturesNo){
+                configModel.creaturesNo = 10;
+                configModel.killed = 0;
+                configModel.waveLap++;
+                Creatures = new CreatureModel[configModel.creaturesNo];
+                for(int i=0;i<Creatures.length;i++){
+                    Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
+                    //mobs[i].spawnMob(0);
+                }
             }
+        	return true;
+        } else {
+        	return false;
         }
     }
     
@@ -132,7 +143,7 @@ public class PlayScreenView extends JPanel implements Runnable {
      */
     public void paintComponent(Graphics g){
         //System.out.println("xyz");
-        
+        w=g;
         if(isFirst)
         {
             initCreatures();
@@ -152,6 +163,18 @@ public class PlayScreenView extends JPanel implements Runnable {
             
             psCont.getshopDraw(g);
         }
+        
+        if(isgameOver()){
+        	System.out.println("Game End");
+        }
+    }
+    
+    public boolean isgameOver(){
+    	if(configModel.health <= 0){
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
     public int spawnTime = 2000, spawnFrame = 0;

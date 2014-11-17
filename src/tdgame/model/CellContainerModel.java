@@ -36,6 +36,19 @@ public class CellContainerModel {
         }
     }
     
+    public boolean setCellContainerModel(int yC, int xC){
+    	this.xC = xC;
+        this.yC = yC;
+        gcModel = new GridCellModel[yC][xC];
+        
+        for(int y=0;y<gcModel.length;y++){
+            for(int x=0;x<gcModel[0].length;x++){
+                gcModel[y][x] = new GridCellModel(x*cellPixels+10, y*cellPixels+10, cellPixels, cellPixels, configModel.groundGrass, configModel.airAir);
+            }
+        }
+        return true;
+    }
+    
     public void physic(CreatureModel[] cModel){
         for(int y=0;y<gcModel.length;y++){
             for(int x=0;x<gcModel[0].length;x++){

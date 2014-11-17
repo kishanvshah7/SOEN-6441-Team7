@@ -4,9 +4,12 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import tdgame.model.CreatureModel;
 import tdgame.model.PlayScreenModel;
+import tdgame.model.configModel;
 import tdgame.view.PlayScreenView;
 import towerdefensegame.GamePlay;
 
@@ -17,8 +20,12 @@ public class PlayScreenViewTest {
 	
 	PlayScreenView psviewtest = new PlayScreenView(gptest);
 	
-	@Test
+	@Before
+	public void setup(){
+		
+	}
 	
+	@Test
 	public void teststartGame(){
 		
 		boolean exp = true;
@@ -37,7 +44,51 @@ public class PlayScreenViewTest {
 		
 	}
 	
+	@Test
+	public void TestinitCreatures(){
+		psviewtest.setController(null);
+		boolean exp = false;
+		boolean act = psviewtest.initCreatures();
+		assertEquals(exp, act);
+    }
 	
+	@Test
+	public void TestinitCreatures_true(){
+		psviewtest.setController(gptest.getPsCont());
+		boolean exp = true;
+		boolean act = psviewtest.initCreatures();
+		assertEquals(exp, act);
+    }
 	
-
+	@Test
+    public void TesthasWon() {
+		configModel.killed = 5;
+		boolean exp = true;
+		boolean act = psviewtest.hasWon();
+		assertEquals(exp, act);
+    }
+	
+	@Test
+    public void TesthasWon_false() {
+		configModel.killed = 0;
+		boolean exp = false;
+		boolean act = psviewtest.hasWon();
+		assertEquals(exp, act);
+    }
+	
+	@Test
+    public void TestisgameOver() {
+		configModel.health = 0;
+		boolean exp = true;
+		boolean act = psviewtest.isgameOver();
+		assertEquals(exp, act);
+    }
+	
+	@Test
+    public void TestisgameOver_false() {
+		configModel.health = 3;
+		boolean exp = false;
+		boolean act = psviewtest.isgameOver();
+		assertEquals(exp, act);
+    }
 }
