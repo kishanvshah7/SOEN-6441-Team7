@@ -14,6 +14,28 @@ import java.awt.Point;
  */
 public class configModel {
     
+<<<<<<< HEAD
+=======
+    public static int money = 150;
+    public static int total_earned = 150;
+    public static int health = 100;
+    public static int killed = 0;
+    public static int total_killed = 0;
+    public static int killsToWin = 5;
+    public static int maxLevel = 2;
+    public static boolean roundSlot = true;
+    public static int creaturesNo = 5;
+    public static int waveLap = 1;
+    
+    public static int level = 1;
+    
+    public static int gridX = 7;
+    public static int gridY = 7;
+    public static int cellPixels = 44;
+    
+    public static int walkFrame = 0, walkSpeed = 20;
+    
+>>>>>>> origin/Rahul
     public static Point mse = new Point(0, 0);
     
     public static int groundGrass = 0;
@@ -24,8 +46,14 @@ public class configModel {
     
     public static int removeTower = 11;
     public static int[] airTowerLaser  = new int[]{3,4,5,6};
+<<<<<<< HEAD
     public static int[] airTowerRanger  = new int[]{90,135,180,225};
     public static int[] TowerFiringRate = new int[]{10,15,20,25};
+=======
+    public static int[] TowerLevel  = new int[]{1,1,1,1};
+    public static int[] airTowerRanger  = new int[]{44,68,88,108};
+    public static int[] TowerFiringRate = new int[]{1,2,20,5};
+>>>>>>> origin/Rahul
     public static int[] Towerhealth = new int[]{10,15,20,25};
     
     public static int mobAir = -1;

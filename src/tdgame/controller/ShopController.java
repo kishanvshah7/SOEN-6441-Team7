@@ -55,6 +55,7 @@ public class ShopController {
      */
     public static void click(int button) {
         
+<<<<<<< HEAD
         if(button == 1){
             for(int i=0;i<sModel.getbuttonLength();i++){
                 if(sModel.getButtonObj(i).contains(configModel.mse)){
@@ -64,6 +65,66 @@ public class ShopController {
                             sModel.setHeldID(sModel.getButtonId(i));
                             sModel.setRealID(i);
                             sModel.setHoldsItem(true);
+=======
+    }
+    
+    public boolean placeTower(int y, int x, int priceID){
+        if(ccCont.getgcModelObj(y, x).getgID() != 11 && ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
+            ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
+            configModel.money = configModel.money - sModel.getButtonPrice(priceID);
+            System.out.println("Tower Placed"+sModel.getHeldID());
+            sModel.setHoldsItem(false);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean removeTower(int y, int x){
+        for(int i=0;i<configModel.airTowerLaser.length;i++){
+            if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
+                    ccCont.getgcModelObj(y, x).setFiring(false);
+                    ccCont.getgcModelObj(y, x).setAirID(-1);
+                    ccCont.getgcModelObj(y, x).setgID(0);
+                    double refund_amount = sModel.getButtonPrice(i) * 0.8;
+                    sModel.setMoney(configModel.money + (int)refund_amount );
+                    configModel.money = configModel.money + (int)refund_amount;
+                    return true;
+                }
+        }
+        return false;
+    }
+    
+    public boolean isTowerHere(int y, int x){
+        for(int i=0;i<configModel.airTowerLaser.length;i++){
+            System.out.println("Tower Id: "+ccCont.getgcModelObj(y, x).getAirID()+"-"+configModel.airTowerLaser[i]);
+            if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
+                System.out.println("Tower Is Here");
+                sModel.setTowerID(i);
+                sModel.setTowerInfo(true);
+                return true;
+            } else {
+                sModel.setTowerInfo(false);
+            }
+        }
+        return false;
+    }
+    
+    public void update(Observable o, Object arg) {
+        //System.out.println("Bagha");
+         if (arg instanceof String) {
+            int button = Integer.parseInt((String)arg);
+            if(button == 1){
+                for(int i=0;i<sModel.getbuttonLength();i++){
+                    if(sModel.getButtonObj(i).contains(configModel.mse)){
+                        if(sModel.getButtonId(i) != configModel.airAir)
+                        {
+                            if(configModel.money >= sModel.getButtonPrice(i)){
+                                sModel.setHeldID(sModel.getButtonId(i));
+                                sModel.setRealID(i);
+                                sModel.setHoldsItem(true);
+                            }
+>>>>>>> origin/Rahul
                         }
                     }
                 }
