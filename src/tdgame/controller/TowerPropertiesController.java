@@ -30,7 +30,63 @@ public class TowerPropertiesController {
 	    /** The listener to listen for signs to attack*/
 	    protected ActionListener attackListener;
 	    
-	    protected ActionListener newEnemyListener;
+	    public double getFullHealth() {
+			return fullHealth;
+		}
+
+		public void setFullHealth(double fullHealth) {
+			this.fullHealth = fullHealth;
+		}
+
+		public double getHealth() {
+			return health;
+		}
+
+		public void setHealth(double health) {
+			this.health = health;
+		}
+
+		public double getDamage() {
+			return damage;
+		}
+
+		public void setDamage(double damage) {
+			this.damage = damage;
+		}
+
+		public int getRange() {
+			return range;
+		}
+
+		public void setRange(int range) {
+			this.range = range;
+		}
+
+		public double getSpeed() {
+			return speed;
+		}
+
+		public void setSpeed(double speed) {
+			this.speed = speed;
+		}
+
+		public double getCost() {
+			return cost;
+		}
+
+		public void setCost(double cost) {
+			this.cost = cost;
+		}
+
+		public GameGrid getGrid() {
+			return grid;
+		}
+
+		public void setGrid(GameGrid grid) {
+			this.grid = grid;
+		}
+
+		protected ActionListener newEnemyListener;
 	    protected Timer attackTimer;
 		private GameGrid grid;
 		
