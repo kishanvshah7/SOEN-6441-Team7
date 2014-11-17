@@ -34,6 +34,13 @@ public class ShopControllerTest {
             boolean act = sctest.placeTower(0, 15, 0);
             assertEquals(exp, act);
 	}
+	
+	@Test
+	public void testPlaceTower_path() {
+            boolean exp = false;
+            boolean act = sctest.placeTower(0, 7, 0);
+            assertEquals(exp, act);
+	}
         
         @Test
 	public void testPlaceTower_true() {
