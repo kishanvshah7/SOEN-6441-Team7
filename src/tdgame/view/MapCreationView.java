@@ -8,13 +8,10 @@ package tdgame.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import tdgame.controller.MapBoxController;
-import tdgame.controller.MapCreationController;
 
 
 /**
@@ -147,14 +144,16 @@ public class MapCreationView extends JFrame{
     /**
      * This method will add gridMap in Map Creation Screen.
      * @param  mbCont the controller object of map box controller.
+     * @return flag
      */
-    public void addGridMap(MapBoxController mbCont){
+    public boolean addGridMap(MapBoxController mbCont){
         this.mbCont = mbCont;
         System.out.println("xbc"+mbCont.getXBlockCount());
         MapBoxView x = this.mbCont.getView();
         map_grid_panel.add(x);
         this.mbCont.setBtnGridClickListner();
         map_grid_panel.validate();
+        return true;
     }
     
     /**

@@ -13,6 +13,13 @@ import java.awt.Rectangle;
  * @author Rahul K Kikani
  */
 public class ShopModel {
+
+    /**
+     * @return the buttonSize
+     */
+    public static int getButtonSize() {
+        return buttonSize;
+    }
     
     private int health = 5;
     private int money = 150;
@@ -21,7 +28,7 @@ public class ShopModel {
     private int startY = 0;
     
     public static int shopWidth = 4;
-    public static int buttonSize = 52;
+    private static int buttonSize = 52;
     public static int cellSpace = 3;
     public static int iconSize = 20;
     public static int icon_space = 30;
@@ -34,6 +41,8 @@ public class ShopModel {
     public Rectangle[] button  = new Rectangle[shopWidth];
     public Rectangle btn_health;
     public Rectangle btn_coins;
+    
+    public Rectangle towerUpgrade;
     
     private boolean holdsItem = false;
     
@@ -56,8 +65,9 @@ public class ShopModel {
      */
     public void define(){
         for(int i=0;i<button.length;i++){
-            button[i] = new Rectangle( startX +(i * (cellSpace+buttonSize)), startY+buttonSize+cellSpace, buttonSize, buttonSize);
+            button[i] = new Rectangle( startX +(i * (cellSpace+getButtonSize())), startY+getButtonSize()+cellSpace, getButtonSize(), getButtonSize());
         }
+        towerUpgrade = new Rectangle(startX - 5, 240, 226, 20);
         btn_health = new Rectangle(startX, 14, iconSize, iconSize);
         btn_coins = new Rectangle(startX + button[0].y + 60, 14, iconSize, iconSize);
     }

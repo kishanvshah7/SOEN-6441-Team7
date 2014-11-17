@@ -9,7 +9,6 @@ package tdgame.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -197,7 +196,8 @@ public class MapBoxController {
     public String validPath(int[][] ga){
         MapValidation mapV = new MapValidation(ga);
         System.out.println("Path Validation: "+mapV.isValid());
-        if(mapV.isValid()){
+        if(mapV.isValid()){            
+            //ga = mapV.getFinal_array();
             return "Done";
         }else{
             return "Invalid";
