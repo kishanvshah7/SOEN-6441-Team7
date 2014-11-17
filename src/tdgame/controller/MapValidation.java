@@ -15,9 +15,8 @@ public class MapValidation {
     static int enY = 0;
     static int exX = 0;
     static int exY = 0;
-    //static int[][] GridArray;
-    //static int[][] GridArray_temp;
-    static int width = 5;
+ 
+	static int width = 5;
     static int height = 17;
     static int lastCheckX =0;
     static int lastCheckY =0;
