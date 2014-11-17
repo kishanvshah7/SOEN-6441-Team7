@@ -98,7 +98,8 @@ public class GridCellModel extends Rectangle{
         if(isFiring() && getAirID() != -1){
             if(loseFrame >= loseTime){
                 if(getAirID() != 5){
-                    cModel[getShotMob()].loseHealth(1);
+                    System.out.println("Air Id: "+getAirID()+" Rate:"+configModel.TowerFiringRate[getAirID()-3]);
+                    cModel[getShotMob()].loseHealth(configModel.TowerFiringRate[getAirID()-3]);
                 } else if(getAirID()==5) {
                     if(cModel[getShotMob()].walkSpeed < 40){
                         cModel[getShotMob()].walkSpeed++;

@@ -50,9 +50,9 @@ public class CreatureModel extends Rectangle{
             }
         }
         this.mobID = mobID;
-        this.setHealth(getHealth());
+        //this.setHealth(getHealth());
         setInGame(true);
-        System.out.println("Mob Id"+this.mobID);
+        System.out.println("Mob Id: "+getHealth());
     }
     
     public void deleteCreature(){
@@ -215,7 +215,7 @@ public class CreatureModel extends Rectangle{
      * @return the healthHeight
      */
     public int getHealthHeight() {
-        return health;
+        return health/configModel.level;
     }
 
     /**

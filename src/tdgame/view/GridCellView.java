@@ -55,12 +55,18 @@ public class GridCellView {
      */
     public void fireRangeOutline(GridCellModel gcModel,Graphics g){
         if(true){
-            for(int i=0;i<configModel.airTowerLaser.length;i++){
-                if(gcModel.getAirID() == configModel.airTowerLaser[i]){
-                    g.setColor(Color.yellow);
-                    g.drawRect(gcModel.getTowerRange(i).x, gcModel.getTowerRange(i).y, gcModel.getTowerRange(i).width, gcModel.getTowerRange(i).height);
+            
+            if(gcModel.getAirID() == 3){
+                    g.setColor(Color.white);
+                    g.drawRect(gcModel.getTowerRange(0).x, gcModel.getTowerRange(0).y, gcModel.getTowerRange(0).width, gcModel.getTowerRange(0).height);
                 }
-            }
+            
+//            for(int i=0;i<configModel.airTowerLaser.length;i++){
+//                if(gcModel.getAirID() == configModel.airTowerLaser[i]){
+//                    g.setColor(Color.yellow);
+//                    g.drawRect(gcModel.getTowerRange(i).x, gcModel.getTowerRange(i).y, gcModel.getTowerRange(i).width, gcModel.getTowerRange(i).height);
+//                }
+//            }
             g.setColor(Color.white);
         }
         if(gcModel != null && gcModel.isFiring() && gcModel.getAirID() != -1){
@@ -73,7 +79,14 @@ public class GridCellView {
             
                //PlayScreenView.Creatures[gcModel.getShotMob()].walkSpeed = 40;
                //System.out.println("Firing Red: "+gcModel.getAirID());
-               g.setColor(Color.red);
+            if(gcModel.getAirID() == 4){
+                g.setColor(Color.green);
+            } else if(gcModel.getAirID() == 5){
+                g.setColor(Color.blue);
+            } else {
+                g.setColor(Color.red);
+            }
+               
                //System.out.println(gcModel.getShotMob()+" - "+PlayScreenView.Creatures[gcModel.getShotMob()].x);
                g.drawLine(gcModel.x + (gcModel.width/2), gcModel.y + (gcModel.height/2), PlayScreenView.Creatures[gcModel.getShotMob()].x + (PlayScreenView.Creatures[gcModel.getShotMob()].width/2), PlayScreenView.Creatures[gcModel.getShotMob()].y + (PlayScreenView.Creatures[gcModel.getShotMob()].height/2));
         }

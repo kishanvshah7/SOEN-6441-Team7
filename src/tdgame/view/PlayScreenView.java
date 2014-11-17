@@ -31,6 +31,7 @@ public class PlayScreenView extends JPanel implements Runnable {
     public Thread gameLoop = new Thread(this);
     
     private static boolean isFirst = true;
+    private static boolean isWon = false;
     
     public static CreatureModel[] Creatures = new CreatureModel[configModel.creaturesNo];
     CreatureView cView = new CreatureView();
@@ -91,7 +92,12 @@ public class PlayScreenView extends JPanel implements Runnable {
     }
     
     public void newCreatures(){
-        if(configModel.health > 0 && checkLiveCreatures()){
+        if((configModel.level >= maxLevel) && configModel.killed == configModel.killsToWin){
+            isWon = true;
+        } else{
+            isWon = false;
+        }
+        if((configModel.health > 0 && checkLiveCreatures()) && !isWon){
             configModel.creaturesNo = configModel.creaturesNo * 2;
             configModel.killsToWin = configModel.creaturesNo;
             configModel.killed = 0;
@@ -119,7 +125,7 @@ public class PlayScreenView extends JPanel implements Runnable {
     }
     
     public static boolean hasWon() {
-        if(configModel.level >= maxLevel){
+        if((configModel.level >= maxLevel) && configModel.killed == configModel.killsToWin){
             return true;
         } else{
             return false;
@@ -172,8 +178,8 @@ public class PlayScreenView extends JPanel implements Runnable {
             psCont.getshopDraw(g);
         }
         
-        if(hasWon()){
-            System.out.println("Game Over");
+        if(hasWon() || isWon){
+            System.out.println("Congratulations");
             Point Cp= GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
             for(int i=0; i< Creatures.length;i++){
                 Creatures[i].setHealth(0);
@@ -190,7 +196,7 @@ public class PlayScreenView extends JPanel implements Runnable {
             g.setFont(new Font("Courier New",Font.BOLD, 15));
             g.drawString("Level: "+level, Cp.x/2 - 80, Cp.y/2 + 20);
             g.drawString("Killed: "+total_killed, Cp.x/2 - 80, Cp.y/2 + 40);
-            g.drawString("Earned: "+total_earned, Cp.x/2 - 80, Cp.y/2 + 60);
+            g.drawString("Earned: "+money, Cp.x/2 - 80, Cp.y/2 + 60);
         }
         
         if(isGameOver()){
@@ -227,6 +233,7 @@ public class PlayScreenView extends JPanel implements Runnable {
             int i =0;
             for(i=0;i<Creatures.length;i++){
                 if(!Creatures[i].isInGame() && Creatures[i].getHealth() == 44){
+                    Creatures[i].setHealth(44 * configModel.level);
                     Creatures[i].spawnCreature(i);
                     break;
                 } else{     

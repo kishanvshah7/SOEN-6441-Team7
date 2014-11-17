@@ -44,8 +44,8 @@ public class configModel {
     
     public static int removeTower = 11;
     public static int[] airTowerLaser  = new int[]{3,4,5,6};
-    public static int[] airTowerRanger  = new int[]{88,135,180,225};
-    public static int[] TowerFiringRate = new int[]{10,15,20,25};
+    public static int[] airTowerRanger  = new int[]{44,135,180,225};
+    public static int[] TowerFiringRate = new int[]{1,2,20,5};
     public static int[] Towerhealth = new int[]{10,15,20,25};
     
     public static int mobAir = -1;
