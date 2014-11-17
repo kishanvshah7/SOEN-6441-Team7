@@ -74,10 +74,10 @@ public class ShopView {
             int temp_Height = 100;
             double x = sModel.getButtonPrice(sModel.getTowerID()) * 0.8;
             g.drawRect(sModel.button[0].x - 5, 150, 226, 85);
-            g.drawString("Tower ID: "+sModel.getTowerID(), sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 45);
+            g.drawString("Tower ID: "+(sModel.getTowerID()+1), sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 45);
             g.drawString("Tower Price: "+sModel.getButtonPrice(sModel.getTowerID()), sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 60);
             g.drawString("Tower Range: "+configModel.airTowerRanger[sModel.getTowerID()], sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 75);
-            g.drawString("Tower Health: "+configModel.Towerhealth[sModel.getTowerID()], sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 90);
+            g.drawString("Tower Level: "+configModel.TowerLevel[sModel.getTowerID()], sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 90);
             g.drawString("Refund Rate: "+(int)x, sModel.btn_health.x - 30 + sModel.icon_space, sModel.btn_health.height + temp_Height + 105);
             
             g.setColor(new Color(255, 255, 255, 100));            
