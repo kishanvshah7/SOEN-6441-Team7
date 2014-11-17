@@ -8,15 +8,10 @@ package tdgame.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.*;
 import tdgame.controller.MapBoxController;
-import tdgame.controller.MapCreationController;
 
 
 /**

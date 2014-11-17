@@ -36,6 +36,12 @@ public class CellContainerModel {
         }
     }
     
+    /**
+     * this method is constructor for Cell Container Model. It will set xC and xY.
+     * @param yC the y coordinate
+     * @param xC the x coordinate
+     * @return successFlag
+     */
     public boolean setCellContainerModel(int yC, int xC){
     	this.xC = xC;
         this.yC = yC;
@@ -49,6 +55,10 @@ public class CellContainerModel {
         return true;
     }
     
+    /**
+     * Creation of creatures.
+     * @param cModel array of creatures object
+     */
     public void physic(CreatureModel[] cModel){
         for(int y=0;y<gcModel.length;y++){
             for(int x=0;x<gcModel[0].length;x++){

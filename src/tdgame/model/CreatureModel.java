@@ -31,16 +31,29 @@ public class CreatureModel extends Rectangle{
     private CellContainerModel ccModel;
     private CellContainerController ccCont;
     
+    /**
+     * CreatureModel constructor
+     */
     public CreatureModel(){
         
     }
     
+    /**
+     * CreatureModel constructor
+     * @param ccModel the CellContainerModel object
+     * @param ccCont the CellContainerController Object
+     */
     public CreatureModel(CellContainerModel ccModel, CellContainerController ccCont){
         this.ccModel = ccModel;
         this.ccCont = ccCont;
     }
     
-    public void spawnCreature(int mobID)
+    /**
+     * Creatures Movement
+     * @param mobID  creaturesID
+     * @return successFlag
+     */
+    public boolean spawnCreature(int mobID)
     {
         for(int y=0;y<ccModel.getGcModel().length;y++){
             if(ccModel.getGcModelObj(y, 0).getgID() == configModel.groundRoad){
@@ -52,13 +65,16 @@ public class CreatureModel extends Rectangle{
         this.mobID = mobID;
         //this.setHealth(getHealth());
         setInGame(true);
-        System.out.println("Mob Id: "+getHealth());
+        //System.out.println("Mob Id: "+getHealth());
+        return true;
     }
     
-    public void deleteCreature(){
+    /**
+     * Delete Creatures
+     * @return successFlag
+     */
+    public boolean deleteCreature(){
         this.setInGame(false);
-        //System.out.println("Not in Game: "+mobID);
-        //this.health = 0;
         direction = right;
         mobWalk = 0;
         if(health <= 0){
@@ -67,6 +83,7 @@ public class CreatureModel extends Rectangle{
             configModel.total_killed +=1;
         }
         this.setHealth(0);
+        return true;
     }
 
     /**
@@ -90,21 +107,41 @@ public class CreatureModel extends Rectangle{
         return health;
     }
     
-    public void loosHealth(){
+    /**
+     * LoosHealth of the game
+     * @return successFlag
+     */
+    public boolean loosHealth(){
         configModel.health -= 1;
+        return true;
     }
     
-    public void loseHealth(int rate){
+    /**
+     * LoseHealth for creatures
+     * @param rate rate of health
+     * @return successFlag
+     */
+    public boolean loseHealth(int rate){
         setHealth(health - rate);
         checkDeath();
+        return true;
     }
     
-    public void checkDeath(){
+    /**
+     * check Creature's life status
+     * @return successFlag
+     */
+    public boolean checkDeath(){
         if(health <= 0){
             deleteCreature();
         }
+        return true;
     }
     
+    /**
+     * check Creature's dead status
+     * @return successFlag
+     */
     public boolean isDead(){
         if(inGame){
             return false;
@@ -114,6 +151,9 @@ public class CreatureModel extends Rectangle{
         }
     }
     
+    /**
+     * Creatures movement
+     */
     public int walkFrame = 0, walkSpeed = 20;
     public void physic(){
         if(walkFrame >= walkSpeed){

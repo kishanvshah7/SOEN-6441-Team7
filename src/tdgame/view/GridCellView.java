@@ -30,10 +30,7 @@ public class GridCellView {
      * @param gcModel the model object
      */
     public void draw(GridCellModel gcModel,Graphics g){
-        //System.out.println("abcd");
             g.drawImage(configModel.ground_level[gcModel.getgID()], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
-        //g.drawRect(gcModel.x, gcModel.y, gcModel.width, gcModel.height);
-        //System.out.println("airID"+gcModel.airID);
         
         if(gcModel.getAirID() != configModel.airAir && (gcModel.getAirID() ==8)){
            g.drawImage(configModel.air_level[0], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
@@ -71,8 +68,6 @@ public class GridCellView {
                 g.drawImage(configModel.star[0], PlayScreenView.Creatures[gcModel.getShotMob()].x, PlayScreenView.Creatures[gcModel.getShotMob()].y, gcModel.width, gcModel.height, null);
             }
             
-               //PlayScreenView.Creatures[gcModel.getShotMob()].walkSpeed = 40;
-               //System.out.println("Firing Red: "+gcModel.getAirID());
             if(gcModel.getAirID() == 4){
                 g.setColor(Color.yellow);
             } else if(gcModel.getAirID() == 5){
@@ -83,7 +78,6 @@ public class GridCellView {
                 g.setColor(Color.green);
             }
                
-               //System.out.println(gcModel.getShotMob()+" - "+PlayScreenView.Creatures[gcModel.getShotMob()].x);
                g.drawLine(gcModel.x + (gcModel.width/2)+1, gcModel.y + (gcModel.height/2)+1, PlayScreenView.Creatures[gcModel.getShotMob()].x + (PlayScreenView.Creatures[gcModel.getShotMob()].width/2) + 1, PlayScreenView.Creatures[gcModel.getShotMob()].y + (PlayScreenView.Creatures[gcModel.getShotMob()].height/2) + 1);
                g.drawLine(gcModel.x + (gcModel.width/2), gcModel.y + (gcModel.height/2), PlayScreenView.Creatures[gcModel.getShotMob()].x + (PlayScreenView.Creatures[gcModel.getShotMob()].width/2), PlayScreenView.Creatures[gcModel.getShotMob()].y + (PlayScreenView.Creatures[gcModel.getShotMob()].height/2));
         }

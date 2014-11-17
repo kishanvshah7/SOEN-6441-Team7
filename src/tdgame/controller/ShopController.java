@@ -7,11 +7,11 @@
 package tdgame.controller;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Observable;
 import java.util.Observer;
 import tdgame.model.ShopModel;
 import tdgame.model.configModel;
-import tdgame.view.CellContainerView;
 import tdgame.view.ShopView;
 
 /**
@@ -63,11 +63,21 @@ public class ShopController implements Observer {
         
     }
     
+    /**
+     * Place tower function
+     * @param y y Co-ordinate
+     * @param x x Co-ordinate
+     * @param priceID price of towerID
+     * @return successFlag
+     */
     public boolean placeTower(int y, int x, int priceID){
         if(ccCont.getgcModelObj(y, x).getgID() != 11 && ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
             ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
             configModel.money = configModel.money - sModel.getButtonPrice(priceID);
             System.out.println("Tower Placed"+sModel.getHeldID());
+
+                ccCont.getgcModelObj(y, x).setTowerRange(sModel.getTowerID(), new Rectangle(ccCont.getgcModelObj(y, x).x - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).y - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).width + configModel.airTowerRanger[sModel.getTowerID()], ccCont.getgcModelObj(y, x).height + configModel.airTowerRanger[sModel.getTowerID()]));
+
             sModel.setHoldsItem(false);
             return true;
         } else {
@@ -75,6 +85,12 @@ public class ShopController implements Observer {
         }
     }
     
+    /**
+     * Remove tower function
+     * @param y y Co-ordinate
+     * @param x x Co-ordinate
+     * @return successFlag
+     */
     public boolean removeTower(int y, int x){
         for(int i=0;i<configModel.airTowerLaser.length;i++){
             if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
@@ -90,6 +106,12 @@ public class ShopController implements Observer {
         return false;
     }
     
+    /**
+     * Is tower here function
+     * @param y y Co-ordinate
+     * @param x x Co-ordinate
+     * @return successFlag
+     */
     public boolean isTowerHere(int y, int x){
         for(int i=0;i<configModel.airTowerLaser.length;i++){
             System.out.println("Tower Id: "+ccCont.getgcModelObj(y, x).getAirID()+"-"+configModel.airTowerLaser[i]);
@@ -105,6 +127,11 @@ public class ShopController implements Observer {
         return false;
     }
     
+    /**
+     * Observer Update Method
+     * @param o observer Object
+     * @param arg arguments
+     */
     public void update(Observable o, Object arg) {
         //System.out.println("Bagha");
          if (arg instanceof String) {
@@ -141,6 +168,35 @@ public class ShopController implements Observer {
                                 }
                             }
                         }
+            
+            if(sModel.towerUpgrade.contains(configModel.mse)){
+                if(sModel.isTowerInfo()){
+                    System.out.println("Tower Info");
+                    if(configModel.TowerLevel[sModel.getTowerID()] < 5){
+                        if(configModel.money >= configModel.TowerPrice[sModel.getTowerID()]){
+                            System.out.println("Tower Upgrade: "+sModel.getTowerID());
+                            if(sModel.getTowerID() == 2){
+                                configModel.TowerFiringRate[sModel.getTowerID()] += 5;
+                            } else {
+                                configModel.TowerFiringRate[sModel.getTowerID()] += 1;
+                            }
+                            
+                            configModel.airTowerRanger[sModel.getTowerID()] += 20;
+                            configModel.TowerLevel[sModel.getTowerID()]++;
+                            configModel.money -= configModel.TowerPrice[sModel.getTowerID()];
+                            
+                            for(int y=0;y<ccCont.getyC();y++){
+                                for(int x=0;x<ccCont.getxC();x++){
+                                    if(ccCont.getgcModelObj(y, x).getAirID() == (sModel.getTowerID()+3)){
+                                        ccCont.getgcModelObj(y, x).setTowerRange(sModel.getTowerID(), new Rectangle(ccCont.getgcModelObj(y, x).x - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).y - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).width + configModel.airTowerRanger[sModel.getTowerID()], ccCont.getgcModelObj(y, x).height + configModel.airTowerRanger[sModel.getTowerID()]));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }                
+            }
+                        
             }else if(button == 0 && sModel.isHoldsItem()){
                 sModel.setHoldsItem(false);
             } else if(button == 0 && !sModel.isHoldsItem()){

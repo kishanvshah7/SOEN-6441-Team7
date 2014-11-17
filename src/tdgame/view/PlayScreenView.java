@@ -41,6 +41,10 @@ public class PlayScreenView extends JPanel implements Runnable {
     static PlayScreenController psCont;
     
     public static int winTime = 2000, winFrame =0;
+    public Graphics w;
+    public Graphics getGraph(){
+        return w;
+    }
     
     /**
      * This method will initialize GUI components for Play Screen.
@@ -79,7 +83,11 @@ public class PlayScreenView extends JPanel implements Runnable {
         sad[0] = new ImageIcon("resources/sad.gif").getImage();
     }
     
-    public void initCreatures(){
+    /**
+     * Initializing creatures
+     * @return successFlag
+     */
+    public boolean initCreatures(){
         System.out.println("initCreatures");
         if(psCont != null){
             for(int i=0;i<Creatures.length;i++){
@@ -87,12 +95,18 @@ public class PlayScreenView extends JPanel implements Runnable {
                 //mobs[i].spawnMob(0);
             }
             isFirst = false;
-        } else
+            return true;
+        } else {
             System.out.println("psCont not initialized");
+            return false;
+        }
     }
     
+    /**
+     * Adding new creatures for next level
+     */
     public void newCreatures(){
-        if((configModel.level >= maxLevel) && configModel.killed == configModel.killsToWin){
+        if((configModel.level > maxLevel) && health != 0){
             isWon = true;
         } else{
             isWon = false;
@@ -112,11 +126,17 @@ public class PlayScreenView extends JPanel implements Runnable {
     
     /**
      * This method will start thread.
+     * @return successFlag
      */
-    public void startGame(){
+    public boolean startGame(){
         gameLoop.start();
+        return true;
     }
     
+    /**
+     * Check Game over or not.
+     * @return successFlag
+     */
     public boolean isGameOver(){
         if(configModel.health <= 0)
             return true;
@@ -124,6 +144,10 @@ public class PlayScreenView extends JPanel implements Runnable {
             return false;
     }
     
+    /**
+     * Check user is won the game or not.
+     * @return successFlag
+     */
     public static boolean hasWon() {
         if((configModel.level >= maxLevel) && configModel.killed == configModel.killsToWin){
             return true;
@@ -132,6 +156,10 @@ public class PlayScreenView extends JPanel implements Runnable {
         }
     }
     
+    /**
+     * Check Creatures Life health
+     * @return successFlag 
+     */
     public static boolean checkLiveCreatures(){
         for(int i=0;i<Creatures.length;i++){
                 if(Creatures[i].getHealth() != 0)
@@ -155,7 +183,7 @@ public class PlayScreenView extends JPanel implements Runnable {
      */
     public void paintComponent(Graphics g){
         //System.out.println("xyz");
-        
+        w=g;
         if(isFirst)
         {
             initCreatures();
@@ -194,7 +222,7 @@ public class PlayScreenView extends JPanel implements Runnable {
             
             g.setColor(new Color(0, 0, 0));
             g.setFont(new Font("Courier New",Font.BOLD, 15));
-            g.drawString("Level: "+level, Cp.x/2 - 80, Cp.y/2 + 20);
+            g.drawString("Level: "+(level-1), Cp.x/2 - 80, Cp.y/2 + 20);
             g.drawString("Killed: "+total_killed, Cp.x/2 - 80, Cp.y/2 + 40);
             g.drawString("Earned: "+money, Cp.x/2 - 80, Cp.y/2 + 60);
         }
@@ -221,14 +249,17 @@ public class PlayScreenView extends JPanel implements Runnable {
             
             g.setColor(new Color(0, 0, 0));
             g.setFont(new Font("Courier New",Font.BOLD, 15));
-            g.drawString("Level: "+level, Cp.x/2 - 80, Cp.y/2 + 20);
+            g.drawString("Level: "+(level-1), Cp.x/2 - 80, Cp.y/2 + 20);
             g.drawString("Killed: "+total_killed, Cp.x/2 - 80, Cp.y/2 + 40);
             g.drawString("Earned: "+total_earned, Cp.x/2 - 80, Cp.y/2 + 60);
         }
     }
     
+    /**
+     * Creatures Movement for current level
+     */
     public int spawnTime = 1000, spawnFrame = 0;
-    public void mobSpawner(){
+    public boolean mobSpawner(){
         if(spawnFrame >= spawnTime){
             int i =0;
             for(i=0;i<Creatures.length;i++){
@@ -236,14 +267,13 @@ public class PlayScreenView extends JPanel implements Runnable {
                     Creatures[i].setHealth(44 * configModel.level);
                     Creatures[i].spawnCreature(i);
                     break;
-                } else{     
-                    //System.out.println("In Game: "+i);
                 }
             }
             spawnFrame = 0;
         }else{
             spawnFrame += 1;
         }
+        return true;
     }
     
     /**
@@ -258,7 +288,6 @@ public class PlayScreenView extends JPanel implements Runnable {
             }
             
             if(rFlag && !isFirst && !isWin){
-                //System.out.println("Gamp Loop!");
                 psCont.getCcModel().physic(Creatures);
                 mobSpawner();
                 for(int i=0;i<Creatures.length;i++){
@@ -266,9 +295,7 @@ public class PlayScreenView extends JPanel implements Runnable {
                         Creatures[i].physic();
                     }
                 }
-                //psCont.logic();
                 repaint();
-                //System.out.println("Test Loop!");
                 try{
                     gameLoop.sleep(1);
                 } catch (Exception e){
@@ -278,10 +305,8 @@ public class PlayScreenView extends JPanel implements Runnable {
                 if(isWin){
                     if(winFrame >= winTime){
                         if(configModel.level == configModel.maxLevel){
-                            //System.exit(0);
                         }else{
                             configModel.level +=1;
-                            //initCreatures();
                             isWin = false;
                         }
                         winFrame =0;

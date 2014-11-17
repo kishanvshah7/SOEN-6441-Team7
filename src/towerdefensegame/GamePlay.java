@@ -7,7 +7,6 @@
 package towerdefensegame;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.io.File;
 import javax.swing.JFrame;

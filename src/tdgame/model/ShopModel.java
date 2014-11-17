@@ -42,6 +42,8 @@ public class ShopModel {
     public Rectangle btn_health;
     public Rectangle btn_coins;
     
+    public Rectangle towerUpgrade;
+    
     private boolean holdsItem = false;
     
     private int towerID = 0;
@@ -65,6 +67,7 @@ public class ShopModel {
         for(int i=0;i<button.length;i++){
             button[i] = new Rectangle( startX +(i * (cellSpace+getButtonSize())), startY+getButtonSize()+cellSpace, getButtonSize(), getButtonSize());
         }
+        towerUpgrade = new Rectangle(startX - 5, 240, 226, 20);
         btn_health = new Rectangle(startX, 14, iconSize, iconSize);
         btn_coins = new Rectangle(startX + button[0].y + 60, 14, iconSize, iconSize);
     }

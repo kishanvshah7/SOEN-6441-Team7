@@ -29,6 +29,7 @@ public class TowerDefenseGame_SingleObject {
    }
    /**
     * If the instance was not previously created, create it. Then return the instance
+    * @return the TowerDefenseGame_SingleObject
     */
    public static TowerDefenseGame_SingleObject getInstance(){
       if (instance == null)

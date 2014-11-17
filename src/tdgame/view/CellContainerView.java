@@ -8,7 +8,6 @@ package tdgame.view;
 
 import java.awt.Graphics;
 import tdgame.controller.CellContainerController;
-import tdgame.controller.GridCellController;
 
 /**
  * This is GUI class of Cell Container Module.

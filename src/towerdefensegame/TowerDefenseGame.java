@@ -7,9 +7,6 @@
 package towerdefensegame;
 
 import tdgame.controller.MainScreenController;
-import tdgame.model.MainScreenModel;
-import tdgame.view.MainScreenView;
-
 /**
  * Main Class to start game.
  * @author Rahul K Kikani
