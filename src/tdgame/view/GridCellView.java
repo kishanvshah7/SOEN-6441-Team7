@@ -54,11 +54,47 @@ public class GridCellView {
         if(true){
             for(int i=0;i<configModel.airTowerLaser.length;i++){
                 if(gcModel.getAirID() == configModel.airTowerLaser[i]){
+<<<<<<< HEAD
+                    g.setColor(Color.gray);
+=======
+<<<<<<< HEAD
+                    g.setColor(Color.yellow);
+>>>>>>> origin/master
+                    g.drawRect(gcModel.getTowerRange(i).x, gcModel.getTowerRange(i).y, gcModel.getTowerRange(i).width, gcModel.getTowerRange(i).height);
+                }
+            }
+            g.setColor(Color.white);
+=======
                     g.setColor(Color.gray);
                     g.drawRect(gcModel.getTowerRange(i).x, gcModel.getTowerRange(i).y, gcModel.getTowerRange(i).width, gcModel.getTowerRange(i).height);
                 }
             }
             g.setColor(Color.white);
+        }
+        if(gcModel != null && gcModel.isFiring() && gcModel.getAirID() != -1){
+            if(gcModel.getAirID() == 4){
+                    g.drawImage(configModel.fire[0], PlayScreenView.Creatures[gcModel.getShotMob()].x, PlayScreenView.Creatures[gcModel.getShotMob()].y, gcModel.width, gcModel.height, null);
+            } else if(gcModel.getAirID() == 5){
+            } else {
+                g.drawImage(configModel.star[0], PlayScreenView.Creatures[gcModel.getShotMob()].x, PlayScreenView.Creatures[gcModel.getShotMob()].y, gcModel.width, gcModel.height, null);
+            }
+            
+               //PlayScreenView.Creatures[gcModel.getShotMob()].walkSpeed = 40;
+               //System.out.println("Firing Red: "+gcModel.getAirID());
+            if(gcModel.getAirID() == 4){
+                g.setColor(Color.yellow);
+            } else if(gcModel.getAirID() == 5){
+                g.setColor(Color.blue);
+            } else if(gcModel.getAirID() == 6){
+                g.setColor(Color.red);
+            } else {
+                g.setColor(Color.green);
+            }
+               
+               //System.out.println(gcModel.getShotMob()+" - "+PlayScreenView.Creatures[gcModel.getShotMob()].x);
+               g.drawLine(gcModel.x + (gcModel.width/2)+1, gcModel.y + (gcModel.height/2)+1, PlayScreenView.Creatures[gcModel.getShotMob()].x + (PlayScreenView.Creatures[gcModel.getShotMob()].width/2) + 1, PlayScreenView.Creatures[gcModel.getShotMob()].y + (PlayScreenView.Creatures[gcModel.getShotMob()].height/2) + 1);
+               g.drawLine(gcModel.x + (gcModel.width/2), gcModel.y + (gcModel.height/2), PlayScreenView.Creatures[gcModel.getShotMob()].x + (PlayScreenView.Creatures[gcModel.getShotMob()].width/2), PlayScreenView.Creatures[gcModel.getShotMob()].y + (PlayScreenView.Creatures[gcModel.getShotMob()].height/2));
+>>>>>>> origin/Rahul
         }
         if(gcModel != null && gcModel.isFiring() && gcModel.getAirID() != -1){
             if(gcModel.getAirID() == 4){
