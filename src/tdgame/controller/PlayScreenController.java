@@ -25,17 +25,17 @@ public class PlayScreenController {
     PlayScreenModel theModel;
     PlayScreenView theView;
     
-    CellContainerModel ccModel;
-    CellContainerView ccView;
-    CellContainerController ccCont;
+    private CellContainerModel ccModel;
+    private CellContainerView ccView;
+    private CellContainerController ccCont;
     
     GridCellModel[][] gcModel;
     GridCellView gcView;
     GridCellController gcCont;
     
-    ShopModel sModel;
+    private ShopModel sModel;
     ShopView sView;
-    ShopController sCont;
+    private ShopController sCont;
     
     /**
      * This method is constructor for Play Screen Controller. It will initialize different views,model and controller.
@@ -59,7 +59,7 @@ public class PlayScreenController {
         
         this.ccView = ccView;
         this.ccModel = ccModel;
-        this.ccCont = new CellContainerController(this.ccView,this.ccModel);
+        this.ccCont = new CellContainerController(this.getCcView(), this.getCcModel());
         this.ccCont.setgcCont(gcCont);
         
         this.ccView.setCcCont(ccCont);
@@ -68,7 +68,7 @@ public class PlayScreenController {
         
         this.sModel = sModel;
         this.sView = sView;
-        sCont = new ShopController(this.sModel,this.sView);
+        sCont = new ShopController(this.getsModel(),this.sView);
         sCont.setccCont(ccCont);
     }
 
@@ -78,13 +78,48 @@ public class PlayScreenController {
      * @param g the Graphics
      */
     public void getccDraw(Graphics g){
-            ccCont.getDraw(g);
+            getCcCont().getDraw(g);
     }
     /**
      * This method will call draw() method of Shop View
      * @param g the Graphics
      */
     public void getshopDraw(Graphics g){
-        sCont.getshopDraw(sModel, g);
+        getsCont().getshopDraw(getsModel(), g);
+    }
+
+    /**
+     * @return the ccModel
+     */
+    public CellContainerModel getCcModel() {
+        return ccModel;
+    }
+
+    /**
+     * @return the ccView
+     */
+    public CellContainerView getCcView() {
+        return ccView;
+    }
+
+    /**
+     * @return the ccCont
+     */
+    public CellContainerController getCcCont() {
+        return ccCont;
+    }
+
+    /**
+     * @return the sCont
+     */
+    public ShopController getsCont() {
+        return sCont;
+    }
+
+    /**
+     * @return the sModel
+     */
+    public ShopModel getsModel() {
+        return sModel;
     }
 }
