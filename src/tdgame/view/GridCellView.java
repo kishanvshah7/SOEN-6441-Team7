@@ -31,7 +31,7 @@ public class GridCellView {
      */
     public void draw(GridCellModel gcModel,Graphics g){
         //System.out.println("abcd");
-        g.drawImage(configModel.ground_level[gcModel.getgID()], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
+            g.drawImage(configModel.ground_level[gcModel.getgID()], gcModel.x, gcModel.y, gcModel.width, gcModel.height, null);
         //g.drawRect(gcModel.x, gcModel.y, gcModel.width, gcModel.height);
         //System.out.println("airID"+gcModel.airID);
         
@@ -63,7 +63,7 @@ public class GridCellView {
             }
             g.setColor(Color.white);
         }
-        if(gcModel.isFiring() && gcModel.getAirID() != -1){
+        if(gcModel != null && gcModel.isFiring() && gcModel.getAirID() != -1){
             if(gcModel.getAirID() == 4){
                     g.drawImage(configModel.fire[0], PlayScreenView.Creatures[gcModel.getShotMob()].x, PlayScreenView.Creatures[gcModel.getShotMob()].y, gcModel.width, gcModel.height, null);
             } else if(gcModel.getAirID() == 5){

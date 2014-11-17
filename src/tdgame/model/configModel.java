@@ -15,10 +15,12 @@ import java.awt.Point;
 public class configModel {
     
     public static int money = 150;
+    public static int total_earned = 150;
     public static int health = 3;
     public static int killed = 0;
+    public static int total_killed = 0;
     public static int killsToWin = 5;
-    public static int maxLevel = 5;
+    public static int maxLevel = 2;
     public static boolean roundSlot = true;
     public static int creaturesNo = 5;
     public static int waveLap = 1;
@@ -35,6 +37,7 @@ public class configModel {
     
     public static int groundGrass = 0;
     public static int groundRoad = 1;
+    public static int groundWater = 11;
     
     public static int airAir = -1;
     public static int airCave = 8;
@@ -58,4 +61,9 @@ public class configModel {
     public static Image[] fire = new Image[1];
     public static Image[] ice = new Image[1];
     public static Image[] star = new Image[1];
+    
+    public static Image[] happy = new Image[1];
+    public static Image[] sad = new Image[1];
+    
+    public static boolean gameOberFlag = false;
 }

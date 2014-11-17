@@ -50,13 +50,13 @@ public class CreatureModel extends Rectangle{
             }
         }
         this.mobID = mobID;
-        this.health = getHealth();
-        inGame = true;
-        System.out.println("Mob Id"+health);
+        this.setHealth(getHealth());
+        setInGame(true);
+        System.out.println("Mob Id"+this.mobID);
     }
     
     public void deleteCreature(){
-        this.inGame = false;
+        this.setInGame(false);
         //System.out.println("Not in Game: "+mobID);
         //this.health = 0;
         direction = right;
@@ -64,8 +64,9 @@ public class CreatureModel extends Rectangle{
         if(health <= 0){
             ccModel.getGcModelObj(yC, 0).getMoney(getMobID());
             configModel.killed +=1;
+            configModel.total_killed +=1;
         }
-        this.health = 0;
+        this.setHealth(0);
     }
 
     /**
@@ -94,7 +95,7 @@ public class CreatureModel extends Rectangle{
     }
     
     public void loseHealth(int rate){
-        health -= rate;
+        setHealth(health - rate);
         checkDeath();
     }
     
@@ -222,6 +223,20 @@ public class CreatureModel extends Rectangle{
      */
     public void setHealthHeight(int healthHeight) {
         this.healthHeight = healthHeight;
+    }
+
+    /**
+     * @param health the health to set
+     */
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    /**
+     * @param inGame the inGame to set
+     */
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
     }
     
 }

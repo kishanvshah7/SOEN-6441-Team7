@@ -64,7 +64,7 @@ public class ShopController implements Observer {
     }
     
     public boolean placeTower(int y, int x, int priceID){
-        if(ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
+        if(ccCont.getgcModelObj(y, x).getgID() != 11 && ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
             ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
             configModel.money = configModel.money - sModel.getButtonPrice(priceID);
             System.out.println("Tower Placed"+sModel.getHeldID());
