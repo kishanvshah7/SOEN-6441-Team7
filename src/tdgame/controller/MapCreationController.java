@@ -17,6 +17,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import tdgame.model.MapCreationModel;
 import tdgame.view.MapCreationView;
+import towerdefensegame.LogGenerator;
 
 /**
  * This Class will bind and initialize Model-View of Main Creation Module.
@@ -93,6 +94,7 @@ public class MapCreationController {
                     }
                     else
                     {
+                        LogGenerator.addLog("Invalid Map x,y parameter");
                         theView.displayMessage(errMsg);
                     }
                 }
@@ -110,6 +112,7 @@ public class MapCreationController {
                 }
                 
                 if(tempBtnStr.equals("Load Map")){
+                    LogGenerator.addLog("Load Map Initialized.");
                     System.out.println("Load Map: Clicked");
                     final JFileChooser  fileDialog = new JFileChooser();
                     FileFilter filter = new FileNameExtensionFilter("TDMap file", "txt");
@@ -119,12 +122,15 @@ public class MapCreationController {
                        File file = fileDialog.getSelectedFile();
                        theView.setdisabledsubmitBtn();
                        mbCon = new MapBoxController();
+                       LogGenerator.addLog("MapFile Selected By user : "+file.getName());
                        if(theModel.readFile(mbCon, file.getName(), file)){
                         System.out.println("Map Grid is Created from file.");
                         theView.addGridMap(mbCon);
                         theView.disableSubmitButton();
                         theView.disableLoadButton();
+                        LogGenerator.addLog("Loadded Map is Valid");
                        }else{
+                           LogGenerator.addLog("Loadded Map is inalid");
                            theView.displayMessage("Invalid Map File");
                        }
                     }
@@ -134,8 +140,10 @@ public class MapCreationController {
                 }
 
                 if(tempBtnStr.equals("Save Map")){
+                    LogGenerator.addLog("User wants to save map.");
                     System.out.println("Save Clicked");
                     if(mbCon.validPath(mbCon.getMapGirdArray()).equals("Done")){
+                        LogGenerator.addLog("User edited map is valid.");
                         String file_name = theView.getFileName();
                         System.out.println("file "+file_name);
                         if(file_name == null){
@@ -148,18 +156,22 @@ public class MapCreationController {
                             theView.displayMessage("Thank You, Your Map is successfully saved with "+ft.format(date));
                             theView.dispose();
                             msCon.setTopEnabled();
+                            LogGenerator.addLog("MapFile saved as : "+ft.format(date));
                         }else{
                             mbCon.saveMap(file_name);
                             theView.displayMessage("Thank You, Your Map is successfully saved with "+file_name);
                             theView.dispose();
                             msCon.setTopEnabled();
+                            LogGenerator.addLog("MapFile saved as : "+file_name);
                         }
                     }else{
+                        LogGenerator.addLog("User edited map is not valid.");
                         theView.displayMessage("Sorry, Your Path is invalid.");
                     }
                 }
 
                 if(tempBtnStr.equals("Exit")){
+                    theView.displayMessage("Exit from Map Creation window.");
                     theView.dispose();
                     msCon.setTopEnabled();
                 }

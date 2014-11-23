@@ -22,6 +22,7 @@ public class TowerDefenseGame {
         TowerDefenseGame_SingleObject Singleobject = TowerDefenseGame_SingleObject.getInstance();
 
         MainScreenController theController = new MainScreenController(Singleobject.getTheView(), Singleobject.getTheModel());
+        LogGenerator.addLog("Game Initialized.");
         Singleobject.getTheView().setVisible(true);
     }
     

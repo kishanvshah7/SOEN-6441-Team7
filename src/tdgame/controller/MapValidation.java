@@ -6,6 +6,8 @@
 
 package tdgame.controller;
 
+import tdgame.model.configModel;
+
 /**
  * This controller will used to validation of Map.
  * @author Kishan V. Shah
@@ -15,12 +17,7 @@ public class MapValidation {
     static int enY = 0;
     static int exX = 0;
     static int exY = 0;
-<<<<<<< HEAD
     static int width = 5;
-=======
- 
-	static int width = 5;
->>>>>>> origin/master
     static int height = 17;
     static int lastCheckX =0;
     static int lastCheckY =0;
@@ -55,6 +52,10 @@ public class MapValidation {
         GridArray = new int[width][height];
         final_array = new int[width][height];
         final_array = GridA;
+        configModel.gridX = height;
+        configModel.gridY = width;
+        System.out.println("gridX"+configModel.gridX);
+        System.out.println("gridY"+configModel.gridY);
         for(int y=0;y < width; y++){
                     for(int x=0;x < height; x++){
                         GridArray[y][x] = GridA[y][x];

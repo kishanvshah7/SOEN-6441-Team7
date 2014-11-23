@@ -1,0 +1,41 @@
+[22/11/2014 06:26:51 PM] : Game Initialized.
+[22/11/2014 06:26:53 PM] : Play button clicked.
+[22/11/2014 06:26:53 PM] : MapChooser Screen open
+[22/11/2014 06:26:53 PM] : Listed all mapfiles from MapFiel folder
+[22/11/2014 06:26:55 PM] : Let's Play clicked.
+[22/11/2014 06:26:55 PM] : User's map file:chital.team7
+[22/11/2014 06:26:55 PM] : Game Play Started.
+[22/11/2014 06:26:55 PM] : Game Play Screen initialized.
+[22/11/2014 06:26:56 PM] : Basic Images are loaded successfully.
+[22/11/2014 06:26:56 PM] : First Level get started
+[22/11/2014 06:26:56 PM] : 5 New Creatures Created.
+[22/11/2014 06:26:56 PM] : Game Play Start
+[22/11/2014 06:26:57 PM] : Tower Id:3 placed at (1,4)
+[22/11/2014 06:26:57 PM] : Tower Inspection window showed for Tower:3 at (1,4)
+[22/11/2014 06:26:58 PM] : Mob Id:0 get started moving.
+[22/11/2014 06:26:59 PM] : Tower Upgrade to Level:2 Range:64 Rate:2
+[22/11/2014 06:26:59 PM] : Tower Upgrade cost deducted from total money.
+[22/11/2014 06:26:59 PM] : Tower Upgrade to Level:3 Range:84 Rate:3
+[22/11/2014 06:26:59 PM] : Tower Upgrade cost deducted from total money.
+[22/11/2014 06:26:59 PM] : Tower Upgrade to Level:4 Range:104 Rate:4
+[22/11/2014 06:26:59 PM] : Tower Upgrade cost deducted from total money.
+[22/11/2014 06:26:59 PM] : Tower Upgrade to Level:5 Range:124 Rate:5
+[22/11/2014 06:26:59 PM] : Tower Upgrade cost deducted from total money.
+[22/11/2014 06:26:59 PM] : Mob Id:1 get started moving.
+[22/11/2014 06:27:01 PM] : Mob Id:2 get started moving.
+[22/11/2014 06:27:01 PM] : Mob Killed, Mob Id :0
+[22/11/2014 06:27:01 PM] : Mob killing reward added to main amount.
+[22/11/2014 06:27:02 PM] : Mob Id:3 get started moving.
+[22/11/2014 06:27:03 PM] : Mob Killed, Mob Id :1
+[22/11/2014 06:27:03 PM] : Mob killing reward added to main amount.
+[22/11/2014 06:27:04 PM] : Mob Id:4 get started moving.
+[22/11/2014 06:27:04 PM] : Mob Killed, Mob Id :2
+[22/11/2014 06:27:04 PM] : Mob killing reward added to main amount.
+[22/11/2014 06:27:06 PM] : Mob Killed, Mob Id :3
+[22/11/2014 06:27:06 PM] : Mob killing reward added to main amount.
+[22/11/2014 06:27:07 PM] : Mob Killed, Mob Id :4
+[22/11/2014 06:27:07 PM] : Mob killing reward added to main amount.
+[22/11/2014 06:27:07 PM] : Game Level Upgraded to : 2
+[22/11/2014 06:27:07 PM] : new Creatures : 10
+[22/11/2014 06:27:08 PM] : Game Play Window Closed.
+[22/11/2014 06:27:08 PM] : Game Closed

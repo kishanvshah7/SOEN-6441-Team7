@@ -15,6 +15,7 @@ import tdgame.model.MapCreationModel;
 import tdgame.view.MainScreenView;
 import tdgame.view.MapChooserView;
 import tdgame.view.MapCreationView;
+import towerdefensegame.LogGenerator;
 
 /**
  * This Class will bind and initialize Model-View of Main Screen Module.
@@ -70,16 +71,19 @@ public class MainScreenController {
             if(e.getSource() instanceof JButton)
             {
                 if(tempBtnStr.equals("Play")){
+                    LogGenerator.addLog("Play button clicked.");
                     MapChooserModel mcModel = new MapChooserModel();
                     MapChooserView mcView = new MapChooserView(theView, mcModel.getMapFileList());
                     MapChooserController mp = new MapChooserController(mcView,mcModel);
                 }
 
                 if(tempBtnStr.equals("Create Map")){
+                    LogGenerator.addLog("Create Map button clicked.");
                     initMapCreationController();
                 }
 
                 if(tempBtnStr.equals("Exit")){
+                    LogGenerator.addLog("Exit clicked.");
                     theView.dispose();
                     //System.exit(0);
                 }

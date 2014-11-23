@@ -54,9 +54,11 @@ public class MapChooserController {
             if(e.getSource() instanceof JButton)
             {
                 if(tempBtnStr.equals("Let's Play")){
+                    LogGenerator.addLog("Let's Play clicked.");
                     if(theView.getSelectedFile().equals("NONE")){
                         theView.displayMessage("Please Select At least one file.");
                     }else{
+                        LogGenerator.addLog("User's map file:"+theView.getSelectedFile());
                         PlayScreenModel psModel = new PlayScreenModel();
                         boolean temp = psModel.LoadMap(new File("MapFiles/"+theView.getSelectedFile()));
                         if(temp){

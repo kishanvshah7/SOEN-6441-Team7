@@ -1,0 +1,47 @@
+[21/11/2014 08:17:54 PM] : Game Initialized.
+[21/11/2014 08:17:56 PM] : Play button clicked.
+[21/11/2014 08:17:59 PM] : Create Map button clicked.
+[21/11/2014 08:17:59 PM] : Map Creation Window Opened
+[21/11/2014 08:18:01 PM] : Invalid Map x,y parameter
+[21/11/2014 08:18:07 PM] : Map Grid Generated.
+[21/11/2014 08:18:09 PM] : Entry Point Set : (0,0)
+[21/11/2014 08:18:11 PM] : Exit Point Set : (7,0)
+[21/11/2014 08:18:13 PM] : Path Point Set : (1,0)
+[21/11/2014 08:18:13 PM] : Path Point Set : (2,0)
+[21/11/2014 08:18:14 PM] : Path Point Set : (3,0)
+[21/11/2014 08:18:14 PM] : Path Point Set : (4,0)
+[21/11/2014 08:18:15 PM] : Path Point Set : (5,0)
+[21/11/2014 08:18:15 PM] : Path Point Set : (6,0)
+[21/11/2014 08:18:17 PM] : User wants to save map.
+[21/11/2014 08:18:17 PM] : Map Validation
+[21/11/2014 08:18:17 PM] : Valid Map
+[21/11/2014 08:18:17 PM] : User edited map is valid.
+[21/11/2014 08:18:21 PM] : Map Saved : abcd.team7
+[21/11/2014 08:18:21 PM] : MapFile saved as : abcd
+[21/11/2014 08:18:23 PM] : Create Map button clicked.
+[21/11/2014 08:18:23 PM] : Map Creation Window Opened
+[21/11/2014 08:18:25 PM] : Load Map Initialized.
+[21/11/2014 08:18:38 PM] : MapFile Selected By user : abcd.team7
+[21/11/2014 08:18:39 PM] : Map Grid Generated.
+[21/11/2014 08:18:39 PM] : Entry Point Set : (0,0)
+[21/11/2014 08:18:39 PM] : Path Point Set : (1,0)
+[21/11/2014 08:18:39 PM] : Path Point Set : (2,0)
+[21/11/2014 08:18:39 PM] : Path Point Set : (3,0)
+[21/11/2014 08:18:39 PM] : Path Point Set : (4,0)
+[21/11/2014 08:18:39 PM] : Path Point Set : (5,0)
+[21/11/2014 08:18:39 PM] : Path Point Set : (6,0)
+[21/11/2014 08:18:39 PM] : Exit Point Set : (7,0)
+[21/11/2014 08:18:39 PM] : Loadded Map is Valid
+[21/11/2014 08:18:44 PM] : Path Point Set : (3,0)
+[21/11/2014 08:18:44 PM] : Path Point Set : (2,1)
+[21/11/2014 08:18:45 PM] : Path Point Set : (3,1)
+[21/11/2014 08:18:45 PM] : Path Point Set : (4,1)
+[21/11/2014 08:18:47 PM] : User wants to save map.
+[21/11/2014 08:18:47 PM] : Map Validation
+[21/11/2014 08:18:47 PM] : Valid Map
+[21/11/2014 08:18:47 PM] : User edited map is valid.
+[21/11/2014 08:18:52 PM] : Map Saved : abcd.team7
+[21/11/2014 08:18:52 PM] : MapFile saved as : abcd
+[21/11/2014 08:19:04 PM] : Play button clicked.
+[21/11/2014 08:19:08 PM] : Exit clicked.
+[21/11/2014 08:19:08 PM] : Game Closed

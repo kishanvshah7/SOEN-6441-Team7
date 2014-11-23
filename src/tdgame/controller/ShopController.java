@@ -8,11 +8,15 @@ package tdgame.controller;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.text.ParseException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import tdgame.model.ShopModel;
 import tdgame.model.configModel;
 import tdgame.view.ShopView;
+import towerdefensegame.LogGenerator;
 
 /**
  * This Class will bind and initialize Model-View of Shop(Tower) Module.
@@ -61,7 +65,6 @@ public class ShopController implements Observer {
      */
     public static void click(int button) {
         
-<<<<<<< HEAD
     }
     
     /**
@@ -71,32 +74,14 @@ public class ShopController implements Observer {
      * @param priceID price of towerID
      * @return successFlag
      */
-=======
-<<<<<<< HEAD
-        if(button == 1){
-            for(int i=0;i<sModel.getbuttonLength();i++){
-                if(sModel.getButtonObj(i).contains(configModel.mse)){
-                    if(sModel.getButtonId(i) != configModel.airAir)
-                    {
-                        if(sModel.getMoney() >= sModel.getButtonPrice(i)){
-                            sModel.setHeldID(sModel.getButtonId(i));
-                            sModel.setRealID(i);
-                            sModel.setHoldsItem(true);
-=======
-    }
-    
->>>>>>> origin/master
     public boolean placeTower(int y, int x, int priceID){
         if(ccCont.getgcModelObj(y, x).getgID() != 11 && ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
             ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
             configModel.money = configModel.money - sModel.getButtonPrice(priceID);
             System.out.println("Tower Placed"+sModel.getHeldID());
-<<<<<<< HEAD
-
-                ccCont.getgcModelObj(y, x).setTowerRange(sModel.getTowerID(), new Rectangle(ccCont.getgcModelObj(y, x).x - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).y - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).width + configModel.airTowerRanger[sModel.getTowerID()], ccCont.getgcModelObj(y, x).height + configModel.airTowerRanger[sModel.getTowerID()]));
-
-=======
->>>>>>> origin/master
+            LogGenerator.addLog("Tower Id:"+sModel.getHeldID()+" placed at ("+y+","+x+")");
+            ccCont.getgcModelObj(y, x).towerLog[sModel.getHeldID()-3] = LogGenerator.getLogTime()+"Tower Placed at ("+y+","+x+")\n";
+            ccCont.getgcModelObj(y, x).setTowerRange(sModel.getTowerID(), new Rectangle(ccCont.getgcModelObj(y, x).x - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).y - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).width + configModel.airTowerRanger[sModel.getTowerID()], ccCont.getgcModelObj(y, x).height + configModel.airTowerRanger[sModel.getTowerID()]));
             sModel.setHoldsItem(false);
             return true;
         } else {
@@ -104,15 +89,12 @@ public class ShopController implements Observer {
         }
     }
     
-<<<<<<< HEAD
     /**
      * Remove tower function
      * @param y y Co-ordinate
      * @param x x Co-ordinate
      * @return successFlag
      */
-=======
->>>>>>> origin/master
     public boolean removeTower(int y, int x){
         for(int i=0;i<configModel.airTowerLaser.length;i++){
             if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
@@ -122,26 +104,33 @@ public class ShopController implements Observer {
                     double refund_amount = sModel.getButtonPrice(i) * 0.8;
                     sModel.setMoney(configModel.money + (int)refund_amount );
                     configModel.money = configModel.money + (int)refund_amount;
+                    ccCont.getgcModelObj(y, x).towerLog[i] += LogGenerator.getLogTime()+"Tower Removed from ("+y+","+x+")\n";
+                    LogGenerator.addLog("Tower Id:"+sModel.getHeldID()+" removed from ("+y+","+x+")");
+                    LogGenerator.addLog("Tower Sell reward done.");
+                    try {
+                        ccCont.getgcModelObj(y, x).endTime();
+                    } catch (ParseException ex) {
+                        Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return true;
                 }
         }
         return false;
     }
     
-<<<<<<< HEAD
     /**
      * Is tower here function
      * @param y y Co-ordinate
      * @param x x Co-ordinate
      * @return successFlag
      */
-=======
->>>>>>> origin/master
     public boolean isTowerHere(int y, int x){
         for(int i=0;i<configModel.airTowerLaser.length;i++){
             System.out.println("Tower Id: "+ccCont.getgcModelObj(y, x).getAirID()+"-"+configModel.airTowerLaser[i]);
             if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
                 System.out.println("Tower Is Here");
+                ccCont.getgcModelObj(y, x).towerLog[i] += LogGenerator.getLogTime()+"Tower Inspection window opened.\n";
+                LogGenerator.addLog("Tower Inspection window showed for Tower:"+configModel.airTowerLaser[i]+" at ("+y+","+x+")");
                 sModel.setTowerID(i);
                 sModel.setTowerInfo(true);
                 return true;
@@ -152,14 +141,11 @@ public class ShopController implements Observer {
         return false;
     }
     
-<<<<<<< HEAD
     /**
      * Observer Update Method
      * @param o observer Object
      * @param arg arguments
      */
-=======
->>>>>>> origin/master
     public void update(Observable o, Object arg) {
         //System.out.println("Bagha");
          if (arg instanceof String) {
@@ -174,10 +160,6 @@ public class ShopController implements Observer {
                                 sModel.setRealID(i);
                                 sModel.setHoldsItem(true);
                             }
-<<<<<<< HEAD
-=======
->>>>>>> origin/Rahul
->>>>>>> origin/master
                         }
                     }
                 }
@@ -207,6 +189,7 @@ public class ShopController implements Observer {
                     if(configModel.TowerLevel[sModel.getTowerID()] < 5){
                         if(configModel.money >= configModel.TowerPrice[sModel.getTowerID()]){
                             System.out.println("Tower Upgrade: "+sModel.getTowerID());
+                            
                             if(sModel.getTowerID() == 2){
                                 configModel.TowerFiringRate[sModel.getTowerID()] += 5;
                             } else {
@@ -217,10 +200,17 @@ public class ShopController implements Observer {
                             configModel.TowerLevel[sModel.getTowerID()]++;
                             configModel.money -= configModel.TowerPrice[sModel.getTowerID()];
                             
+                            LogGenerator.addLog("Tower Upgrade to Level:"+configModel.TowerLevel[sModel.getTowerID()]+
+                                                " Range:" +configModel.airTowerRanger[sModel.getTowerID()]+
+                                                " Rate:" +configModel.TowerFiringRate[sModel.getTowerID()]);
+                            LogGenerator.addLog("Tower Upgrade cost deducted from total money.");
                             for(int y=0;y<ccCont.getyC();y++){
                                 for(int x=0;x<ccCont.getxC();x++){
                                     if(ccCont.getgcModelObj(y, x).getAirID() == (sModel.getTowerID()+3)){
                                         ccCont.getgcModelObj(y, x).setTowerRange(sModel.getTowerID(), new Rectangle(ccCont.getgcModelObj(y, x).x - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).y - ((configModel.airTowerRanger[sModel.getTowerID()])/2), ccCont.getgcModelObj(y, x).width + configModel.airTowerRanger[sModel.getTowerID()], ccCont.getgcModelObj(y, x).height + configModel.airTowerRanger[sModel.getTowerID()]));
+                                        ccCont.getgcModelObj(y, x).towerLog[sModel.getTowerID()] += LogGenerator.getLogTime()+"Tower Upgrade to Level:"+configModel.TowerLevel[sModel.getTowerID()]+
+                                                " Range:" +configModel.airTowerRanger[sModel.getTowerID()]+
+                                                " Rate:" +configModel.TowerFiringRate[sModel.getTowerID()]+"\n";
                                     }
                                 }
                             }

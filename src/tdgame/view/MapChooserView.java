@@ -15,6 +15,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import towerdefensegame.LogGenerator;
 
 /**
  * This is GUI class of Map Chooser Module.
@@ -38,6 +39,7 @@ public class MapChooserView extends JFrame {
      * @param fileList array of map files
      */
     public MapChooserView(MainScreenView msView, String[] fileList){
+        LogGenerator.addLog("MapChooser Screen open");
         this.setTitle("Select Your Map");
         this.setSize(200,300);
         this.msView = msView;
@@ -78,6 +80,7 @@ public class MapChooserView extends JFrame {
         showButton = new JButton("Let's Play");
         this.add(fruitListScrollPane,BorderLayout.CENTER);  
         this.add(showButton,BorderLayout.SOUTH);
+        LogGenerator.addLog("Listed all mapfiles from MapFiel folder");
     }
     /**
      * this method will add button action listener to button.
