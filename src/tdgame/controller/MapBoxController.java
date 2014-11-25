@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import tdgame.model.MapBoxModel;
 import tdgame.view.MapBoxView;
+import towerdefensegame.LogGenerator;
 
 /**
  * This Class will bind and initialize Model-View of Map Box Module.
@@ -196,10 +197,13 @@ public class MapBoxController {
     public String validPath(int[][] ga){
         MapValidation mapV = new MapValidation(ga);
         System.out.println("Path Validation: "+mapV.isValid());
+        LogGenerator.addLog("Map Validation");
         if(mapV.isValid()){            
             //ga = mapV.getFinal_array();
+            LogGenerator.addLog("Valid Map");
             return "Done";
         }else{
+            LogGenerator.addLog("Invalid Map");
             return "Invalid";
         }
     }
@@ -221,6 +225,7 @@ public class MapBoxController {
                 }
                 writer.write(System.getProperty("line.separator"));
             }
+            LogGenerator.addLog("Map Saved : "+str+".team7");
         } catch (IOException ex) {
         } finally {
            try {writer.close();} catch (Exception ex) {}

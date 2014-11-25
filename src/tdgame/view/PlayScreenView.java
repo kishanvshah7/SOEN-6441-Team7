@@ -13,6 +13,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import tdgame.controller.PlayScreenController;
@@ -51,6 +54,7 @@ public class PlayScreenView extends JPanel implements Runnable {
      * @param j the GamePlay object
      */
     public PlayScreenView(GamePlay j){
+        LogGenerator.addLog("Game Play Screen initialized.");
         final KeyController eventSource = new KeyController();
  
         // create an observer
@@ -81,6 +85,7 @@ public class PlayScreenView extends JPanel implements Runnable {
         
         happy[0] = new ImageIcon("resources/happy.gif").getImage();
         sad[0] = new ImageIcon("resources/sad.gif").getImage();
+        LogGenerator.addLog("Basic Images are loaded successfully.");
     }
     
     /**
@@ -89,6 +94,12 @@ public class PlayScreenView extends JPanel implements Runnable {
      */
     public boolean initCreatures(){
         System.out.println("initCreatures");
+        LogGenerator.addLog("First Level get started");
+        LogGenerator.addLog(creaturesNo+" New Creatures Created.");
+        LogGenerator.addWaveLog("First Level get started");
+        LogGenerator.addWaveLog(creaturesNo+" New Creatures will be Created.");
+        LogGenerator.addWaveLog("Total Money:"+money);
+        LogGenerator.addWaveLog("Game Health:"+health);
         if(psCont != null){
             for(int i=0;i<Creatures.length;i++){
                 Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
@@ -117,6 +128,14 @@ public class PlayScreenView extends JPanel implements Runnable {
             configModel.killed = 0;
             configModel.waveLap++;
             configModel.level++;
+            LogGenerator.addLog("Game Level Upgraded to : "+level);
+            LogGenerator.addLog("new Creatures : "+configModel.creaturesNo);
+            GameLogViewer.addText_Wjtp("==================================\n");
+            LogGenerator.addWaveLog("Game Wave Upgraded to : "+level);
+            LogGenerator.addWaveLog(creaturesNo+" New Creatures will be Created.");
+            LogGenerator.addWaveLog("Total Money:"+money);
+            LogGenerator.addWaveLog("Game Health:"+health);
+
             Creatures = new CreatureModel[configModel.creaturesNo];
             for(int i=0;i<Creatures.length;i++){
                 Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
@@ -191,7 +210,7 @@ public class PlayScreenView extends JPanel implements Runnable {
             newCreatures();
         }
         
-        if(psCont !=null && !gameOberFlag){
+        if(psCont !=null && !gameOverFlag){
             g.setColor(new Color(50,50,50));
             g.fillRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.white);
@@ -207,7 +226,12 @@ public class PlayScreenView extends JPanel implements Runnable {
         }
         
         if(hasWon() || isWon){
-            System.out.println("Congratulations");
+            if(!gameWonFlag)
+            {
+                LogGenerator.addLog("User Won Game");
+                System.out.println("Congratulations");
+            }
+            gameWonFlag = true;
             Point Cp= GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
             for(int i=0; i< Creatures.length;i++){
                 Creatures[i].setHealth(0);
@@ -228,13 +252,14 @@ public class PlayScreenView extends JPanel implements Runnable {
         }
         
         if(isGameOver()){
-            if(!gameOberFlag)
+            if(!gameOverFlag)
             {
                 total_earned = money;
                 money = 0;
+                System.out.println("Game Over");
+                LogGenerator.addLog("User lost game.");
             }
-            gameOberFlag = true;
-            System.out.println("Game Over");
+            gameOverFlag = true;
             Point Cp= GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
             for(int i=0; i< Creatures.length;i++){
                 Creatures[i].setHealth(0);
@@ -288,7 +313,11 @@ public class PlayScreenView extends JPanel implements Runnable {
             }
             
             if(rFlag && !isFirst && !isWin){
-                psCont.getCcModel().physic(Creatures);
+                try {
+                    psCont.getCcModel().physic(Creatures);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PlayScreenView.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 mobSpawner();
                 for(int i=0;i<Creatures.length;i++){
                     if(Creatures[i].isInGame()){

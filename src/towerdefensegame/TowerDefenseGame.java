@@ -18,10 +18,10 @@ public class TowerDefenseGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        GameLogViewer glView = new GameLogViewer();
         TowerDefenseGame_SingleObject Singleobject = TowerDefenseGame_SingleObject.getInstance();
-
         MainScreenController theController = new MainScreenController(Singleobject.getTheView(), Singleobject.getTheModel());
+        LogGenerator.addLog("Game Initialized.");
         Singleobject.getTheView().setVisible(true);
     }
     

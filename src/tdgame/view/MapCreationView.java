@@ -10,15 +10,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.*;
 import tdgame.controller.MapBoxController;
+import towerdefensegame.LogGenerator;
 
 
 /**
  * This is GUI class of Map Creation Module.
  * @author Rahul K Kikani
  */
-public class MapCreationView extends JFrame{
+public class MapCreationView extends JFrame implements WindowListener{
     
     JLabel xLabel;
     JLabel yLabel;
@@ -43,6 +46,7 @@ public class MapCreationView extends JFrame{
      * This method is initialize GUI components for Map Creation Screen.
      */
     public MapCreationView(){
+        LogGenerator.addLog("Map Creation Window Opened");
         this.setTitle("Map Creation Window");
         this.setSize(1000,700);
         this.setLocationRelativeTo(null);
@@ -218,5 +222,40 @@ public class MapCreationView extends JFrame{
      */
     public String getFileName(){
         return JOptionPane.showInputDialog(this, "Enter File Name");
+    }
+
+        @Override
+    public void windowOpened(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        LogGenerator.addLog("Map Creation Window Closed.");
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        LogGenerator.addLog("Map Creation Window Closed.");
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        
     }
 }

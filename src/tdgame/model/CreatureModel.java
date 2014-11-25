@@ -8,6 +8,7 @@ package tdgame.model;
 
 import java.awt.Rectangle;
 import tdgame.controller.CellContainerController;
+import towerdefensegame.LogGenerator;
 
 /**
  *
@@ -66,6 +67,7 @@ public class CreatureModel extends Rectangle{
         //this.setHealth(getHealth());
         setInGame(true);
         //System.out.println("Mob Id: "+getHealth());
+        LogGenerator.addLog("Mob Id:"+getMobID()+" get started moving.");
         return true;
     }
     
@@ -81,6 +83,8 @@ public class CreatureModel extends Rectangle{
             ccModel.getGcModelObj(yC, 0).getMoney(getMobID());
             configModel.killed +=1;
             configModel.total_killed +=1;
+            LogGenerator.addLog("Mob Killed, Mob Id :"+getMobID());
+            LogGenerator.addLog("Mob killing reward added to main amount.");
         }
         this.setHealth(0);
         return true;

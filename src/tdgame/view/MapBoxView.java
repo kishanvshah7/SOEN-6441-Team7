@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import tdgame.controller.MapBoxController;
+import towerdefensegame.LogGenerator;
 
 /**
  * This is GUI class of Map Box Module.
@@ -191,6 +192,8 @@ public class MapBoxView extends JPanel {
     public boolean setEntryPoint(int yC, int xC){
         if(xC != 0) {
             return false;
+        } else {
+            LogGenerator.addLog("Entry Point Set : ("+xC+","+yC+")");
         }
         for(int y=0;y<mbCon.getYBlockCount();y++){
             cellBtn[y][0].setBackground(Color.gray);
@@ -205,6 +208,7 @@ public class MapBoxView extends JPanel {
      * @param xC x coordinate
      */
     public void setPathPoint(int yC, int xC){
+        LogGenerator.addLog("Path Point Set : ("+xC+","+yC+")");
         int[][] temp = mbCon.getMapGirdArray();
         for(int x=0;x<mbCon.getXBlockCount();x++){
             for(int y=0;y<mbCon.getYBlockCount();y++){
@@ -225,7 +229,9 @@ public class MapBoxView extends JPanel {
     public boolean setExitPoint(int yC, int xC){
         if(xC != (this.xC-1) ) {
             return false;
-    	}
+    	} else {
+            LogGenerator.addLog("Exit Point Set : ("+xC+","+yC+")");
+        }
         for(int y=0;y<mbCon.getYBlockCount();y++){
             cellBtn[y][mbCon.getXBlockCount()-1].setBackground(Color.gray);
         }

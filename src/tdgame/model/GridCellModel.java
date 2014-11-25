@@ -7,7 +7,11 @@
 package tdgame.model;
 
 import java.awt.Rectangle;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import tdgame.view.PlayScreenView;
 
 /**
@@ -17,6 +21,9 @@ import tdgame.view.PlayScreenView;
 public class GridCellModel extends Rectangle{
     
     private Rectangle[] towerRange;
+    public String[] towerLog;
+    public int[] towerCKilled;
+    
     private int towerRangeSize = 100;
     private int gID;
     private int airID;
@@ -27,6 +34,12 @@ public class GridCellModel extends Rectangle{
     private boolean freeze = false;
     private boolean fire = false;
     private boolean firing = false;
+    
+    private int xC=0,yC=0;
+    
+    private String startTime;
+    private boolean startFlag = false;
+    private String endTime;
 
     /**
      * * This is constructor method for Grid Cell. It will set different properties for each grid cell.
@@ -41,11 +54,16 @@ public class GridCellModel extends Rectangle{
         Arrays.fill(MobList, 0);
         setBounds(x, y, width, height);
         towerRange = new Rectangle[configModel.airTowerLaser.length];
+        towerLog = new String[configModel.airTowerLaser.length];
+        towerCKilled = new int[configModel.airTowerLaser.length];
         for(int i=0;i<configModel.airTowerLaser.length;i++){
             towerRange[i] = new Rectangle(x - ((configModel.airTowerRanger[i])/2), y - ((configModel.airTowerRanger[i])/2), width + configModel.airTowerRanger[i], height + configModel.airTowerRanger[i]);
+            towerCKilled[i] = 0;
         }
         this.gID = gID;
         this.airID = airID;
+        //xC = (x/44);
+        //yC = (y/44);
     }
     
     public void physic(CreatureModel[] cModel){
@@ -77,6 +95,11 @@ public class GridCellModel extends Rectangle{
                             if(getTowerRange()[tid].intersects(cModel[i])){
                                 setFiring(true);
                                 shotMob = i;
+                                if(!startFlag){
+                                    startTime = getCurrentTime();
+                                    System.out.println("Start");
+                                    startFlag = true;
+                                }
                             }
                         }
                     }
@@ -98,8 +121,8 @@ public class GridCellModel extends Rectangle{
             }else {
                 loseFrame +=1;
             }
-           
             if(cModel[getShotMob()].isDead()){
+                towerCKilled[getAirID()-3]++;
                 setFiring(false);
                 shotMob = -1;
                 PlayScreenView.hasWon();
@@ -182,5 +205,12 @@ public class GridCellModel extends Rectangle{
      */
     public void setTowerRange(int i,Rectangle towerRange) {
         this.towerRange[i] = towerRange;
+    }
+    
+    public String getCurrentTime(){
+        Calendar cal = Calendar.getInstance();
+    	cal.getTime();
+    	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    	return sdf.format(cal.getTime());
     }
 }

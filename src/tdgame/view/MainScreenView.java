@@ -11,13 +11,16 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.*;
+import towerdefensegame.LogGenerator;
 
 /**
  * This is GUI class for Main Screen. It will show buttons(Play, Create Map, Exit).
  * @author Rahul K Kikani
  */
-public class MainScreenView extends JFrame {
+public class MainScreenView extends JFrame implements WindowListener {
     
     public static MainScreenPanel ms;
     JButton start_game;
@@ -31,7 +34,7 @@ public class MainScreenView extends JFrame {
         this.setTitle("Tower Defense Game");
         this.setSize(600, 600);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBackground(Color.DARK_GRAY);
         
         //
@@ -48,6 +51,7 @@ public class MainScreenView extends JFrame {
         this.add(map_creation);
         this.add(exit_btn);
         
+        this.addWindowListener(this);
     }
     
     /**
@@ -74,5 +78,44 @@ public class MainScreenView extends JFrame {
      */
     public void displayMessage(String str){
         JOptionPane.showMessageDialog(this, str);
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        LogGenerator.addLog("Game Closed");
+        LogGenerator.closeLog();
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        LogGenerator.addLog("Game Closed");
+        LogGenerator.closeLog();
+        System.exit(0);
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        
     }
 }

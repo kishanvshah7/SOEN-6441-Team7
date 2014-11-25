@@ -6,6 +6,7 @@
 
 package tdgame.model;
 
+import java.text.ParseException;
 import tdgame.controller.GridCellController;
 
 /**
@@ -17,7 +18,7 @@ public class CellContainerModel {
     private int yC = 10;
     private int cellPixels = 44;
     
-    private static GridCellModel[][] gcModel;
+    public static GridCellModel[][] gcModel;
     
     /**
      * this method is constructor for Cell Container Model. It will set xC and xY.
@@ -59,7 +60,7 @@ public class CellContainerModel {
      * Creation of creatures.
      * @param cModel array of creatures object
      */
-    public void physic(CreatureModel[] cModel){
+    public void physic(CreatureModel[] cModel) throws ParseException{
         for(int y=0;y<gcModel.length;y++){
             for(int x=0;x<gcModel[0].length;x++){
                 gcModel[y][x].physic(cModel);

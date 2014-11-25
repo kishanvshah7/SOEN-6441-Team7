@@ -20,7 +20,7 @@ public class configModel {
     public static int killed = 0;
     public static int total_killed = 0;
     public static int killsToWin = 5;
-    public static int maxLevel = 4;
+    public static int maxLevel = 2;
     public static boolean roundSlot = true;
     public static int creaturesNo = 5;
     public static int waveLap = 1;
@@ -67,5 +67,6 @@ public class configModel {
     public static Image[] happy = new Image[1];
     public static Image[] sad = new Image[1];
     
-    public static boolean gameOberFlag = false;
+    public static boolean gameOverFlag = false;
+    public static boolean gameWonFlag = false;
 }

@@ -6,6 +6,8 @@
 
 package tdgame.model;
 
+import towerdefensegame.LogGenerator;
+
 /**
  * This is model for Map Box Module.
  * @author Rahul K Kikani
@@ -159,6 +161,7 @@ public class MapBoxModel {
                 mapGirdArray[y][x] = 0;
           }
       }
+        LogGenerator.addLog("Map Grid Generated.");
     }
     
     /**
