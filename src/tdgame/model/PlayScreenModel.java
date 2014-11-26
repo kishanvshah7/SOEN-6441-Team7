@@ -57,7 +57,7 @@ public class PlayScreenModel {
             Scanner loadScanner = new Scanner(file);
             this.xC = loadScanner.nextInt();
             this.yC = loadScanner.nextInt();
-            gridCellArray = new int[getyC()][getxC()];
+            setGridCellArray(new int[getyC()][getxC()]);
             //System.out.println("MapCreationModel X: "+xC+" Y:"+yC);
              while(loadScanner.hasNext()){
                  Thread.sleep(100);
@@ -102,8 +102,10 @@ public class PlayScreenModel {
                     System.out.println("ExitPoint");
                     ccModel.setGcModelObj(y, x, 1, getGridCellArray()[y][x]);
                 }
-                else
+                else if(getGridCellArray()[y][x] == 0 || getGridCellArray()[y][x] == 1)
                     ccModel.setGcModelObj(y, x, getGridCellArray()[y][x],-1);
+                else
+                    ccModel.setGcModelObj(y, x, 0, getGridCellArray()[y][x]);
             }
             System.out.println("\n");
         }
@@ -155,5 +157,14 @@ public class PlayScreenModel {
      */
     public int[][] getGridCellArray() {
         return gridCellArray;
+    }
+
+    /**
+     * @param gridCellArray the gridCellArray to set
+     */
+    public void setGridCellArray(int[][] gridCellArray) {
+        this.xC = gridCellArray.length;
+        this.yC = gridCellArray[0].length;
+        this.gridCellArray = gridCellArray;
     }
 }

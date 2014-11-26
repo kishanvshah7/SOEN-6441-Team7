@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import tdgame.controller.PlayScreenController;
 import tdgame.controller.ShopController;
 import tdgame.model.CreatureModel;
+import tdgame.model.GridCellModel;
 import tdgame.model.configModel;
 import static tdgame.model.configModel.*;
 import towerdefensegame.*;
@@ -45,6 +46,7 @@ public class PlayScreenView extends JPanel implements Runnable {
     
     public static int winTime = 2000, winFrame =0;
     public Graphics w;
+    public static boolean gamePause = false;
     public Graphics getGraph(){
         return w;
     }
@@ -53,7 +55,7 @@ public class PlayScreenView extends JPanel implements Runnable {
      * This method will initialize GUI components for Play Screen.
      * @param j the GamePlay object
      */
-    public PlayScreenView(GamePlay j){
+    public PlayScreenView(LoadGame j){
         LogGenerator.addLog("Game Play Screen initialized.");
         final KeyController eventSource = new KeyController();
  
@@ -93,24 +95,69 @@ public class PlayScreenView extends JPanel implements Runnable {
      * @return successFlag
      */
     public boolean initCreatures(){
-        System.out.println("initCreatures");
-        LogGenerator.addLog("First Level get started");
-        LogGenerator.addLog(creaturesNo+" New Creatures Created.");
-        LogGenerator.addWaveLog("First Level get started");
-        LogGenerator.addWaveLog(creaturesNo+" New Creatures will be Created.");
-        LogGenerator.addWaveLog("Total Money:"+money);
-        LogGenerator.addWaveLog("Game Health:"+health);
-        if(psCont != null){
-            for(int i=0;i<Creatures.length;i++){
-                Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
-                //mobs[i].spawnMob(0);
+        if(configModel.level ==1){
+            System.out.println("initCreatures");
+            LogGenerator.addLog("First Level get started");
+            LogGenerator.addLog(creaturesNo+" New Creatures Created.");
+            LogGenerator.addWaveLog("First Level get started");
+            LogGenerator.addWaveLog(creaturesNo+" New Creatures will be Created.");
+            LogGenerator.addWaveLog("Total Money:"+money);
+            LogGenerator.addWaveLog("Game Health:"+health);
+            if(psCont != null){
+                for(int i=0;i<Creatures.length;i++){
+                    Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
+                    //mobs[i].spawnMob(0);
+                }
+                isFirst = false;
+                return true;
+            } else {
+                System.out.println("psCont not initialized");
+                return false;
             }
-            isFirst = false;
-            return true;
-        } else {
-            System.out.println("psCont not initialized");
-            return false;
+        } else if(GameLoadFlag) {
+            configModel.creaturesNo = configModel.creaturesLevel[configModel.level];
+            configModel.killsToWin = configModel.creaturesNo;
+            configModel.killed = 0;
+            LogGenerator.addLog("Game Loaded");
+            LogGenerator.addLog(creaturesNo+" New Creatures Created.");
+            LogGenerator.addWaveLog("Wave started: "+level);
+            LogGenerator.addWaveLog(creaturesNo+" New Creatures will be Created.");
+            LogGenerator.addWaveLog("Total Money:"+money);
+            LogGenerator.addWaveLog("Game Health:"+health);
+            Creatures = new CreatureModel[configModel.creaturesNo];
+            if(psCont != null){
+                for(int i=0;i<Creatures.length;i++){
+                    Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
+                    //mobs[i].spawnMob(0);
+                }
+                isFirst = false;
+                return true;
+            } else {
+                System.out.println("psCont not initialized");
+                return false;
+            }
         }
+        return true;
+    }
+    
+    public void saveGame(){
+        gamePause = true;
+        System.out.println("GamePaused");
+        LogGenerator.addLog("Game Saved");
+        GridCellModel[][] gcm = psCont.getCcModel().getGcModel();
+        int[][] temp = psCont.getTheModel().getGridCellArray();
+        for(int y=0;y<gcm.length;y++){
+            for(int x=0;x<gcm[0].length;x++){
+                System.out.println("("+y+", "+x+")="+gcm[y][x].getAirID());
+            }
+            System.out.println("\n");
+        }
+        for(int i=0;i<TowerLevel.length;i++)
+            System.out.println("T ID+Level"+(i+3)+"+"+TowerLevel[i]);
+        System.out.println("Health"+configModel.health);
+        System.out.println("Money"+configModel.money);
+        System.out.println("Level"+configModel.level);
+        gamePause = false;
     }
     
     /**
@@ -123,11 +170,11 @@ public class PlayScreenView extends JPanel implements Runnable {
             isWon = false;
         }
         if((configModel.health > 0 && checkLiveCreatures()) && !isWon){
-            configModel.creaturesNo = configModel.creaturesNo * 2;
+            saveGame();
+            configModel.level++;
+            configModel.creaturesNo = configModel.creaturesLevel[configModel.level];
             configModel.killsToWin = configModel.creaturesNo;
             configModel.killed = 0;
-            configModel.waveLap++;
-            configModel.level++;
             LogGenerator.addLog("Game Level Upgraded to : "+level);
             LogGenerator.addLog("new Creatures : "+configModel.creaturesNo);
             GameLogViewer.addText_Wjtp("==================================\n");
@@ -216,9 +263,11 @@ public class PlayScreenView extends JPanel implements Runnable {
             g.setColor(Color.white);
             psCont.getccDraw(g);
             
-            for(int i=0; i< Creatures.length;i++){
-                if(Creatures[i].isInGame()){
-                    cView.draw(Creatures[i], i, g);
+            if(Creatures.length > 0){
+                for(int i=0; i< Creatures.length;i++){
+                    if(Creatures[i].isInGame()){
+                        cView.draw(Creatures[i], i, g);
+                    }
                 }
             }
             
@@ -307,41 +356,48 @@ public class PlayScreenView extends JPanel implements Runnable {
     @Override
     public void run() {
         while(true){
-            
-            if(isFirst){
-                initCreatures();
-            }
-            
-            if(rFlag && !isFirst && !isWin){
-                try {
-                    psCont.getCcModel().physic(Creatures);
-                } catch (ParseException ex) {
-                    Logger.getLogger(PlayScreenView.class.getName()).log(Level.SEVERE, null, ex);
+            if(!gamePause){
+                if(isFirst){
+                    initCreatures();
                 }
-                mobSpawner();
-                for(int i=0;i<Creatures.length;i++){
-                    if(Creatures[i].isInGame()){
-                        Creatures[i].physic();
+
+                if(rFlag && !isFirst && !isWin){
+                    try {
+                        psCont.getCcModel().physic(Creatures);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(PlayScreenView.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
-                repaint();
-                try{
-                    gameLoop.sleep(1);
-                } catch (Exception e){
-                    System.out.println("Some Error");
-                }
-            } else {
-                if(isWin){
-                    if(winFrame >= winTime){
-                        if(configModel.level == configModel.maxLevel){
-                        }else{
-                            configModel.level +=1;
-                            isWin = false;
+                    mobSpawner();
+                    for(int i=0;i<Creatures.length;i++){
+                        if(Creatures[i].isInGame()){
+                            Creatures[i].physic();
                         }
-                        winFrame =0;
-                    }else {
-                        winFrame +=1;
                     }
+                    repaint();
+                    try{
+                        gameLoop.sleep(1);
+                    } catch (Exception e){
+                        System.out.println("Some Error");
+                    }
+                } else {
+                    if(isWin){
+                        if(winFrame >= winTime){
+                            if(configModel.level == configModel.maxLevel){
+                            }else{
+                                configModel.level +=1;
+                                isWin = false;
+                            }
+                            winFrame =0;
+                        }else {
+                            winFrame +=1;
+                        }
+                    }
+                }
+            }else {
+                try {
+                    gameLoop.sleep(1);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(PlayScreenView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

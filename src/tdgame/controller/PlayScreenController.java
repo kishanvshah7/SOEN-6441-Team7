@@ -22,7 +22,7 @@ import tdgame.view.ShopView;
  */
 public class PlayScreenController {
 
-    PlayScreenModel theModel;
+    private PlayScreenModel theModel;
     PlayScreenView theView;
     
     private CellContainerModel ccModel;
@@ -121,5 +121,12 @@ public class PlayScreenController {
      */
     public ShopModel getsModel() {
         return sModel;
+    }
+
+    /**
+     * @return the theModel
+     */
+    public PlayScreenModel getTheModel() {
+        return theModel;
     }
 }

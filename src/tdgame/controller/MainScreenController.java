@@ -15,6 +15,7 @@ import tdgame.model.MapCreationModel;
 import tdgame.view.MainScreenView;
 import tdgame.view.MapChooserView;
 import tdgame.view.MapCreationView;
+import towerdefensegame.LoadGame;
 import towerdefensegame.LogGenerator;
 
 /**
@@ -80,6 +81,12 @@ public class MainScreenController {
                 if(tempBtnStr.equals("Create Map")){
                     LogGenerator.addLog("Create Map button clicked.");
                     initMapCreationController();
+                }
+                if(tempBtnStr.equals("Load Game")){
+                    LogGenerator.addLog("Load Game clicked.");
+                    LoadGame lg = new LoadGame(10, 20);
+                    //theView.dispose();
+                    //System.exit(0);
                 }
 
                 if(tempBtnStr.equals("Exit")){

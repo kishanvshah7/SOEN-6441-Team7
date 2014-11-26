@@ -20,9 +20,10 @@ public class configModel {
     public static int killed = 0;
     public static int total_killed = 0;
     public static int killsToWin = 5;
-    public static int maxLevel = 2;
+    public static int maxLevel = 9;
     public static boolean roundSlot = true;
     public static int creaturesNo = 5;
+    public static int[] creaturesLevel = new int[]{0, 5, 5, 5, 40, 50, 60, 70, 80, 90, 100};
     public static int waveLap = 1;
     
     public static int level = 1;
@@ -69,4 +70,5 @@ public class configModel {
     
     public static boolean gameOverFlag = false;
     public static boolean gameWonFlag = false;
+    public static boolean GameLoadFlag = false;
 }

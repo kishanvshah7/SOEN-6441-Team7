@@ -10,6 +10,7 @@ package extra;
  *
  * @author Rahul K Kikani
  */
+import java.awt.GridBagConstraints;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,9 +19,32 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import tdgame.model.configModel;
  
 public class ReadXMLFile {
- 
+    private static int[][] GridArray;
+    
+    public ReadXMLFile(){
+        try {
+
+            File file = new File("SavedGame/Game1.xml");
+
+            DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
+                                 .newDocumentBuilder();
+
+            Document doc = dBuilder.parse(file);
+
+            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
+            if (doc.hasChildNodes()) {
+                printNote(doc.getChildNodes());
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
   public static void main(String[] args) {
  
     try {
@@ -61,6 +85,7 @@ public class ReadXMLFile {
                             Element eElement = (Element) xtempNode;
                             System.out.println("X: "+eElement.getAttribute("x"));
                             System.out.println("Y: "+eElement.getAttribute("y"));
+                            GridArray = new int[Integer.parseInt(eElement.getAttribute("y"))][Integer.parseInt(eElement.getAttribute("x"))];
                         }
                         
                         NodeList tilenodeList = xtempNode.getChildNodes();
@@ -69,6 +94,7 @@ public class ReadXMLFile {
                             if (jtempNode.hasAttributes()) {
                                 Element eElement = (Element) jtempNode;
                                 System.out.println("("+eElement.getAttribute("x")+","+eElement.getAttribute("x")+") = "+eElement.getAttribute("value"));
+                                GridArray[Integer.parseInt(eElement.getAttribute("y"))-1][Integer.parseInt(eElement.getAttribute("x"))-1] = Integer.parseInt(eElement.getAttribute("value"));
                             }
                         }
                     }
@@ -78,6 +104,7 @@ public class ReadXMLFile {
                         Node towerNode = towerList.item(x);
                         if (towerNode.hasAttributes()) {
                             Element eElement = (Element) towerNode;
+                            configModel.TowerLevel[Integer.parseInt(eElement.getAttribute("id"))-3] = Integer.parseInt(eElement.getAttribute("level"));
                             System.out.println("ID: "+eElement.getAttribute("id"));
                             System.out.println("Level: "+eElement.getAttribute("level"));
                         }
@@ -89,7 +116,20 @@ public class ReadXMLFile {
                         if(!towerNode.getNodeName().equals("#text"))
                         {
                             System.out.println("Name: "+towerNode.getNodeName());
-                            System.out.println("Val: "+towerNode.getTextContent());
+                            //System.out.println("Val: "+towerNode.getTextContent());
+                            if(towerNode.getNodeName().equals("level"))
+                            {
+                                int w = Integer.parseInt(towerNode.getTextContent().toString());
+                                configModel.level = w;
+                            }
+                            else if(towerNode.getNodeName().equals("health")){
+                                int w = Integer.parseInt(towerNode.getTextContent().toString());
+                                configModel.health = w;
+                            }
+                            else if (towerNode.getNodeName().equals("money")){
+                                int w = Integer.parseInt(towerNode.getTextContent().toString());
+                                configModel.money = w;
+                            }
                         }
                     }
                 } else if(tempNode.getNodeName().equals("loginfo")){
@@ -112,5 +152,12 @@ public class ReadXMLFile {
     }
  
   }
+
+    /**
+     * @return the GridArray
+     */
+    public static int[][] getGridArray() {
+        return GridArray;
+    }
  
 }

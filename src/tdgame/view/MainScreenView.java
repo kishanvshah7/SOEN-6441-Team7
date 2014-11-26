@@ -26,7 +26,7 @@ public class MainScreenView extends JFrame implements WindowListener {
     JButton start_game;
     JButton map_creation;
     JButton exit_btn;
-    
+    JButton load_btn;
     /**
      * This method will initialize GUI components like button and Main Screen Panel.
      */
@@ -41,6 +41,7 @@ public class MainScreenView extends JFrame implements WindowListener {
         start_game = new JButton("Play");
         map_creation = new JButton("Create Map");
         exit_btn = new JButton("Exit");
+        load_btn = new JButton("Load Game");
         
         this.setLayout(new FlowLayout(10));
         
@@ -49,6 +50,7 @@ public class MainScreenView extends JFrame implements WindowListener {
         
         this.add(start_game);
         this.add(map_creation);
+        this.add(load_btn);
         this.add(exit_btn);
         
         this.addWindowListener(this);
@@ -62,6 +64,7 @@ public class MainScreenView extends JFrame implements WindowListener {
         start_game.addActionListener(ListnerForButton);
         map_creation.addActionListener(ListnerForButton);
         exit_btn.addActionListener(ListnerForButton);
+        load_btn.addActionListener(ListnerForButton);
     }
     
     /**

@@ -1,23 +1,74 @@
 <?xml version="1.0"?>
 <game>
     <mapinfo>
-        <map x="2" y="2">
-            <Tile x="1" y="1" value="2"></Tile>
-            <Tile x="1" y="2" value="1"></Tile>
-            <Tile x="2" y="1" value="7"></Tile>
-            <Tile x="2" y="2" value="7"></Tile>
+        <map x="7" y="7">
+            <Tile x="1" y="1" value="7"></Tile>
+            <Tile x="1" y="2" value="5"></Tile>
+            <Tile x="1" y="3" value="0"></Tile>
+            <Tile x="1" y="4" value="0"></Tile>
+            <Tile x="1" y="5" value="0"></Tile>
+            <Tile x="1" y="6" value="0"></Tile>
+            <Tile x="1" y="7" value="0"></Tile>
+            
+            <Tile x="2" y="1" value="1"></Tile>
+            <Tile x="2" y="2" value="4"></Tile>
+            <Tile x="2" y="3" value="0"></Tile>
+            <Tile x="2" y="4" value="0"></Tile>
+            <Tile x="2" y="5" value="0"></Tile>
+            <Tile x="2" y="6" value="0"></Tile>
+            <Tile x="2" y="7" value="0"></Tile>
+            
+            <Tile x="3" y="1" value="1"></Tile>
+            <Tile x="3" y="2" value="5"></Tile>
+            <Tile x="3" y="3" value="0"></Tile>
+            <Tile x="3" y="4" value="0"></Tile>
+            <Tile x="3" y="5" value="0"></Tile>
+            <Tile x="3" y="6" value="0"></Tile>
+            <Tile x="3" y="7" value="0"></Tile>
+            
+            <Tile x="4" y="1" value="1"></Tile>
+            <Tile x="4" y="2" value="6"></Tile>
+            <Tile x="4" y="3" value="0"></Tile>
+            <Tile x="4" y="4" value="0"></Tile>
+            <Tile x="4" y="5" value="0"></Tile>
+            <Tile x="4" y="6" value="0"></Tile>
+            <Tile x="4" y="7" value="0"></Tile>
+            
+            <Tile x="5" y="1" value="1"></Tile>
+            <Tile x="5" y="2" value="3"></Tile>
+            <Tile x="5" y="3" value="0"></Tile>
+            <Tile x="5" y="4" value="0"></Tile>
+            <Tile x="5" y="5" value="0"></Tile>
+            <Tile x="5" y="6" value="0"></Tile>
+            <Tile x="5" y="7" value="0"></Tile>
+            
+            <Tile x="6" y="1" value="1"></Tile>
+            <Tile x="6" y="2" value="4"></Tile>
+            <Tile x="6" y="3" value="0"></Tile>
+            <Tile x="6" y="4" value="0"></Tile>
+            <Tile x="6" y="5" value="0"></Tile>
+            <Tile x="6" y="6" value="0"></Tile>
+            <Tile x="6" y="7" value="0"></Tile>
+            
+            <Tile x="7" y="1" value="8"></Tile>
+            <Tile x="7" y="2" value="5"></Tile>
+            <Tile x="7" y="3" value="0"></Tile>
+            <Tile x="7" y="4" value="0"></Tile>
+            <Tile x="7" y="5" value="0"></Tile>
+            <Tile x="7" y="6" value="0"></Tile>
+            <Tile x="7" y="7" value="0"></Tile>
         </map>
     </mapinfo>
     <towerinfo>
-        <tower id="3" level="1"></tower>
-        <tower id="4" level="1"></tower>
-        <tower id="5" level="1"></tower>
-        <tower id="6" level="1"></tower>
+        <tower id="3" level="2"></tower>
+        <tower id="4" level="2"></tower>
+        <tower id="5" level="2"></tower>
+        <tower id="6" level="2"></tower>
     </towerinfo>
     <gameinfo>
-        <level>1</level>
-        <health>3</health>
-        <money>150</money>
+        <level>2</level>
+        <health>2</health>
+        <money>100</money>
     </gameinfo>
     <loginfo>
         <item time="12" type="T">asdfasdf</item>
