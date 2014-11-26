@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<game>
+    <tileinfo>
+        <map x="2" y="2">
+            <Tile x="1" y="1" value="2"></Tile>
+            <Tile x="1" y="2" value="1"></Tile>
+            <Tile x="2" y="1" value="7"></Tile>
+            <Tile x="2" y="2" value="7"></Tile>
+        </map>
+    </tileinfo>
+    <mapinfo>
+        <modification create="time" lastModified="time"></modification>
+    </mapinfo>
+    <scoreinfo>
+        <item no="1">100</item>
+        <item no="2">90</item>
+        <item no="3">80</item>
+        <item no="4">70</item>
+        <item no="5">60</item>
+    </scoreinfo>
+    <playerinfo>
+        <item time="time" score="100"></item>
+    </playerinfo>
+    <loginfo>
+        <item time="12" type="T">asdfasdf</item>
+        <item time="13" type="W">asdfasdf</item>
+    </loginfo>
+</game>
