@@ -16,7 +16,7 @@ import towerdefensegame.GamePlay;
 public class PlayScreenViewTest {
 	
 	
-	GamePlay gptest = new GamePlay(new File("MapFilesTest/Path4.team7"), 5, 5);
+	GamePlay gptest = new GamePlay(new File("MapFilesTest/Path4.team7"), 5, 5, "GamePlay");
 	
 	PlayScreenView psviewtest = new PlayScreenView(gptest);
 	

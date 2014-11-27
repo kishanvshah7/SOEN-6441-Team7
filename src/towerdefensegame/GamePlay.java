@@ -6,6 +6,7 @@
 
 package towerdefensegame;
 
+import extra.ReadXMLFile;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.WindowEvent;
@@ -20,6 +21,7 @@ import tdgame.model.GridCellModel;
 import tdgame.model.PlayScreenModel;
 import tdgame.model.ShopModel;
 import tdgame.model.configModel;
+import static tdgame.model.configModel.GameLoadFlag;
 import tdgame.view.CellContainerView;
 import tdgame.view.GridCellView;
 import tdgame.view.PlayScreenView;
@@ -38,7 +40,7 @@ public class GamePlay extends JFrame implements WindowListener {
      * @param w Width of Play screen based on map size
      * @param h Height of Play screen based on map size
      */
-    public GamePlay(File f, int w, int h)
+    public GamePlay(File f, int w, int h, String type)
     {
         LogGenerator.addLog("Game Play Started.");
         int width = w*40 + 350;
@@ -49,7 +51,13 @@ public class GamePlay extends JFrame implements WindowListener {
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
         this.setBackground(Color.darkGray);
-        init_elements(f);
+        if(type.equals("GamePlay"))
+            init_elements(f);
+        else if(type.equals("GameLoad"))
+        {
+            GameLoadFlag = true;
+            init_elements_xml();
+        }
         this.addWindowListener(this);
     }
     
@@ -68,6 +76,47 @@ public class GamePlay extends JFrame implements WindowListener {
                             if(mv.isValid()){
                                 System.out.println("Map is Valid");
                                 configModel cModel = new configModel(); 
+                            
+                                psModel.initCellContainerModel();
+                                psModel.setGridCellVal();
+
+                                ShopModel sModel = new ShopModel(psModel.getStartX(),psModel.getStartY());
+                                ShopView sView = new ShopView();
+
+                                CellContainerView ccView = new CellContainerView();
+                                CellContainerModel ccModel = psModel.getCellContainerModel();
+
+                                GridCellView gcView = new GridCellView();
+                                GridCellModel[][] gcModel = ccModel.getGcModel();
+
+                                PlayScreenView psView = new PlayScreenView(this);
+                                add(psView);
+                                psCont = new PlayScreenController(psView, psModel, gcView, gcModel, ccView, ccModel, sView, sModel);
+                                psView.setController(getPsCont());
+                                psView.startGame();
+                                this.setVisible(true);
+                            }else{
+                                System.out.println("Map Is Invalid");
+                                JOptionPane.showMessageDialog(this,"Map is Invalid", null, WIDTH);
+                            }  
+                        }else{
+                            this.dispose();
+                            JOptionPane.showMessageDialog(this, "Invalid Map File", null, WIDTH);
+                        }
+    }
+    
+    
+    public void init_elements_xml()
+    {
+        this.setLayout(new GridLayout(1, 1, 0, 0));
+        
+        PlayScreenModel psModel = new PlayScreenModel();
+        psModel.setGridCellArray(ReadXMLFile.getGridArray());
+                        if(true){
+                            MapValidation mv = new MapValidation(psModel.getGridCellArray());
+                            if(mv.isValid()){
+                                System.out.println("Map is Valid");
+                                
                             
                                 psModel.initCellContainerModel();
                                 psModel.setGridCellVal();

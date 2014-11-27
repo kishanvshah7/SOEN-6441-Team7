@@ -6,6 +6,7 @@
 
 package tdgame.view;
 
+import extra.saveGameFile;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -56,6 +57,41 @@ public class PlayScreenView extends JPanel implements Runnable {
      * @param j the GamePlay object
      */
     public PlayScreenView(LoadGame j){
+        LogGenerator.addLog("Game Play Screen initialized.");
+        final KeyController eventSource = new KeyController();
+ 
+        // create an observer
+        final ShopController responseHandler = new ShopController();
+ 
+        // subscribe the observer to the event source
+        eventSource.addObserver(responseHandler);
+        
+        j.addMouseListener(eventSource);
+        j.addMouseMotionListener(eventSource);
+        for(int i=0;i<ground_level.length;i++){
+            ground_level[i] = new ImageIcon("resources/grass_tile1.png").getImage();
+            ground_level[i] = createImage(new FilteredImageSource(ground_level[i].getSource(), new CropImageFilter(0, 40*i, 40, 40)));
+        }
+        
+        for(int i=0;i<air_level.length;i++){
+            air_level[i] = new ImageIcon("resources/air_tile1.png").getImage();
+            air_level[i] = createImage(new FilteredImageSource(air_level[i].getSource(), new CropImageFilter(0, 40*i, 40, 40)));
+        }
+        
+        tileset_res[0] = new ImageIcon("resources/cell.png").getImage();
+        tileset_res[1] = new ImageIcon("resources/heart.png").getImage();
+        tileset_res[2] = new ImageIcon("resources/coin_icon.png").getImage();
+        tileset_mob[0] = new ImageIcon("resources/mob_level1.png").getImage();
+        fire[0] = new ImageIcon("resources/fire.gif").getImage();
+        ice[0] = new ImageIcon("resources/ice.png").getImage();
+        star[0] = new ImageIcon("resources/star.gif").getImage();
+        
+        happy[0] = new ImageIcon("resources/happy.gif").getImage();
+        sad[0] = new ImageIcon("resources/sad.gif").getImage();
+        LogGenerator.addLog("Basic Images are loaded successfully.");
+    }
+    
+    public PlayScreenView(GamePlay j){
         LogGenerator.addLog("Game Play Screen initialized.");
         final KeyController eventSource = new KeyController();
  
@@ -144,19 +180,12 @@ public class PlayScreenView extends JPanel implements Runnable {
         gamePause = true;
         System.out.println("GamePaused");
         LogGenerator.addLog("Game Saved");
+        saveGameFile.initFile();
         GridCellModel[][] gcm = psCont.getCcModel().getGcModel();
-        int[][] temp = psCont.getTheModel().getGridCellArray();
-        for(int y=0;y<gcm.length;y++){
-            for(int x=0;x<gcm[0].length;x++){
-                System.out.println("("+y+", "+x+")="+gcm[y][x].getAirID());
-            }
-            System.out.println("\n");
-        }
-        for(int i=0;i<TowerLevel.length;i++)
-            System.out.println("T ID+Level"+(i+3)+"+"+TowerLevel[i]);
-        System.out.println("Health"+configModel.health);
-        System.out.println("Money"+configModel.money);
-        System.out.println("Level"+configModel.level);
+        saveGameFile.mapInfo(gcm);
+        saveGameFile.towerInfo();
+        saveGameFile.gameInfo();
+        saveGameFile.saveFile();
         gamePause = false;
     }
     
@@ -170,8 +199,8 @@ public class PlayScreenView extends JPanel implements Runnable {
             isWon = false;
         }
         if((configModel.health > 0 && checkLiveCreatures()) && !isWon){
-            saveGame();
             configModel.level++;
+            saveGame();
             configModel.creaturesNo = configModel.creaturesLevel[configModel.level];
             configModel.killsToWin = configModel.creaturesNo;
             configModel.killed = 0;

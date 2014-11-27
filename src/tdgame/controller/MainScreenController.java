@@ -83,8 +83,8 @@ public class MainScreenController {
                     initMapCreationController();
                 }
                 if(tempBtnStr.equals("Load Game")){
-                    LogGenerator.addLog("Load Game clicked.");
-                    LoadGame lg = new LoadGame(10, 20);
+                    System.out.println("Load Game clicked.");
+                    GameChooser gc = new GameChooser(theView);
                     //theView.dispose();
                     //System.exit(0);
                 }

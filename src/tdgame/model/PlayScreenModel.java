@@ -58,15 +58,15 @@ public class PlayScreenModel {
             this.xC = loadScanner.nextInt();
             this.yC = loadScanner.nextInt();
             setGridCellArray(new int[getyC()][getxC()]);
-            //System.out.println("MapCreationModel X: "+xC+" Y:"+yC);
+            System.out.println("MapCreationModel X: "+xC+" Y:"+yC);
              while(loadScanner.hasNext()){
-                 Thread.sleep(100);
+                 Thread.sleep(1);
                  System.out.println("asdf");
                 for(int y=0;y<getyC();y++){
                     for(int x=0;x<getxC();x++){
                         int val = loadScanner.nextInt();
                         gridCellArray[y][x] = val;
-                        //System.out.println("XY X: "+x+" Y:"+y+" val:"+val);
+                        System.out.println("XY X: "+x+" Y:"+y+" val:"+val);
                     }
                 }
              }
@@ -163,8 +163,6 @@ public class PlayScreenModel {
      * @param gridCellArray the gridCellArray to set
      */
     public void setGridCellArray(int[][] gridCellArray) {
-        this.xC = gridCellArray.length;
-        this.yC = gridCellArray[0].length;
         this.gridCellArray = gridCellArray;
     }
 }

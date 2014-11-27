@@ -23,12 +23,28 @@ import tdgame.model.configModel;
  
 public class ReadXMLFile {
     private static int[][] GridArray;
+    private static int xC;
+    private static int yC;
+
+    /**
+     * @return the xC
+     */
+    public static int getxC() {
+        return xC;
+    }
+
+    /**
+     * @return the yC
+     */
+    public static int getyC() {
+        return yC;
+    }
     
-    public ReadXMLFile(){
+    public ReadXMLFile(File f){
         try {
 
-            File file = new File("SavedGame/Game1.xml");
-
+            File file = f;
+            saveGameFile.f = f;
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
                                  .newDocumentBuilder();
 
@@ -85,6 +101,8 @@ public class ReadXMLFile {
                             Element eElement = (Element) xtempNode;
                             System.out.println("X: "+eElement.getAttribute("x"));
                             System.out.println("Y: "+eElement.getAttribute("y"));
+                            xC = Integer.parseInt(eElement.getAttribute("x"));
+                            yC = Integer.parseInt(eElement.getAttribute("y"));
                             GridArray = new int[Integer.parseInt(eElement.getAttribute("y"))][Integer.parseInt(eElement.getAttribute("x"))];
                         }
                         

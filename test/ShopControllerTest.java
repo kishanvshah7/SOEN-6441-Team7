@@ -12,7 +12,7 @@ import towerdefensegame.GamePlay;
 
 public class ShopControllerTest {
 	
-	public GamePlay gptest = new GamePlay(new File("MapFiles/20 15.team7"), 5, 5);
+	public GamePlay gptest = new GamePlay(new File("MapFiles/20 15.team7"), 5, 5, "GamePlay");
         public ShopController sctest = gptest.getPsCont().getsCont();
         public ShopModel sModel = gptest.getPsCont().getsModel();
         
@@ -58,7 +58,7 @@ public class ShopControllerTest {
         @Test
 	public void testPlaceTower_replaceTower() {
             boolean exp = false;
-            boolean act = sctest.placeTower(5, 5, 0);
+            boolean act = sctest.placeTower(5, 5, 1);
             assertEquals(exp, act);
 	}
 

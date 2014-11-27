@@ -52,7 +52,7 @@ public class LoadGame extends JFrame implements WindowListener {
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
         this.setBackground(Color.darkGray);
-        gameFile = new ReadXMLFile();
+        gameFile = new ReadXMLFile(new File("SavedGame/Game1.xml"));
         GameLoadFlag = true;
         init_elements();
         this.addWindowListener(this);

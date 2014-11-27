@@ -62,7 +62,7 @@ public class MapChooserController {
                         PlayScreenModel psModel = new PlayScreenModel();
                         boolean temp = psModel.LoadMap(new File("MapFiles/"+theView.getSelectedFile()));
                         if(temp){
-                            GamePlay gp = new GamePlay(new File("MapFiles/"+theView.getSelectedFile()), psModel.getxC(), psModel.getyC());
+                            GamePlay gp = new GamePlay(new File("MapFiles/"+theView.getSelectedFile()), psModel.getxC(), psModel.getyC(), "GamePlay");
                             theView.setMSTOp(false);
                             theView.dispose();
                         }
