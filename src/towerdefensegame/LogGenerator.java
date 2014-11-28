@@ -73,7 +73,8 @@ public class LogGenerator {
                 Date date = new Date();
                 SimpleDateFormat ft =  new SimpleDateFormat ("dd.MM.yyyy hh_mm_ss a");
                 fileName = ft.format(date);
-                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Log/"+ft.format(date)+".log"), "utf-8"));
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Log/temp.log"), "utf-8"));
+//                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Log/"+ft.format(date)+".log"), "utf-8"));
                 fileFlag = true;
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(LogGenerator.class.getName()).log(Level.SEVERE, null, ex);

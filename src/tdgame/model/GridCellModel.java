@@ -97,7 +97,7 @@ public class GridCellModel extends Rectangle{
                                 shotMob = i;
                                 if(!startFlag){
                                     startTime = getCurrentTime();
-                                    System.out.println("Start");
+                                    //System.out.println("Start");
                                     startFlag = true;
                                 }
                             }

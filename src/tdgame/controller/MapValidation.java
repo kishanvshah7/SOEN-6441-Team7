@@ -54,8 +54,8 @@ public class MapValidation {
         final_array = GridA;
         configModel.gridX = height;
         configModel.gridY = width;
-        System.out.println("gridX"+configModel.gridX);
-        System.out.println("gridY"+configModel.gridY);
+        //System.out.println("gridX"+configModel.gridX);
+        //System.out.println("gridY"+configModel.gridY);
         for(int y=0;y < width; y++){
                     for(int x=0;x < height; x++){
                         GridArray[y][x] = GridA[y][x];
@@ -165,7 +165,7 @@ public class MapValidation {
      * This method will moved pointer to up.
      */
     public void up(){
-        System.out.println(""+flag.equals("d"));
+        //System.out.println(""+flag.equals("d"));
         if(!flag.equals("d") && !flag.equals("e" ) && !flag.equals("f")){
                 flag = "u";
                 if(checkUp() == 1){
@@ -315,9 +315,9 @@ public class MapValidation {
     public void setArray(){
         for(int y = 0;y < width; y++){
                     for(int x=0;x < height; x++){
-                        System.out.print("  "+GridArray_temp[y][x]);
+                        //System.out.print("  "+GridArray_temp[y][x]);
                     }
-                    System.out.println("");
+                    //System.out.println("");
                 }
         for(int y=0;y < width ; y++){
                         for(int x=0;x < height; x++){

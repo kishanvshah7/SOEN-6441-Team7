@@ -6,8 +6,11 @@
 
 package tdgame.model;
 
+import extra.mapReader;
 import java.io.File;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import tdgame.controller.MapBoxController;
 
 /**
@@ -89,5 +92,33 @@ public class MapCreationModel {
              System.out.println("Hey, Somtething is wrong in file.");
              return false;
          }
+    }
+    
+    /**
+     * This method reads map file.
+     * @param mbCon the object of Map Box Controller
+     * @param name the name of file
+     * @param path the path of file
+     * @return file validation result
+     */
+    public boolean readFile_XML(MapBoxController mbCon, String name, File path){
+        
+        mapReader mr = new mapReader();
+        if(mr.loadmapReader(path)){
+            mbCon.setXBlockCount(mr.getxC());
+                mbCon.setYBlockCount(mr.getyC());
+                mbCon.setGridArray();
+                
+                for(int y=0;y<mr.getyC();y++){
+                    for(int x=0;x<mr.getxC();x++){
+                        mbCon.setmapGirdArrayElementF(y, x, mr.getGridArray()[y][x]);
+                    }
+                }
+            mbCon.setFileFlag(true);
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 }

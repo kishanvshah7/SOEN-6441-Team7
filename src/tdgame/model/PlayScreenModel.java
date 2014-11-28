@@ -6,9 +6,13 @@
 
 package tdgame.model;
 
+import extra.mapReader;
+import extra.saveGameFile;
 import java.awt.Image;
 import java.awt.Point;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 /**
  * This is model for Play Screen Module.
@@ -66,23 +70,45 @@ public class PlayScreenModel {
                     for(int x=0;x<getxC();x++){
                         int val = loadScanner.nextInt();
                         gridCellArray[y][x] = val;
-                        System.out.println("XY X: "+x+" Y:"+y+" val:"+val);
+                        //System.out.println("XY X: "+x+" Y:"+y+" val:"+val);
                     }
                 }
              }
-             System.out.println("ABCXD");
-            for(int y=0;y<getyC();y++){
-                for(int x=0;x<getxC();x++){
-                    System.out.print(getGridCellArray()[y][x]+" ");
-                }
-                System.out.println("\n");
-            }
+//            System.out.println("ABCXD");
+//            for(int y=0;y<getyC();y++){
+//                for(int x=0;x<getxC();x++){
+//                    System.out.print(getGridCellArray()[y][x]+" ");
+//                }
+//                System.out.println("\n");
+//            }
              loadScanner.close();
              return true;
          } catch(Exception e){
              System.out.println("Hey Buddy, Somtething is wrong in file.");
              return false;
          }
+    }
+    
+        /**
+     * This method load file, validate the map and trigger the view to draw map.
+     * @param file map file path.
+     * @return return true if map file is valid.
+     */
+    public boolean LoadMap_XML(File file) {
+        mapReader sem = new mapReader();
+        boolean result = sem.loadmapReader(file);
+        if(result){
+            Date date = new Date();
+            SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy hh_mm_ss a");
+            //System.out.println("" + ft.format(date));
+            gridCellArray = sem.getGridArray();
+            this.xC = sem.getxC();
+            this.yC = sem.getyC();
+            saveGameFile.f = new File("SavedGame/"+file.getName());
+            sem.savedTime = ft.format(date);
+            //System.out.println("savedTime Set");
+        }
+        return result;
     }
 
     /**

@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tdgame.controller;
 
+import extra.mapReader;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import tdgame.model.MapBoxModel;
@@ -21,94 +24,103 @@ import towerdefensegame.LogGenerator;
 
 /**
  * This Class will bind and initialize Model-View of Map Box Module.
+ *
  * @author Rahul K Kikani
  */
 public class MapBoxController {
-    
+
     MapBoxView theView;
     MapBoxModel theModel;
-    
+
     /**
      * This method is constructor.
      */
-    public MapBoxController(){
+    public MapBoxController() {
         this.theModel = new MapBoxModel();
         this.theView = new MapBoxView(this);
     }
-    
+
     /**
      * This method will return MapBoxView object
+     *
      * @return MapBoxView object
      */
-    public MapBoxView getView(){
-        return this.theView = new MapBoxView(this,theModel.getXBlockCount(),theModel.getYBlockCount());
+    public MapBoxView getView() {
+        return this.theView = new MapBoxView(this, theModel.getXBlockCount(), theModel.getYBlockCount());
     }
-    
+
     /**
      * This method will set MapBoxView object
+     *
      * @param mbView the MapBoxView object
      */
-    public void updateView(MapBoxView mbView){
+    public void updateView(MapBoxView mbView) {
         this.theView = mbView;
     }
-    
+
     /**
      * This method will call getXBlockCount() from MapBoxModel
+     *
      * @return xBockCount
      */
-    public int getXBlockCount(){
+    public int getXBlockCount() {
         return theModel.getXBlockCount();
     }
-    
+
     /**
      * This method will call getYBlockCount() from MapBoxModel
+     *
      * @return yBockCount
      */
-    public int getYBlockCount(){
+    public int getYBlockCount() {
         return theModel.getYBlockCount();
     }
-    
+
     /**
-     * This method will call setXBlockCount() from MapBoxModel and set xBlockCount
+     * This method will call setXBlockCount() from MapBoxModel and set
+     * xBlockCount
+     *
      * @param x xBockCount
      */
-    public void setXBlockCount(int x){
+    public void setXBlockCount(int x) {
         theModel.setXBlockCount(x);
     }
-    
+
     /**
-     * This method will call setYBlockCount() from MapBoxModel and set yBlockCount
+     * This method will call setYBlockCount() from MapBoxModel and set
+     * yBlockCount
+     *
      * @param y yBockCount
      */
-    public void setYBlockCount(int y){
+    public void setYBlockCount(int y) {
         theModel.setYBlockCount(y);
     }
-    
+
     /**
      * This method will call setGridArray() from MapBoxModel
      */
-    public void setGridArray(){
+    public void setGridArray() {
         theModel.setGridArray();
     }
-    
-     /**
+
+    /**
      * This method will call setEntryPointFlag() from MapBoxView
      */
-    public void setEntryPointFlag(){
+    public void setEntryPointFlag() {
         theView.setEntryPointFlag();
     }
-    
+
     /**
      * This method will call setPathPointFlag() from MapBoxView
      */
-    public void setPathPointFlag(){
+    public void setPathPointFlag() {
         theView.setPathPointFlag();
     }
-    
+
     /**
      * This method will call setExitPointFlag() from MapBoxView
      */
-    public void setExitPointFlag(){
+    public void setExitPointFlag() {
         theView.setExitPointFlag();
     }
 
@@ -118,145 +130,188 @@ public class MapBoxController {
     public void setBtnGridClickListner() {
         this.theView.addButtonClickEventListner(new ButtonActionDetector());
     }
-    
+
     /**
-     * This method will return Exit Point(y index) and call getExitPointData() from MapBoxModel
+     * This method will return Exit Point(y index) and call getExitPointData()
+     * from MapBoxModel
+     *
      * @return the Exit Point(y index)
      */
-    public int getExitPointData(){
+    public int getExitPointData() {
         return this.theModel.getExitPointData();
     }
-    
+
     /**
-     * This method will return Entry Point(y index) and call getEntryPointData() from MapBoxModel
+     * This method will return Entry Point(y index) and call getEntryPointData()
+     * from MapBoxModel
+     *
      * @return the Entry Point(y index)
      */
-    public int getEentryPointData(){
+    public int getEentryPointData() {
         return this.theModel.getEntryPointData();
     }
-    
+
     /**
-     * This method will return Map Gird Array and call getMapGirdArray() from MapBoxModel
-     * @return Map Gird Array 
+     * This method will return Map Gird Array and call getMapGirdArray() from
+     * MapBoxModel
+     *
+     * @return Map Gird Array
      */
-    public int[][] getMapGirdArray(){
+    public int[][] getMapGirdArray() {
         return this.theModel.getMapGirdArray();
     }
-    
+
     /**
-     * this method will set cell value with respect to x,y index in grid cell array
+     * this method will set cell value with respect to x,y index in grid cell
+     * array
+     *
      * @param y y index
      * @param x x index
      * @param val value of cell
      */
-    public void setmapGirdArrayElement(int y, int x, int val){
+    public void setmapGirdArrayElement(int y, int x, int val) {
         this.theModel.setmapGirdArrayElement(y, x, val);
     }
-    
+
     /**
-     * this method will set cell value with respect to x,y index in grid cell array
+     * this method will set cell value with respect to x,y index in grid cell
+     * array
+     *
      * @param y y index
      * @param x x index
      * @param val value of cell
      */
-    public void setmapGirdArrayElementF(int y, int x, int val){
+    public void setmapGirdArrayElementF(int y, int x, int val) {
         this.theModel.setmapGirdArrayElementF(y, x, val);
     }
-    
+
     /**
-     * this method will return cell value with respect to x,y index of grid cell array
+     * this method will return cell value with respect to x,y index of grid cell
+     * array
+     *
      * @param x x index
      * @param y y index
      * @return cell value
      */
-    public int getmapGirdArrayElement(int x, int y){
+    public int getmapGirdArrayElement(int x, int y) {
         return this.theModel.getmapGirdArrayElement(x, y);
     }
-    
+
     /**
      * this method will return file load flag
+     *
      * @return the file load flag
      */
-    public boolean getFileFlag(){
+    public boolean getFileFlag() {
         return this.theModel.getFileFlag();
     }
-    
+
     /**
-     * This method will set File Flag 
+     * This method will set File Flag
+     *
      * @param b the file flag
      */
-    public void setFileFlag(boolean b){
+    public void setFileFlag(boolean b) {
         this.theModel.setFileFlag(b);
     }
 
     /**
      * This method will validate user path.
+     *
      * @param ga the Grid array
      * @return the valid flag
      */
-    public String validPath(int[][] ga){
+    public String validPath(int[][] ga) {
         MapValidation mapV = new MapValidation(ga);
-        System.out.println("Path Validation: "+mapV.isValid());
+        System.out.println("Path Validation: " + mapV.isValid());
         LogGenerator.addLog("Map Validation");
-        if(mapV.isValid()){            
+        if (mapV.isValid()) {
             //ga = mapV.getFinal_array();
             LogGenerator.addLog("Valid Map");
             return "Done";
-        }else{
+        } else {
             LogGenerator.addLog("Invalid Map");
             return "Invalid";
         }
     }
-    
+
     /**
      * This method will save map in file.
+     *
      * @param str file name
      */
-    public void saveMap(String str){
+    public void saveMap(String str) {
         Writer writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(
-            new FileOutputStream("MapFiles/"+str+".team7"), "utf-8"));
-            writer.write(theModel.getXBlockCount()+" "+theModel.getYBlockCount());
+                    new FileOutputStream("MapFiles/" + str + ".team7"), "utf-8"));
+            writer.write(theModel.getXBlockCount() + " " + theModel.getYBlockCount());
             writer.write(System.getProperty("line.separator"));
-            for(int y=0;y<theModel.getYBlockCount();y++){
-                for(int x=0;x<theModel.getXBlockCount();x++){                
-                    writer.write(theModel.getmapGirdArrayElement(y, x)+" ");
+            for (int y = 0; y < theModel.getYBlockCount(); y++) {
+                for (int x = 0; x < theModel.getXBlockCount(); x++) {
+                    writer.write(theModel.getmapGirdArrayElement(y, x) + " ");
                 }
                 writer.write(System.getProperty("line.separator"));
             }
-            LogGenerator.addLog("Map Saved : "+str+".team7");
+            LogGenerator.addLog("Map Saved : " + str + ".team7");
         } catch (IOException ex) {
         } finally {
-           try {writer.close();} catch (Exception ex) {}
+            try {
+                writer.close();
+            } catch (Exception ex) {
+            }
         }
     }
-    
+
+    /**
+     * This method will save map in file.
+     *
+     * @param str file name
+     */
+    public void saveMap_XML(String str, String type) {
+        mapReader sem = new mapReader();
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy hh_mm_ss a");
+        System.out.println("" + ft.format(date));
+        sem.lastmodifiedDate = "[" + ft.format(date) + "]";
+        if (type.equals("Loaded")) {
+
+        } else if (type.equals("New")) {
+            sem.mapFile = new File("MapFiles/" + str + ".team7");
+            sem.createDate = "[" + ft.format(date) + "]";
+        }
+        sem.initFile();
+        sem.mapInfo(this.getMapGirdArray());
+        sem.mapEInfo();
+        sem.scoreInfo();
+        sem.playerInfo();
+        sem.saveFile();
+    }
+
     /**
      * This class will perform action based on buttons pressed in Map Box GUI.
      */
-    class ButtonActionDetector implements ActionListener{
+    class ButtonActionDetector implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             String tempBtnStr = e.getActionCommand();
-            if(e.getSource() instanceof JButton)
-            {
-                String btnName = ((JComponent)e.getSource()).getName();
-                System.out.println("You Clicked Grid."+btnName);
+            if (e.getSource() instanceof JButton) {
+                String btnName = ((JComponent) e.getSource()).getName();
+                System.out.println("You Clicked Grid." + btnName);
                 String[] temp = new String[2];
                 temp = btnName.split("_");
                 int x = Integer.parseInt(temp[0]);
                 int y = Integer.parseInt(temp[1]);
-                System.out.println("X: "+x+" Y:"+y);
-                if(x==0){
+                System.out.println("X: " + x + " Y:" + y);
+                if (x == 0) {
                     theView.setEntryPoint(y, x);
-                    theModel.setmapGirdArrayElement( y, x, 7);
-                }else if(x==(theModel.getXBlockCount()-1)){
+                    theModel.setmapGirdArrayElement(y, x, 7);
+                } else if (x == (theModel.getXBlockCount() - 1)) {
                     theView.setExitPoint(y, x);
-                    theModel.setmapGirdArrayElement( y, x, 8);
-                }else if(x>0 && y <= (theModel.getYBlockCount())){
-                    theModel.setmapGirdArrayElement( y, x, 1);
+                    theModel.setmapGirdArrayElement(y, x, 8);
+                } else if (x > 0 && y <= (theModel.getYBlockCount())) {
+                    theModel.setmapGirdArrayElement(y, x, 1);
                     theView.setPathPoint(y, x);
                 }
             }

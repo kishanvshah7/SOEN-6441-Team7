@@ -146,7 +146,7 @@ public class MapBoxModel {
      * this method will return Grid Map Array
      * @return the Grid Map Array
      */
-    public int[][] getMapGirdArray(){
+    public static int[][] getMapGirdArray(){
         return mapGirdArray;
     }
     

@@ -6,6 +6,7 @@
 
 package tdgame.view;
 
+import extra.mapReader;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -98,5 +99,13 @@ public class ShopView {
                 g.drawString("Tower reached max Level", sModel.btn_health.x + 5, sModel.btn_health.height + 235);
             }
         }
+            g.setColor(new Color(255, 255, 255));
+            g.drawRect(sModel.button[0].x - 5, 290, 226, 75);
+            g.drawString("Top Score",sModel.button[0].x + 60, 305);
+            g.drawString("1. "+mapReader.topScore[0],sModel.button[0].x + 5, 320);
+            g.drawString("2. "+mapReader.topScore[1],sModel.button[0].x + 110, 320);
+            g.drawString("3. "+mapReader.topScore[2],sModel.button[0].x + 5, 340);
+            g.drawString("4. "+mapReader.topScore[3],sModel.button[0].x + 110, 340);
+            g.drawString("5. "+mapReader.topScore[4],sModel.button[0].x + 5, 360);
     }
 }

@@ -6,6 +6,7 @@
 
 package tdgame.view;
 
+import extra.mapReader;
 import extra.saveGameFile;
 import java.awt.Color;
 import java.awt.Font;
@@ -14,15 +15,20 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
+import java.io.File;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import tdgame.controller.PlayScreenController;
 import tdgame.controller.ShopController;
 import tdgame.model.CreatureModel;
 import tdgame.model.GridCellModel;
+import tdgame.model.MapBoxModel;
 import tdgame.model.configModel;
 import static tdgame.model.configModel.*;
 import towerdefensegame.*;
@@ -48,6 +54,7 @@ public class PlayScreenView extends JPanel implements Runnable {
     public static int winTime = 2000, winFrame =0;
     public Graphics w;
     public static boolean gamePause = false;
+    
     public Graphics getGraph(){
         return w;
     }
@@ -186,7 +193,24 @@ public class PlayScreenView extends JPanel implements Runnable {
         saveGameFile.towerInfo();
         saveGameFile.gameInfo();
         saveGameFile.saveFile();
+        updateScore();
         gamePause = false;
+    }
+    
+    public void updateScore(){
+        mapReader sem = new mapReader();
+        sem.updateScore(configModel.money);
+    }
+    
+    public void updateMapFile(){
+        mapReader sem = new mapReader();
+        sem.updateScore(configModel.money);
+        sem.initFile();
+        sem.mapInfo(psCont.getTheModel().getGridCellArray());
+        sem.mapEInfo();
+        sem.scoreInfo();
+        sem.playerInfo();
+        sem.saveFile();
     }
     
     /**
@@ -308,6 +332,7 @@ public class PlayScreenView extends JPanel implements Runnable {
             {
                 LogGenerator.addLog("User Won Game");
                 System.out.println("Congratulations");
+                updateMapFile();
             }
             gameWonFlag = true;
             Point Cp= GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
@@ -327,6 +352,13 @@ public class PlayScreenView extends JPanel implements Runnable {
             g.drawString("Level: "+(level-1), Cp.x/2 - 80, Cp.y/2 + 20);
             g.drawString("Killed: "+total_killed, Cp.x/2 - 80, Cp.y/2 + 40);
             g.drawString("Earned: "+money, Cp.x/2 - 80, Cp.y/2 + 60);
+            
+            g.drawString("Top Score",Cp.x/2 - 80, Cp.y/2 + 80);
+            g.drawString("1. "+mapReader.topScore[0],Cp.x/2 - 70, Cp.y/2 + 100);
+            g.drawString("2. "+mapReader.topScore[1],Cp.x/2 - 70, Cp.y/2 + 115);
+            g.drawString("3. "+mapReader.topScore[2],Cp.x/2 - 70, Cp.y/2 + 130);
+            g.drawString("4. "+mapReader.topScore[3],Cp.x/2 - 70, Cp.y/2 + 145);
+            g.drawString("5. "+mapReader.topScore[4],Cp.x/2 - 70, Cp.y/2 + 160);
         }
         
         if(isGameOver()){
@@ -336,6 +368,7 @@ public class PlayScreenView extends JPanel implements Runnable {
                 money = 0;
                 System.out.println("Game Over");
                 LogGenerator.addLog("User lost game.");
+                updateMapFile();
             }
             gameOverFlag = true;
             Point Cp= GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
@@ -355,6 +388,13 @@ public class PlayScreenView extends JPanel implements Runnable {
             g.drawString("Level: "+(level-1), Cp.x/2 - 80, Cp.y/2 + 20);
             g.drawString("Killed: "+total_killed, Cp.x/2 - 80, Cp.y/2 + 40);
             g.drawString("Earned: "+total_earned, Cp.x/2 - 80, Cp.y/2 + 60);
+            
+            g.drawString("Top Score",Cp.x/2 - 80, Cp.y/2 + 80);
+            g.drawString("1. "+mapReader.topScore[0],Cp.x/2 - 70, Cp.y/2 + 100);
+            g.drawString("2. "+mapReader.topScore[1],Cp.x/2 - 70, Cp.y/2 + 115);
+            g.drawString("3. "+mapReader.topScore[2],Cp.x/2 - 70, Cp.y/2 + 130);
+            g.drawString("4. "+mapReader.topScore[3],Cp.x/2 - 70, Cp.y/2 + 145);
+            g.drawString("5. "+mapReader.topScore[4],Cp.x/2 - 70, Cp.y/2 + 160);
         }
     }
     

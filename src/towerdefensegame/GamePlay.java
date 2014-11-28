@@ -7,6 +7,7 @@
 package towerdefensegame;
 
 import extra.ReadXMLFile;
+import extra.mapReader;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.WindowEvent;
@@ -34,6 +35,7 @@ import tdgame.view.ShopView;
 public class GamePlay extends JFrame implements WindowListener {
     
     private PlayScreenController psCont;
+    private PlayScreenModel psModel;
     /**
      * This method will initialize JFrame and set some basic properties(Title, Size, Background Color, Location).
      * @param f Map file which is selected by user from list box.
@@ -69,8 +71,8 @@ public class GamePlay extends JFrame implements WindowListener {
     {
         this.setLayout(new GridLayout(1, 1, 0, 0));
         
-        PlayScreenModel psModel = new PlayScreenModel();
-                        boolean temp = psModel.LoadMap(f);
+         psModel = new PlayScreenModel();
+                        boolean temp = psModel.LoadMap_XML(f);
                         if(temp){
                             MapValidation mv = new MapValidation(psModel.getGridCellArray());
                             if(mv.isValid()){
@@ -110,14 +112,13 @@ public class GamePlay extends JFrame implements WindowListener {
     {
         this.setLayout(new GridLayout(1, 1, 0, 0));
         
-        PlayScreenModel psModel = new PlayScreenModel();
+        psModel = new PlayScreenModel();
         psModel.setGridCellArray(ReadXMLFile.getGridArray());
                         if(true){
                             MapValidation mv = new MapValidation(psModel.getGridCellArray());
                             if(mv.isValid()){
                                 System.out.println("Map is Valid");
                                 
-                            
                                 psModel.initCellContainerModel();
                                 psModel.setGridCellVal();
 
@@ -164,6 +165,14 @@ public class GamePlay extends JFrame implements WindowListener {
         LogGenerator.addLog("Game Closed");
         LogGenerator.closeLog();
         LogGenerator.towerLog();
+        mapReader sem = new mapReader();
+        sem.initFile();
+        sem.mapInfo(psModel.getGridCellArray());
+        sem.mapEInfo();
+        sem.scoreInfo();
+        sem.playerInfo();
+        sem.saveFile();
+        
         System.exit(0);
     }
 
@@ -173,6 +182,15 @@ public class GamePlay extends JFrame implements WindowListener {
         LogGenerator.addLog("Game Closed");
         LogGenerator.closeLog();
         LogGenerator.towerLog();
+        
+        mapReader sem = new mapReader();
+        sem.initFile();
+        sem.mapInfo(psModel.getGridCellArray());
+        sem.mapEInfo();
+        sem.scoreInfo();
+        sem.playerInfo();
+        sem.saveFile();
+        
         System.exit(0);
     }
 

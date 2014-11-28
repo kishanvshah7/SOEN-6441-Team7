@@ -78,7 +78,7 @@ public class ShopController implements Observer {
         if(ccCont.getgcModelObj(y, x).getgID() != 11 && ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir){
             ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
             configModel.money = configModel.money - sModel.getButtonPrice(priceID);
-            System.out.println("Tower Placed"+sModel.getHeldID());
+            //System.out.println("Tower Placed"+sModel.getHeldID());
             LogGenerator.addLog("Tower Id:"+sModel.getHeldID()+" placed at ("+y+","+x+")");
             ccCont.getgcModelObj(y, x).towerLog[sModel.getHeldID()-3] = LogGenerator.getLogTime()+"Tower Placed at ("+y+","+x+")\n";
             LogGenerator.addCollectiveTowerLog("Tower Placed at ("+y+","+x+")\n");
@@ -125,9 +125,9 @@ public class ShopController implements Observer {
      */
     public boolean isTowerHere(int y, int x){
         for(int i=0;i<configModel.airTowerLaser.length;i++){
-            System.out.println("Tower Id: "+ccCont.getgcModelObj(y, x).getAirID()+"-"+configModel.airTowerLaser[i]);
+            //System.out.println("Tower Id: "+ccCont.getgcModelObj(y, x).getAirID()+"-"+configModel.airTowerLaser[i]);
             if(ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]){
-                System.out.println("Tower Is Here");
+                //System.out.println("Tower Is Here");
                 LogGenerator.addLog("Tower Inspection window showed for Tower:"+configModel.airTowerLaser[i]+" at ("+y+","+x+")");
                 sModel.setTowerID(i);
                 sModel.setTowerInfo(true);
@@ -184,10 +184,10 @@ public class ShopController implements Observer {
             
             if(sModel.towerUpgrade.contains(configModel.mse)){
                 if(sModel.isTowerInfo()){
-                    System.out.println("Tower Info");
+                    //System.out.println("Tower Info");
                     if(configModel.TowerLevel[sModel.getTowerID()] < 5){
                         if(configModel.money >= configModel.TowerPrice[sModel.getTowerID()]){
-                            System.out.println("Tower Upgrade: "+sModel.getTowerID());
+                            //System.out.println("Tower Upgrade: "+sModel.getTowerID());
                             
                             if(sModel.getTowerID() == 2){
                                 configModel.TowerFiringRate[sModel.getTowerID()] += 5;

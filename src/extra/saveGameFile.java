@@ -59,12 +59,12 @@ public class saveGameFile {
         // set attribute to map element
         map.setAttribute("y", gcm.length+"");
         map.setAttribute("x", gcm[0].length+"");
-        map.setAttribute("file", configModel.mapFile);
+        map.setAttribute("file", f.getName());
 
         //loop start
-        for(int x=0;x<gcm.length;x++){
-            for(int y=0;y<gcm[0].length;y++){
-                System.out.println("("+y+", "+x+")="+gcm[y][x].getAirID());
+        for(int x=0;x<gcm[0].length;x++){
+            for(int y=0;y<gcm.length;y++){
+                //System.out.println("("+y+", "+x+")="+gcm[y][x].getAirID());
                 // tile elements
                 Element tile = doc.createElement("tile");
                 map.appendChild(tile);

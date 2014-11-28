@@ -10,13 +10,13 @@ package extra;
  *
  * @author Rahul K Kikani
  */
-import java.awt.GridBagConstraints;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import tdgame.model.configModel;
@@ -103,6 +103,11 @@ public class ReadXMLFile {
                             System.out.println("Y: "+eElement.getAttribute("y"));
                             xC = Integer.parseInt(eElement.getAttribute("x"));
                             yC = Integer.parseInt(eElement.getAttribute("y"));
+                            mapReader.mapFile = new File("MapFiles/"+eElement.getAttribute("file"));
+                            Date date = new Date();
+                            SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy hh_mm_ss a");
+                            mapReader.loadmapReader(mapReader.mapFile);
+                            mapReader.savedTime = ft.format(date);
                             GridArray = new int[Integer.parseInt(eElement.getAttribute("y"))][Integer.parseInt(eElement.getAttribute("x"))];
                         }
                         
@@ -123,6 +128,10 @@ public class ReadXMLFile {
                         if (towerNode.hasAttributes()) {
                             Element eElement = (Element) towerNode;
                             configModel.TowerLevel[Integer.parseInt(eElement.getAttribute("id"))-3] = Integer.parseInt(eElement.getAttribute("level"));
+                            int level = Integer.parseInt(eElement.getAttribute("level"));
+                            if(level !=1){
+                                configModel.airTowerRanger[Integer.parseInt(eElement.getAttribute("id"))-3] += 20*level;
+                            }
                             System.out.println("ID: "+eElement.getAttribute("id"));
                             System.out.println("Level: "+eElement.getAttribute("level"));
                         }
