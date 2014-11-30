@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tdgame.model;
 
 import java.awt.Rectangle;
@@ -16,39 +15,42 @@ import tdgame.view.PlayScreenView;
 
 /**
  * This is model for Grid Cells Module.
+ *
  * @author Rahul K Kikani
  */
-public class GridCellModel extends Rectangle{
-    
+public class GridCellModel extends Rectangle {
+
     private Rectangle[] towerRange;
     public String[] towerLog;
     public int[] towerCKilled;
-    
+
     private int towerRangeSize = 100;
     private int gID;
     private int airID;
     private int loseTime = 100, loseFrame = 0;
-    
+
     private int shotMob = -1;
     private int[] MobList = new int[100];
     private boolean freeze = false;
     private boolean fire = false;
     private boolean firing = false;
-    
-    private int xC=0,yC=0;
-    
+
+    private int xC = 0, yC = 0;
+
     private String startTime;
     private boolean startFlag = false;
     private String endTime;
 
     /**
-     * * This is constructor method for Grid Cell. It will set different properties for each grid cell.
+     * * This is constructor method for Grid Cell. It will set different
+     * properties for each grid cell.
+     *
      * @param x x point
      * @param y y point
      * @param width width of cell
      * @param height height of cell
      * @param gId ground id of cell
-     * @param airId  air id of cell
+     * @param airId air id of cell
      */
     GridCellModel(int x, int y, int width, int height, int gId, int airId) {
         Arrays.fill(MobList, 0);
@@ -56,8 +58,8 @@ public class GridCellModel extends Rectangle{
         towerRange = new Rectangle[configModel.airTowerLaser.length];
         towerLog = new String[configModel.airTowerLaser.length];
         towerCKilled = new int[configModel.airTowerLaser.length];
-        for(int i=0;i<configModel.airTowerLaser.length;i++){
-            towerRange[i] = new Rectangle(x - ((configModel.airTowerRanger[i])/2), y - ((configModel.airTowerRanger[i])/2), width + configModel.airTowerRanger[i], height + configModel.airTowerRanger[i]);
+        for (int i = 0; i < configModel.airTowerLaser.length; i++) {
+            towerRange[i] = new Rectangle(x - ((configModel.airTowerRanger[i]) / 2), y - ((configModel.airTowerRanger[i]) / 2), width + configModel.airTowerRanger[i], height + configModel.airTowerRanger[i]);
             towerCKilled[i] = 0;
         }
         this.gID = gID;
@@ -65,67 +67,79 @@ public class GridCellModel extends Rectangle{
         //xC = (x/44);
         //yC = (y/44);
     }
-    
-    public void physic(CreatureModel[] cModel){
-        
-        for(int i=0;i<configModel.airTowerLaser.length;i++){
-                if(getShotMob() != -1 && getTowerRange()[gID].intersects(cModel[getShotMob()])){
-                    setFiring(true);
-                }
-                else{
-                    setFiring(false);
-                }
+
+    public void physic(CreatureModel[] cModel) {
+
+        for (int i = 0; i < configModel.airTowerLaser.length; i++) {
+            if (getShotMob() != -1 && getTowerRange()[gID].intersects(cModel[getShotMob()])) {
+                setFiring(true);
+            } else {
+                setFiring(false);
+            }
         }
-        for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
-                if(airID == 5){
-                    for(int i=0;i<cModel.length;i++){
-                        if(cModel[i].isInGame()){
-                            if(getTowerRange()[tid].contains(cModel[i])){
-                                setFiring(false);
-                            }
+        for (int tid = 0; tid < configModel.airTowerLaser.length; tid++) {
+            if (airID == 5) {
+                for (int i = 0; i < cModel.length; i++) {
+                    if (cModel[i].isInGame()) {
+                        if (getTowerRange()[tid].contains(cModel[i])) {
+                            setFiring(false);
                         }
                     }
                 }
             }
-        if(!isFiring()){
-            for(int tid=0;tid<configModel.airTowerLaser.length;tid++){
-                if(airID == configModel.airTowerLaser[tid]){
-                    for(int i=0;i<cModel.length;i++){
-                        if(cModel[i].isInGame()){
-                            if(getTowerRange()[tid].intersects(cModel[i])){
+        }
+        if (!isFiring()) {
+            for (int tid = 0; tid < configModel.airTowerLaser.length; tid++) {
+                if (airID == configModel.airTowerLaser[tid]) {
+                    for (int i = 0; i < cModel.length; i++) {
+                        if (cModel[i].isInGame()) {
+                            if (getTowerRange()[tid].intersects(cModel[i])) {
                                 setFiring(true);
-                                shotMob = i;
-                                if(!startFlag){
-                                    startTime = getCurrentTime();
-                                    //System.out.println("Start");
-                                    startFlag = true;
-                                }
+                                setShotMob(i);
                             }
                         }
                     }
                 }
             }
         }
-        
-        if(isFiring() && getAirID() != -1){
-            if(loseFrame >= loseTime){
-                if(getAirID() != 5){
+
+        if (getShotMob() != -1 && isFiring() && getAirID() != -1) {
+            if (loseFrame >= loseTime) {
+                if (getAirID() != 5) {
                     //System.out.println("Air Id: "+getAirID()+" Rate:"+configModel.TowerFiringRate[getAirID()-3]);
-                    cModel[getShotMob()].loseHealth(configModel.TowerFiringRate[getAirID()-3]);
-                } else if(getAirID()==5) {
-                    if(cModel[getShotMob()].walkSpeed < 20+configModel.TowerFiringRate[getAirID()-3]){
+                    cModel[getShotMob()].loseHealth(configModel.TowerFiringRate[getAirID() - 3]);
+                } else if (getAirID() == 5) {
+                    System.out.println("Mob " + getShotMob() + " Freezed : "+cModel[getShotMob()].walkSpeed);
+                    if (cModel[getShotMob()].walkSpeed < 20 + configModel.TowerFiringRate[getAirID() - 3]) {
                         cModel[getShotMob()].walkSpeed++;
+                        if (!cModel[getShotMob()].isFreezed()) {
+                            cModel[getShotMob()].setFreezed(true);
+                            cModel[getShotMob()].setTimeNow(System.currentTimeMillis());
+                            
+                        }
+                    } else {
+                        setFiring(false);
+                        setShotMob(-1);
                     }
                 }
                 loseFrame = 0;
-            }else {
-                loseFrame +=1;
+            } else {
+                loseFrame += 1;
             }
-            if(cModel[getShotMob()].isDead()){
-                towerCKilled[getAirID()-3]++;
+            if (getShotMob() != -1 && cModel[getShotMob()].isDead()) {
+                towerCKilled[getAirID() - 3]++;
                 setFiring(false);
-                shotMob = -1;
+                setShotMob(-1);
                 PlayScreenView.hasWon();
+            }
+        }
+
+        for (int i = 0; i < cModel.length; i++) {
+            if (cModel[i].isFreezed()) {
+                if (cModel[i].getTimeNow() + (1000 * configModel.TowerLevel[2]) < System.currentTimeMillis()) {
+                    System.out.println("Mob " + i + " unFreezed");
+                    cModel[i].setFreezed(false);
+                }
             }
         }
     }
@@ -165,8 +179,8 @@ public class GridCellModel extends Rectangle{
     public Rectangle getTowerRange(int x) {
         return getTowerRange()[x];
     }
-    
-    public void getMoney(int mobID){
+
+    public void getMoney(int mobID) {
         System.out.println("Money Is increased");
         configModel.money += configModel.deathReward[0];
     }
@@ -203,14 +217,21 @@ public class GridCellModel extends Rectangle{
      * @param towerRange the towerRange to set
      * @param i the towerRange ID
      */
-    public void setTowerRange(int i,Rectangle towerRange) {
+    public void setTowerRange(int i, Rectangle towerRange) {
         this.towerRange[i] = towerRange;
     }
-    
-    public String getCurrentTime(){
+
+    public String getCurrentTime() {
         Calendar cal = Calendar.getInstance();
-    	cal.getTime();
-    	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    	return sdf.format(cal.getTime());
+        cal.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        return sdf.format(cal.getTime());
+    }
+
+    /**
+     * @param shotMob the shotMob to set
+     */
+    public void setShotMob(int shotMob) {
+        this.shotMob = shotMob;
     }
 }

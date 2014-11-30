@@ -1,20 +1,31 @@
-[27/11/2014 10:37:25 PM] : Game Initialized.
-[27/11/2014 10:37:26 PM] : Play button clicked.
-[27/11/2014 10:37:26 PM] : MapChooser Screen open
-[27/11/2014 10:37:26 PM] : Listed all mapfiles from MapFiel folder
-[27/11/2014 10:37:27 PM] : Let's Play clicked.
-[27/11/2014 10:37:27 PM] : User's map file:7_8.team7
-[27/11/2014 10:37:27 PM] : Game Play Started.
-[27/11/2014 10:37:27 PM] : Game Play Screen initialized.
-[27/11/2014 10:37:28 PM] : Basic Images are loaded successfully.
-[27/11/2014 10:37:28 PM] : First Level get started
-[27/11/2014 10:37:28 PM] : 5 New Creatures Created.
-[27/11/2014 10:37:28 PM] : Game Play Start
-[27/11/2014 10:37:30 PM] : Mob Id:0 get started moving.
-[27/11/2014 10:37:31 PM] : Mob Id:1 get started moving.
-[27/11/2014 10:37:33 PM] : Mob Id:2 get started moving.
-[27/11/2014 10:37:34 PM] : Mob Id:3 get started moving.
-[27/11/2014 10:37:36 PM] : Mob Id:4 get started moving.
-[27/11/2014 10:37:54 PM] : User lost game.
-[27/11/2014 10:38:05 PM] : Game Play Window Closed.
-[27/11/2014 10:38:05 PM] : Game Closed
+[27/11/2014 11:35:41 PM] : Game Initialized.
+[27/11/2014 11:35:43 PM] : Play button clicked.
+[27/11/2014 11:35:43 PM] : MapChooser Screen open
+[27/11/2014 11:35:43 PM] : Listed all mapfiles from MapFiel folder
+[27/11/2014 11:35:43 PM] : Let's Play clicked.
+[27/11/2014 11:35:43 PM] : User's map file:7_8.team7
+[27/11/2014 11:35:44 PM] : Game Play Started.
+[27/11/2014 11:35:44 PM] : Game Play Screen initialized.
+[27/11/2014 11:35:44 PM] : Basic Images are loaded successfully.
+[27/11/2014 11:35:44 PM] : First Level get started
+[27/11/2014 11:35:44 PM] : 5 New Creatures Created.
+[27/11/2014 11:35:44 PM] : First Level get started
+[27/11/2014 11:35:44 PM] : 5 New Creatures Created.
+[27/11/2014 11:35:44 PM] : Game Play Start
+[27/11/2014 11:35:46 PM] : Tower Id:5 placed at (3,2)
+[27/11/2014 11:35:46 PM] : Tower Inspection window showed for Tower:5 at (3,2)
+[27/11/2014 11:35:46 PM] : Mob Id:0 get started moving.
+[27/11/2014 11:35:48 PM] : Mob Id:1 get started moving.
+[27/11/2014 11:35:49 PM] : Mob Id:2 get started moving.
+[27/11/2014 11:35:50 PM] : Tower Upgrade to Level:2 Range:108 Rate:10
+[27/11/2014 11:35:50 PM] : Tower Upgrade cost deducted from total money.
+[27/11/2014 11:35:50 PM] : Tower Upgrade to Level:3 Range:128 Rate:15
+[27/11/2014 11:35:50 PM] : Tower Upgrade cost deducted from total money.
+[27/11/2014 11:35:50 PM] : Tower Upgrade to Level:4 Range:148 Rate:20
+[27/11/2014 11:35:50 PM] : Tower Upgrade cost deducted from total money.
+[27/11/2014 11:35:50 PM] : Mob Id:3 get started moving.
+[27/11/2014 11:35:52 PM] : Mob Id:4 get started moving.
+[27/11/2014 11:36:02 PM] : Tower Upgrade to Level:5 Range:168 Rate:25
+[27/11/2014 11:36:02 PM] : Tower Upgrade cost deducted from total money.
+[27/11/2014 11:36:14 PM] : Game Play Window Closed.
+[27/11/2014 11:36:14 PM] : Game Closed
