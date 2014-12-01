@@ -40,6 +40,8 @@ public class GameLogViewer extends JFrame {
     public static JTextArea Wjtp;
     public static JTextArea GGjtp;
     
+    public static boolean testFlag = false;
+    
     public GameLogViewer(){
         this.setSize(600,700);
         this.setTitle("Game Log Console");
@@ -109,30 +111,38 @@ public class GameLogViewer extends JFrame {
     }
     
     public static void addText_GGjtp(String str){
-        GGjtp.append(str);
-        JScrollBar vbar = GGScroller.getVerticalScrollBar();
-        vbar.setValue(vbar.getMaximum());
-        vbar.paint(vbar.getGraphics());
+        if(!testFlag){
+            GGjtp.append(str);
+            JScrollBar vbar = GGScroller.getVerticalScrollBar();
+            vbar.setValue(vbar.getMaximum());
+            vbar.paint(vbar.getGraphics());
+        }
     }
     
     public static void addText_CTjtp(String str){
-        CTjtp.append(str);
-        JScrollBar vbar = CTScroller.getVerticalScrollBar();
-        vbar.setValue(vbar.getMaximum());
-        vbar.paint(vbar.getGraphics());
+        if(!testFlag){
+            CTjtp.append(str);
+            JScrollBar vbar = CTScroller.getVerticalScrollBar();
+            vbar.setValue(vbar.getMaximum());
+            vbar.paint(vbar.getGraphics());
+        }
     }
     
     public static void addText_ITjtp(String str){
-        ITjtp.setText(str);
-        JScrollBar vbar = ITScroller.getVerticalScrollBar();
-        vbar.setValue(vbar.getMaximum());
-        vbar.paint(vbar.getGraphics());
+        if(!testFlag){
+            ITjtp.setText(str);
+            JScrollBar vbar = ITScroller.getVerticalScrollBar();
+            vbar.setValue(vbar.getMaximum());
+            vbar.paint(vbar.getGraphics());
+        }
     }
     
     public static void addText_Wjtp(String str){
-        Wjtp.append(str);
-        JScrollBar vbar = WScroller.getVerticalScrollBar();
-        vbar.setValue(vbar.getMaximum());
-        vbar.paint(vbar.getGraphics());
+        if(!testFlag){
+            Wjtp.append(str);
+            JScrollBar vbar = WScroller.getVerticalScrollBar();
+            vbar.setValue(vbar.getMaximum());
+            vbar.paint(vbar.getGraphics());
+        }
     }
 }

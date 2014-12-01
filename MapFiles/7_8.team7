@@ -1,1 +1,84 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><game><tileinfo><map x="7" y="8"><tile value="7" x="1" y="1"/><tile value="0" x="1" y="2"/><tile value="0" x="1" y="3"/><tile value="0" x="1" y="4"/><tile value="0" x="1" y="5"/><tile value="0" x="1" y="6"/><tile value="0" x="1" y="7"/><tile value="0" x="1" y="8"/><tile value="1" x="2" y="1"/><tile value="1" x="2" y="2"/><tile value="1" x="2" y="3"/><tile value="1" x="2" y="4"/><tile value="1" x="2" y="5"/><tile value="1" x="2" y="6"/><tile value="0" x="2" y="7"/><tile value="0" x="2" y="8"/><tile value="0" x="3" y="1"/><tile value="0" x="3" y="2"/><tile value="0" x="3" y="3"/><tile value="0" x="3" y="4"/><tile value="0" x="3" y="5"/><tile value="1" x="3" y="6"/><tile value="0" x="3" y="7"/><tile value="0" x="3" y="8"/><tile value="0" x="4" y="1"/><tile value="0" x="4" y="2"/><tile value="1" x="4" y="3"/><tile value="1" x="4" y="4"/><tile value="1" x="4" y="5"/><tile value="1" x="4" y="6"/><tile value="0" x="4" y="7"/><tile value="0" x="4" y="8"/><tile value="0" x="5" y="1"/><tile value="0" x="5" y="2"/><tile value="1" x="5" y="3"/><tile value="0" x="5" y="4"/><tile value="0" x="5" y="5"/><tile value="0" x="5" y="6"/><tile value="0" x="5" y="7"/><tile value="0" x="5" y="8"/><tile value="1" x="6" y="1"/><tile value="1" x="6" y="2"/><tile value="1" x="6" y="3"/><tile value="0" x="6" y="4"/><tile value="0" x="6" y="5"/><tile value="0" x="6" y="6"/><tile value="0" x="6" y="7"/><tile value="0" x="6" y="8"/><tile value="8" x="7" y="1"/><tile value="0" x="7" y="2"/><tile value="0" x="7" y="3"/><tile value="0" x="7" y="4"/><tile value="0" x="7" y="5"/><tile value="0" x="7" y="6"/><tile value="0" x="7" y="7"/><tile value="0" x="7" y="8"/></map></tileinfo><mapinfo><modification create="[27.11.2014 10_22_19 PM]" loastModified=""/></mapinfo><scoreinfo><item no="1">184</item><item no="2">168</item><item no="3">150</item><item no="4">140</item><item no="5">100</item></scoreinfo><playerinfo><item score="0" time="27.11.2014 10_22_23 PM"/><item score="150" time="27.11.2014 10_23_42 PM"/><item score="100" time="27.11.2014 10_24_25 PM"/><item score="140" time="27.11.2014 10_24_56 PM"/><item score="0" time="27.11.2014 10_35_09 PM"/><item score="0" time="27.11.2014 10_37_27 PM"/><item score="168" time="27.11.2014 11_01_03 PM"/><item score="0" time="27.11.2014 11_07_15 PM"/><item score="0" time="27.11.2014 11_25_39 PM"/><item score="0" time="27.11.2014 11_28_14 PM"/></playerinfo></game>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><game>
+    <tileinfo>
+        <map x="7" y="8">
+            <tile value="7" x="1" y="1"/>
+            <tile value="0" x="1" y="2"/>
+            <tile value="0" x="1" y="3"/>
+            <tile value="0" x="1" y="4"/>
+            <tile value="0" x="1" y="5"/>
+            <tile value="0" x="1" y="6"/>
+            <tile value="0" x="1" y="7"/>
+            <tile value="0" x="1" y="8"/>
+            <tile value="1" x="2" y="1"/>
+            <tile value="1" x="2" y="2"/>
+            <tile value="1" x="2" y="3"/>
+            <tile value="1" x="2" y="4"/>
+            <tile value="1" x="2" y="5"/>
+            <tile value="1" x="2" y="6"/>
+            <tile value="0" x="2" y="7"/>
+            <tile value="0" x="2" y="8"/>
+            <tile value="0" x="3" y="1"/>
+            <tile value="0" x="3" y="2"/>
+            <tile value="0" x="3" y="3"/>
+            <tile value="0" x="3" y="4"/>
+            <tile value="0" x="3" y="5"/>
+            <tile value="1" x="3" y="6"/>
+            <tile value="0" x="3" y="7"/>
+            <tile value="0" x="3" y="8"/>
+            <tile value="0" x="4" y="1"/>
+            <tile value="0" x="4" y="2"/>
+            <tile value="1" x="4" y="3"/>
+            <tile value="1" x="4" y="4"/>
+            <tile value="1" x="4" y="5"/>
+            <tile value="1" x="4" y="6"/>
+            <tile value="0" x="4" y="7"/>
+            <tile value="0" x="4" y="8"/>
+            <tile value="0" x="5" y="1"/>
+            <tile value="0" x="5" y="2"/>
+            <tile value="1" x="5" y="3"/>
+            <tile value="0" x="5" y="4"/>
+            <tile value="0" x="5" y="5"/>
+            <tile value="0" x="5" y="6"/>
+            <tile value="0" x="5" y="7"/>
+            <tile value="0" x="5" y="8"/>
+            <tile value="1" x="6" y="1"/>
+            <tile value="1" x="6" y="2"/>
+            <tile value="1" x="6" y="3"/>
+            <tile value="0" x="6" y="4"/>
+            <tile value="0" x="6" y="5"/>
+            <tile value="0" x="6" y="6"/>
+            <tile value="0" x="6" y="7"/>
+            <tile value="0" x="6" y="8"/>
+            <tile value="8" x="7" y="1"/>
+            <tile value="0" x="7" y="2"/>
+            <tile value="0" x="7" y="3"/>
+            <tile value="0" x="7" y="4"/>
+            <tile value="0" x="7" y="5"/>
+            <tile value="0" x="7" y="6"/>
+            <tile value="0" x="7" y="7"/>
+            <tile value="0" x="7" y="8"/>
+        </map>
+    </tileinfo>
+    <mapinfo>
+        <modification create="[27.11.2014 10_22_19 PM]" loastModified=""/>
+    </mapinfo>
+    <scoreinfo>
+        <item no="1">184</item>
+        <item no="2">168</item>
+        <item no="3">150</item>
+        <item no="4">140</item>
+        <item no="5">100</item>
+    </scoreinfo>
+    <playerinfo>
+        <item score="0" time="27.11.2014 10_22_23 PM"/>
+        <item score="150" time="27.11.2014 10_23_42 PM"/>
+        <item score="100" time="27.11.2014 10_24_25 PM"/>
+        <item score="140" time="27.11.2014 10_24_56 PM"/>
+        <item score="0" time="27.11.2014 10_35_09 PM"/>
+        <item score="0" time="27.11.2014 10_37_27 PM"/>
+        <item score="168" time="27.11.2014 11_01_03 PM"/>
+        <item score="0" time="27.11.2014 11_07_15 PM"/>
+        <item score="0" time="27.11.2014 11_25_39 PM"/>
+        <item score="0" time="27.11.2014 11_28_14 PM"/>
+    </playerinfo>
+</game>

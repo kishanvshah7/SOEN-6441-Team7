@@ -1,10 +1,66 @@
-8 9
-0 0 0 0 0 0 0 8 
-7 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><game>
+    <tileinfo>
+        <map x="7" y="7">
+            <tile value="7" x="1" y="1"/>
+            <tile value="0" x="1" y="2"/>
+            <tile value="0" x="1" y="3"/>
+            <tile value="0" x="1" y="4"/>
+            <tile value="0" x="1" y="5"/>
+            <tile value="0" x="1" y="6"/>
+            <tile value="0" x="1" y="7"/>
+            <tile value="0" x="2" y="1"/>
+            <tile value="0" x="2" y="2"/>
+            <tile value="0" x="2" y="3"/>
+            <tile value="0" x="2" y="4"/>
+            <tile value="0" x="2" y="5"/>
+            <tile value="0" x="2" y="6"/>
+            <tile value="0" x="2" y="7"/>
+            <tile value="0" x="3" y="1"/>
+            <tile value="0" x="3" y="2"/>
+            <tile value="0" x="3" y="3"/>
+            <tile value="0" x="3" y="4"/>
+            <tile value="0" x="3" y="5"/>
+            <tile value="0" x="3" y="6"/>
+            <tile value="0" x="3" y="7"/>
+            <tile value="0" x="4" y="1"/>
+            <tile value="0" x="4" y="2"/>
+            <tile value="0" x="4" y="3"/>
+            <tile value="0" x="4" y="4"/>
+            <tile value="0" x="4" y="5"/>
+            <tile value="0" x="4" y="6"/>
+            <tile value="0" x="4" y="7"/>
+            <tile value="0" x="5" y="1"/>
+            <tile value="0" x="5" y="2"/>
+            <tile value="0" x="5" y="3"/>
+            <tile value="0" x="5" y="4"/>
+            <tile value="0" x="5" y="5"/>
+            <tile value="0" x="5" y="6"/>
+            <tile value="0" x="5" y="7"/>
+            <tile value="0" x="6" y="1"/>
+            <tile value="0" x="6" y="2"/>
+            <tile value="0" x="6" y="3"/>
+            <tile value="0" x="6" y="4"/>
+            <tile value="0" x="6" y="5"/>
+            <tile value="0" x="6" y="6"/>
+            <tile value="0" x="6" y="7"/>
+            <tile value="0" x="7" y="1"/>
+            <tile value="8" x="7" y="2"/>
+            <tile value="0" x="7" y="3"/>
+            <tile value="0" x="7" y="4"/>
+            <tile value="0" x="7" y="5"/>
+            <tile value="0" x="7" y="6"/>
+            <tile value="0" x="7" y="7"/>
+        </map>
+    </tileinfo>
+    <mapinfo>
+        <modification create="[30.11.2014 10_18_16 PM]" loastModified="[30.11.2014 10_18_16 PM]"/>
+    </mapinfo>
+    <scoreinfo>
+        <item no="1">0</item>
+        <item no="2">0</item>
+        <item no="3">0</item>
+        <item no="4">0</item>
+        <item no="5">0</item>
+    </scoreinfo>
+    <playerinfo/>
+</game>

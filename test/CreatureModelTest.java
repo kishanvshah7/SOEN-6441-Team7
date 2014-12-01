@@ -2,12 +2,13 @@
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
-
 import tdgame.controller.CellContainerController;
 import tdgame.model.CellContainerModel;
 import tdgame.model.CreatureModel;
 import tdgame.view.CellContainerView;
+import towerdefensegame.GameLogViewer;
 
 public class CreatureModelTest {
 	
@@ -18,6 +19,11 @@ public class CreatureModelTest {
 	CellContainerController ccctest = new CellContainerController(ccvtest, ccmtest);
 	
 	CreatureModel cmtest = new CreatureModel(ccmtest, ccctest);
+        
+        @Before
+        public void setup(){
+            GameLogViewer.testFlag = true;
+        }
 
 	@Test
 	public void testSpawnCreature() {

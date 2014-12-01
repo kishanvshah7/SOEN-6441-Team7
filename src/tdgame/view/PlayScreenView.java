@@ -152,10 +152,8 @@ public class PlayScreenView extends JPanel implements Runnable {
                     //mobs[i].spawnMob(0);
                 }
                 isFirst = false;
-                return true;
             } else {
                 System.out.println("psCont not initialized");
-                return false;
             }
         } else if(GameLoadFlag) {
             configModel.creaturesNo = configModel.creaturesLevel[configModel.level];
@@ -174,13 +172,14 @@ public class PlayScreenView extends JPanel implements Runnable {
                     //mobs[i].spawnMob(0);
                 }
                 isFirst = false;
-                return true;
             } else {
                 System.out.println("psCont not initialized");
-                return false;
             }
         }
-        return true;
+        if(psCont != null){
+            return true;
+        } else 
+            return false;
     }
     
     public void saveGame(){

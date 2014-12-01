@@ -11,6 +11,7 @@ import tdgame.model.CreatureModel;
 import tdgame.model.PlayScreenModel;
 import tdgame.model.configModel;
 import tdgame.view.PlayScreenView;
+import towerdefensegame.GameLogViewer;
 import towerdefensegame.GamePlay;
 
 public class PlayScreenViewTest {
@@ -21,9 +22,9 @@ public class PlayScreenViewTest {
 	PlayScreenView psviewtest = new PlayScreenView(gptest);
 	
 	@Before
-	public void setup(){
-		
-	}
+        public void setup(){
+            GameLogViewer.testFlag = true;
+        }
 	
 	@Test
 	public void teststartGame(){
