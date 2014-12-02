@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<game>
+    <mapinfo>
+        <map x="2" y="2">
+            <Tile x="1" y="1" value="2"></Tile>
+            <Tile x="1" y="2" value="1"></Tile>
+            <Tile x="2" y="1" value="7"></Tile>
+            <Tile x="2" y="2" value="7"></Tile>
+        </map>
+    </mapinfo>
+    <towerinfo>
+        <tower id="3" level="1"></tower>
+        <tower id="4" level="1"></tower>
+        <tower id="5" level="1"></tower>
+        <tower id="6" level="1"></tower>
+    </towerinfo>
+    <gameinfo>
+        <level>1</level>
+        <health>3</health>
+        <money>150</money>
+    </gameinfo>
+    <loginfo>
+        <item time="12" type="T">asdfasdf</item>
+        <item time="13" type="W">asdfasdf</item>
+    </loginfo>
+</game>
