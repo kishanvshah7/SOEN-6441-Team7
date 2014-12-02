@@ -20,7 +20,8 @@ import tdgame.view.PlayScreenView;
  */
 public class GridCellModel extends Rectangle {
 
-    private Rectangle[] towerRange;
+    TowerModel[] towers;
+    //private Rectangle[] towerRange;
     public String[] towerLog;
     public int[] towerCKilled;
 
@@ -55,11 +56,14 @@ public class GridCellModel extends Rectangle {
     GridCellModel(int x, int y, int width, int height, int gId, int airId) {
         Arrays.fill(MobList, 0);
         setBounds(x, y, width, height);
-        towerRange = new Rectangle[configModel.airTowerLaser.length];
+        towers = new TowerModel[configModel.airTowerLaser.length];
+
         towerLog = new String[configModel.airTowerLaser.length];
         towerCKilled = new int[configModel.airTowerLaser.length];
+        
         for (int i = 0; i < configModel.airTowerLaser.length; i++) {
-            towerRange[i] = new Rectangle(x - ((configModel.airTowerRanger[i]) / 2), y - ((configModel.airTowerRanger[i]) / 2), width + configModel.airTowerRanger[i], height + configModel.airTowerRanger[i]);
+            towers[i] = new TowerModel();
+            towers[i].towerRange = new Rectangle(x - ((configModel.airTowerRanger[i]) / 2), y - ((configModel.airTowerRanger[i]) / 2), width + configModel.airTowerRanger[i], height + configModel.airTowerRanger[i]);
             towerCKilled[i] = 0;
         }
         this.gID = gID;
@@ -69,39 +73,41 @@ public class GridCellModel extends Rectangle {
     }
 
     public void physic(CreatureModel[] cModel) {
+        
+        shotMob = towers[gID].getShotMobID(this, cModel);
 
-        for (int i = 0; i < configModel.airTowerLaser.length; i++) {
-            if (getShotMob() != -1 && getTowerRange()[gID].intersects(cModel[getShotMob()])) {
-                setFiring(true);
-            } else {
-                setFiring(false);
-            }
-        }
-        for (int tid = 0; tid < configModel.airTowerLaser.length; tid++) {
-            if (airID == 5) {
-                for (int i = 0; i < cModel.length; i++) {
-                    if (cModel[i].isInGame()) {
-                        if (getTowerRange()[tid].contains(cModel[i])) {
-                            setFiring(false);
-                        }
-                    }
-                }
-            }
-        }
-        if (!isFiring()) {
-            for (int tid = 0; tid < configModel.airTowerLaser.length; tid++) {
-                if (airID == configModel.airTowerLaser[tid]) {
-                    for (int i = 0; i < cModel.length; i++) {
-                        if (cModel[i].isInGame()) {
-                            if (getTowerRange()[tid].intersects(cModel[i])) {
-                                setFiring(true);
-                                setShotMob(i);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        for (int i = 0; i < configModel.airTowerLaser.length; i++) {
+//            if (getShotMob() != -1 && getTowerRange()[gID].intersects(cModel[getShotMob()])) {
+//                setFiring(true);
+//            } else {
+//                setFiring(false);
+//            }
+//        }
+//        for (int tid = 0; tid < configModel.airTowerLaser.length; tid++) {
+//            if (airID == 5) {
+//                for (int i = 0; i < cModel.length; i++) {
+//                    if (cModel[i].isInGame()) {
+//                        if (getTowerRange()[tid].contains(cModel[i])) {
+//                            setFiring(false);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        if (!isFiring()) {
+//            for (int tid = 0; tid < configModel.airTowerLaser.length; tid++) {
+//                if (airID == configModel.airTowerLaser[tid]) {
+//                    for (int i = 0; i < cModel.length; i++) {
+//                        if (cModel[i].isInGame()) {
+//                            if (getTowerRange()[tid].intersects(cModel[i])) {
+//                                setFiring(true);
+//                                setShotMob(i);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         if (getShotMob() != -1 && isFiring() && getAirID() != -1) {
             if (loseFrame >= loseTime) {
@@ -177,7 +183,7 @@ public class GridCellModel extends Rectangle {
      * @param x x index
      */
     public Rectangle getTowerRange(int x) {
-        return getTowerRange()[x];
+        return this.towers[x].towerRange;
     }
 
     public void getMoney(int mobID) {
@@ -206,19 +212,13 @@ public class GridCellModel extends Rectangle {
         this.firing = firing;
     }
 
-    /**
-     * @return the towerRange
-     */
-    public Rectangle[] getTowerRange() {
-        return towerRange;
-    }
 
     /**
      * @param towerRange the towerRange to set
      * @param i the towerRange ID
      */
     public void setTowerRange(int i, Rectangle towerRange) {
-        this.towerRange[i] = towerRange;
+        this.towers[i].towerRange = towerRange;
     }
 
     public String getCurrentTime() {

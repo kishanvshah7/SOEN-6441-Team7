@@ -11,14 +11,17 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Observable;
+import tdgame.controller.ShopController;
 import tdgame.model.configModel;
 
 /**
  * This class will take input from user via mouse and trigger the appropriate function.
  * @author Rahul K Kikani
  */
-public class KeyController extends Observable implements MouseMotionListener, MouseListener {
+public class KeyController implements MouseMotionListener, MouseListener {
 
+    private ShopController sCont;
+    
     /**
      * This Method will listen mouse dragged movement and store x,y coordinates in point variable.
      * @param e the MouseEvent
@@ -45,17 +48,11 @@ public class KeyController extends Observable implements MouseMotionListener, Mo
      * @param e the MouseEvent
      */
     public void mousePressed(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1)
-	    {
-                setChanged();
-                notifyObservers("1");
-	    }	    
-	    else if(e.getButton() == MouseEvent.BUTTON3)
-	    {
-                setChanged();
-                notifyObservers("0");
-	    }
-        
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            sCont.click(1);
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
+            sCont.click(0);
+        }
     }
 
     
@@ -71,6 +68,13 @@ public class KeyController extends Observable implements MouseMotionListener, Mo
     
     public void mouseExited(MouseEvent e) {
         
+    }
+
+    /**
+     * @param sCont the sCont to set
+     */
+    public void setsCont(ShopController sCont) {
+        this.sCont = sCont;
     }
     
 }

@@ -50,6 +50,7 @@ public class configModel {
     public static int[] airTowerRanger  = new int[]{44,68,88,108};
     public static int[] TowerFiringRate = new int[]{1,2,5,5};
     public static int[] Towerhealth = new int[]{10,15,20,25};
+    public static int[] TowerST = new int[]{0,0,0,0};
     
     public static int mobAir = -1;
     public static int mobGreeny = 0;

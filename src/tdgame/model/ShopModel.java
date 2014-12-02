@@ -29,6 +29,7 @@ public class ShopModel {
     
     public static int shopWidth = 4;
     private static int buttonSize = 52;
+    private static int buttonSTSize = 15;
     public static int cellSpace = 3;
     public static int iconSize = 20;
     public static int icon_space = 30;
@@ -39,6 +40,7 @@ public class ShopModel {
     private static int[] buttonPrice = {10, 20, 30, 40};
     
     public Rectangle[] button  = new Rectangle[shopWidth];
+    public Rectangle[] buttonST  = new Rectangle[4];
     public Rectangle btn_health;
     public Rectangle btn_coins;
     
@@ -66,6 +68,7 @@ public class ShopModel {
     public void define(){
         for(int i=0;i<button.length;i++){
             button[i] = new Rectangle( startX +(i * (cellSpace+getButtonSize())), startY+getButtonSize()+cellSpace, getButtonSize(), getButtonSize());
+            buttonST[i] = new Rectangle( startX +(i * (cellSpace+getButtonSize())), startY+ 212 +getButtonSize()+cellSpace, buttonSTSize, buttonSTSize);
         }
         towerUpgrade = new Rectangle(startX - 5, 240, 226, 20);
         btn_health = new Rectangle(startX, 14, iconSize, iconSize);

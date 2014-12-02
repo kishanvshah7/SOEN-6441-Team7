@@ -24,6 +24,10 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import statePattern.Context;
+import statePattern.PauseState;
+import statePattern.StartState;
+import statePattern.StopState;
 import tdgame.controller.PlayScreenController;
 import tdgame.controller.ShopController;
 import tdgame.model.CreatureModel;
@@ -55,6 +59,11 @@ public class PlayScreenView extends JPanel implements Runnable {
     public Graphics w;
     public static boolean gamePause = false;
     
+    private KeyController eventSource;
+    
+    public StartState ss;
+    public Context c;
+    
     public Graphics getGraph(){
         return w;
     }
@@ -65,13 +74,8 @@ public class PlayScreenView extends JPanel implements Runnable {
      */
     public PlayScreenView(LoadGame j){
         LogGenerator.addLog("Game Play Screen initialized.");
-        final KeyController eventSource = new KeyController();
- 
-        // create an observer
-        final ShopController responseHandler = new ShopController();
- 
-        // subscribe the observer to the event source
-        eventSource.addObserver(responseHandler);
+        eventSource = new KeyController();
+
         
         j.addMouseListener(eventSource);
         j.addMouseMotionListener(eventSource);
@@ -98,15 +102,12 @@ public class PlayScreenView extends JPanel implements Runnable {
         LogGenerator.addLog("Basic Images are loaded successfully.");
     }
     
-    public PlayScreenView(GamePlay j){
+    public PlayScreenView(GamePlay j, StartState ss, Context c){
+        this.ss =ss;
+        this.c = c;
         LogGenerator.addLog("Game Play Screen initialized.");
-        final KeyController eventSource = new KeyController();
+        eventSource = new KeyController();
  
-        // create an observer
-        final ShopController responseHandler = new ShopController();
- 
-        // subscribe the observer to the event source
-        eventSource.addObserver(responseHandler);
         
         j.addMouseListener(eventSource);
         j.addMouseMotionListener(eventSource);
@@ -183,17 +184,23 @@ public class PlayScreenView extends JPanel implements Runnable {
     }
     
     public void saveGame(){
-        gamePause = true;
-        System.out.println("GamePaused");
-        LogGenerator.addLog("Game Saved");
-        saveGameFile.initFile();
-        GridCellModel[][] gcm = psCont.getCcModel().getGcModel();
-        saveGameFile.mapInfo(gcm);
-        saveGameFile.towerInfo();
-        saveGameFile.gameInfo();
-        saveGameFile.saveFile();
-        updateScore();
-        gamePause = false;
+        if(c.getState().toString().equals("Start")){
+            gamePause = true;
+            PauseState pauseState = new PauseState();
+            pauseState.doAction(c);
+            System.out.println("GamePaused");
+            LogGenerator.addLog("Game Saved");
+            saveGameFile.initFile();
+            GridCellModel[][] gcm = psCont.getCcModel().getGcModel();
+            saveGameFile.mapInfo(gcm);
+            saveGameFile.towerInfo();
+            saveGameFile.gameInfo();
+            saveGameFile.saveFile();
+            updateScore();
+            gamePause = false;
+            ss.doAction(c);
+        }
+        
     }
     
     public void updateScore(){
@@ -469,6 +476,20 @@ public class PlayScreenView extends JPanel implements Runnable {
                 }
             }
         }
+    }
+
+    /**
+     * @param eventSource the eventSource to set
+     */
+    public void setEventSource(KeyController eventSource) {
+        this.eventSource = eventSource;
+    }
+
+    /**
+     * @return the eventSource
+     */
+    public KeyController getEventSource() {
+        return eventSource;
     }
     
 }

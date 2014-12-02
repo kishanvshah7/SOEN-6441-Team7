@@ -15,6 +15,7 @@ import tdgame.view.CellContainerView;
 import tdgame.view.GridCellView;
 import tdgame.view.PlayScreenView;
 import tdgame.view.ShopView;
+import towerdefensegame.KeyController;
 
 /**
  * This Class will bind and initialize Model-View of Play Screen Module.
@@ -36,6 +37,8 @@ public class PlayScreenController {
     private ShopModel sModel;
     ShopView sView;
     private ShopController sCont;
+    
+    private KeyController kc;
     
     /**
      * This method is constructor for Play Screen Controller. It will initialize different views,model and controller.
@@ -70,6 +73,8 @@ public class PlayScreenController {
         this.sView = sView;
         sCont = new ShopController(this.getsModel(),this.sView);
         sCont.setccCont(ccCont);
+        kc = theView.getEventSource();
+        kc.setsCont(sCont);
     }
 
     
@@ -128,5 +133,12 @@ public class PlayScreenController {
      */
     public PlayScreenModel getTheModel() {
         return theModel;
+    }
+
+    /**
+     * @return the kc
+     */
+    public KeyController getKc() {
+        return kc;
     }
 }

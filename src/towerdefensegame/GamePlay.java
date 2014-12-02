@@ -15,6 +15,8 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import statePattern.Context;
+import statePattern.StartState;
 import tdgame.controller.MapValidation;
 import tdgame.controller.PlayScreenController;
 import tdgame.model.CellContainerModel;
@@ -76,6 +78,8 @@ public class GamePlay extends JFrame implements WindowListener {
                         if(temp){
                             MapValidation mv = new MapValidation(psModel.getGridCellArray());
                             if(mv.isValid()){
+                                Context context = new Context();
+                                
                                 System.out.println("Map is Valid");
                                 configModel cModel = new configModel(); 
                             
@@ -90,12 +94,17 @@ public class GamePlay extends JFrame implements WindowListener {
 
                                 GridCellView gcView = new GridCellView();
                                 GridCellModel[][] gcModel = ccModel.getGcModel();
+                                
+                                StartState startState = new StartState();
+                                startState.doAction(context);
 
-                                PlayScreenView psView = new PlayScreenView(this);
+                                PlayScreenView psView = new PlayScreenView(this, startState, context);
                                 add(psView);
                                 psCont = new PlayScreenController(psView, psModel, gcView, gcModel, ccView, ccModel, sView, sModel);
                                 psView.setController(getPsCont());
                                 psView.startGame();
+
+                                psCont.getsCont().addObserver(sView);
                                 this.setVisible(true);
                             }else{
                                 System.out.println("Map Is Invalid");
@@ -117,6 +126,8 @@ public class GamePlay extends JFrame implements WindowListener {
                         if(true){
                             MapValidation mv = new MapValidation(psModel.getGridCellArray());
                             if(mv.isValid()){
+                                Context context = new Context();
+                                
                                 System.out.println("Map is Valid");
                                 
                                 psModel.initCellContainerModel();
@@ -130,11 +141,17 @@ public class GamePlay extends JFrame implements WindowListener {
 
                                 GridCellView gcView = new GridCellView();
                                 GridCellModel[][] gcModel = ccModel.getGcModel();
+                                
+                                StartState startState = new StartState();
+                                startState.doAction(context);
 
-                                PlayScreenView psView = new PlayScreenView(this);
+                                PlayScreenView psView = new PlayScreenView(this, startState, context);
+                                
                                 add(psView);
                                 psCont = new PlayScreenController(psView, psModel, gcView, gcModel, ccView, ccModel, sView, sModel);
                                 psView.setController(getPsCont());
+                                
+                                psCont.getsCont().addObserver(sView);
                                 psView.startGame();
                                 this.setVisible(true);
                             }else{
