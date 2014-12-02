@@ -59,7 +59,7 @@ public class CellContainerModel {
     /**
      * Creation of creatures.
      * @param cModel array of creatures object
-     * @exception Dom Parsing Exception
+     * @exception ParseException Dom Parsing Exception
      */
     public void physic(CreatureModel[] cModel) throws ParseException{
         for(int y=0;y<gcModel.length;y++){

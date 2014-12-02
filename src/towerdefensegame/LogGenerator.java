@@ -22,7 +22,7 @@ import tdgame.model.CellContainerModel;
 import tdgame.model.configModel;
 
 /**
- *
+ * Log Generator
  * @author Rahul K Kikani
  */
 public class LogGenerator {
@@ -32,7 +32,10 @@ public class LogGenerator {
     public static Writer writer = null;
     public static String[] waveLog = new String[10];
     
-    
+    /**
+     * Adding Log
+     * @param msg Log message
+     */
     public static void addLog(String msg){
         if(fileFlag){
             try {
@@ -49,17 +52,29 @@ public class LogGenerator {
         }
     }
     
+    /**
+     * Add Collective Log
+     * @param msg Log Message
+     */
     public static void addCollectiveTowerLog(String msg){
                 Date date = new Date();
                 SimpleDateFormat ft =  new SimpleDateFormat ("dd/MM/yyyy hh:mm:ss a");
                 GameLogViewer.addText_CTjtp("["+ft.format(date)+"] : "+ msg +"\n");
     }
     
+    /**
+     * Add Individual Tower Log
+     * @param msg log Message
+     */
     public static void addIndividualTowerLog(String msg){
                 Date date = new Date();
                 GameLogViewer.addText_ITjtp(msg);
     }
     
+    /**
+     * Add Wave Log
+     * @param msg Log Message
+     */
     public static void addWaveLog(String msg){
                 Date date = new Date();
                 SimpleDateFormat ft =  new SimpleDateFormat ("dd/MM/yyyy hh:mm:ss a");
@@ -67,6 +82,9 @@ public class LogGenerator {
                 GameLogViewer.addText_Wjtp("["+ft.format(date)+"] : "+ msg +"\n");
     }
     
+    /**
+     * Create Log File
+     */
     public static void createLogFile(){
         try {
             try {
@@ -84,6 +102,9 @@ public class LogGenerator {
         }
     }
     
+    /**
+     * Close Log File
+     */
     public static void closeLog(){
         try {
             writer.close();
@@ -92,12 +113,19 @@ public class LogGenerator {
         }
     }
     
+    /**
+     * Get Log Time
+     * @return time in string
+     */
     public static String getLogTime(){
         Date date = new Date();
         SimpleDateFormat ft =  new SimpleDateFormat ("dd/MM/yyyy hh:mm:ss a");
         return "["+ft.format(date)+"] : ";
     }
     
+    /**
+     * Add Tower Level Log
+     */
     public static void towerLog(){
         for(int y=0;y < configModel.gridY; y++){
                     for(int x=0;x < configModel.gridX; x++){
@@ -110,6 +138,13 @@ public class LogGenerator {
                     }
                 }
     }
+    
+    /**
+     * Total killed by tower
+     * @param y y coordinate of tower
+     * @param x x coordinate of tower
+     * @param i type of tower
+     */
     public static void addTotalKilled(int y, int x, int i){
         CellContainerModel.gcModel[y][x].towerLog[i] += LogGenerator.getLogTime()+"Total no of Creatures Killed by this tower is: "+CellContainerModel.gcModel[y][x].towerCKilled[i]+"\n";
     }

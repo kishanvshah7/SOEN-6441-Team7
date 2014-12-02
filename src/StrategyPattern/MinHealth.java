@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package StrategyPattern;
 
 import tdgame.model.CreatureModel;
@@ -14,9 +13,17 @@ import tdgame.model.TowerModel;
  *
  * @author Rahul K Kikani
  */
-public class MinHealth implements Strategy{
-    
-   @Override
+public class MinHealth implements Strategy {
+
+    /**
+     * Targeting Strategy Algorithm
+     *
+     * @param tm Tower Object
+     * @param gcModel Grid Model Object
+     * @param cModel Creatures Object
+     * @return Creatures Id for targeting
+     */
+    @Override
     public int doOperation(TowerModel tm, GridCellModel gcModel, CreatureModel[] cModel) {
         int temp_health = 1000;
         int shot_id = -1;
@@ -32,7 +39,7 @@ public class MinHealth implements Strategy{
                 }
             }
         }
-        System.out.println("Selected MOB"+shot_id);
+        System.out.println("Selected MOB" + shot_id);
         return shot_id;
     }
 }

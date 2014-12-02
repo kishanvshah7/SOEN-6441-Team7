@@ -39,6 +39,9 @@ public class ShopController extends Observable {
         this.sView = sView;
     }
 
+    /**
+     * Constructor shop controller.
+     */
     public ShopController() {
 
     }

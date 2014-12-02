@@ -15,6 +15,14 @@ import tdgame.model.TowerModel;
  */
 public class MaxHealth implements Strategy {
 
+    /**
+     * Targeting Strategy Algorithm
+     *
+     * @param tm Tower Object
+     * @param gcModel Grid Model Object
+     * @param cModel Creatures Object
+     * @return Creatures Id for targeting
+     */
     @Override
     public int doOperation(TowerModel tm, GridCellModel gcModel, CreatureModel[] cModel) {
         int temp_health = 0;

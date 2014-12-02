@@ -16,11 +16,11 @@ import tdgame.model.TowerModel;
  */
 public class NearToTower  implements Strategy{
     /**
-     * Strategy Algorithm
+     * Targeting Strategy Algorithm
      * @param tm Tower Object
-     * @param gcModel Grid 
-     * @param cModel
-     * @return 
+     * @param gcModel Grid Model Object
+     * @param cModel Creatures Object
+     * @return Creatures Id for targeting
      */
    @Override
     public int doOperation(TowerModel tm, GridCellModel gcModel, CreatureModel[] cModel) {
@@ -40,7 +40,14 @@ public class NearToTower  implements Strategy{
         }
         return shot_id;
     }
-    
+    /**
+     * Find Distance between tower and Creatures
+     * @param x1 x coordinate of tower
+     * @param y1 y coordinate of tower
+     * @param x2 x coordinate of creature
+     * @param y2 y coordinate of creature
+     * @return distance
+     */
     public double distance(int x1, int y1, int x2, int y2) {
         return Math.sqrt(
             (x1 - x2) *  (x1 -x2) + 

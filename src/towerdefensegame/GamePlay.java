@@ -80,8 +80,7 @@ public class GamePlay extends JFrame implements WindowListener {
                             MapValidation mv = new MapValidation(psModel.getGridCellArray());
                             if(mv.isValid()){
                                 Context context = new Context();
-                                
-                                System.out.println("Map is Valid");
+
                                 configModel cModel = new configModel(); 
                             
                                 psModel.initCellContainerModel();
@@ -128,9 +127,7 @@ public class GamePlay extends JFrame implements WindowListener {
                             MapValidation mv = new MapValidation(psModel.getGridCellArray());
                             if(mv.isValid()){
                                 Context context = new Context();
-                                
-                                System.out.println("Map is Valid");
-                                
+
                                 psModel.initCellContainerModel();
                                 psModel.setGridCellVal();
 

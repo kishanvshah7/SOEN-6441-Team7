@@ -7,7 +7,7 @@
 package statePattern;
 
 /**
- *
+ * Game State Interface
  * @author Rahul K Kikani
  */
 public interface State {

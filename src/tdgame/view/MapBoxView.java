@@ -34,7 +34,6 @@ public class MapBoxView extends JPanel {
      */
     public MapBoxView(MapBoxController mbCon){
         this.mbCon = mbCon;
-        System.out.println("MapBoxView");
     }
     
     /**
@@ -44,7 +43,6 @@ public class MapBoxView extends JPanel {
      * @param yC y coordinate
      */
     public MapBoxView(MapBoxController mbCon,int xC, int yC) {
-        System.out.println("XC:"+xC+" yC:"+yC);
         this.mbCon = mbCon;
         boolean FileLoadedFlag = mbCon.getFileFlag();
         int[][] temp_MapGridArray = new int[yC][xC];
@@ -71,7 +69,6 @@ public class MapBoxView extends JPanel {
                 gbc.ipady = 20;
                 this.add(cellBtn[y][x],gbc);
                 if(FileLoadedFlag){
-                    //System.out.println("X:"+x+" y:"+y+" "+temp_MapGridArray[y][x]);
                     if(temp_MapGridArray[y][x] == 7)
                         setEntryPoint(y, x);
                     if(temp_MapGridArray[y][x] == 8)
@@ -102,7 +99,6 @@ public class MapBoxView extends JPanel {
      * @return flag
      */
     public boolean setEntryPointFlag(){
-        System.out.println("setEntryPointFlag: "+mbCon.getEentryPointData());
         for(int y=0;y<mbCon.getYBlockCount();y++){
             for(int x=0;x<mbCon.getXBlockCount();x++){
               if(x==0){

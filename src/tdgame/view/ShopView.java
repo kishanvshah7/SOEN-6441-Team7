@@ -34,7 +34,7 @@ public class ShopView implements Observer {
     }
 
     public void update(Observable o, Object arg) {
-        System.out.println("Bagha");
+        System.out.println("Update");
         if (arg instanceof Integer) {
             if (Integer.parseInt(arg.toString()) == 2) {
                 towerInspectionWindowFlag = true;
@@ -86,7 +86,6 @@ public class ShopView implements Observer {
         g.drawString("" + configModel.money, sModel.btn_coins.x + sModel.icon_space, sModel.btn_coins.height + 30);
 
         if (sModel.isHoldsItem()) {
-            //System.out.println("X:"+configModel.mse.x+" Y:"+configModel.mse.y);
             g.drawImage(configModel.air_level[sModel.getHeldID()], configModel.mse.x - ((sModel.button[0].width - (sModel.itemIn * 2)) / 2) + sModel.itemIn, configModel.mse.y - ((sModel.button[0].width - (sModel.itemIn * 2)) / 2) + sModel.itemIn, sModel.button[0].width - (sModel.itemIn * 2), sModel.button[0].height - (sModel.itemIn * 2), null);
         }
 
@@ -129,11 +128,7 @@ public class ShopView implements Observer {
                 g.drawString("Tower reached max Level", sModel.btn_health.x + 5, sModel.btn_health.height + 235);
             }
         }
-
-//        if(sModel.button[i].contains(configModel.mse)){
-//                 g.setColor(new Color(255, 255, 255, 100));
-//                 g.fillRect(sModel.button[i].x, sModel.button[i].y + 15, sModel.button[i].width, sModel.button[i].height);
-//             }
+        
         g.setColor(new Color(255, 255, 255));
         for (int i = 0; i < sModel.buttonST.length; i++) {
             if (sModel.buttonST[i].contains(configModel.mse)) {

@@ -20,7 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 /**
- *
+ * Game Log Viewer
  * @author Rahul K Kikani
  */
 public class GameLogViewer extends JFrame {
@@ -42,6 +42,9 @@ public class GameLogViewer extends JFrame {
     
     public static boolean testFlag = false;
     
+    /**
+     * Initialized Game Lob Viewer
+     */
     public GameLogViewer(){
         this.setSize(600,700);
         this.setTitle("Game Log Console");
@@ -110,6 +113,10 @@ public class GameLogViewer extends JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * Update Global Game Log Panel
+     * @param str Global Game Log
+     */
     public static void addText_GGjtp(String str){
         if(!testFlag){
             GGjtp.append(str);
@@ -119,6 +126,10 @@ public class GameLogViewer extends JFrame {
         }
     }
     
+    /**
+     * Update Collective tower log Panel
+     * @param str Collective tower log
+     */
     public static void addText_CTjtp(String str){
         if(!testFlag){
             CTjtp.append(str);
@@ -128,6 +139,10 @@ public class GameLogViewer extends JFrame {
         }
     }
     
+    /**
+     * Update Individual tower Log Panel
+     * @param str Individual tower Log
+     */
     public static void addText_ITjtp(String str){
         if(!testFlag){
             ITjtp.setText(str);
@@ -137,6 +152,10 @@ public class GameLogViewer extends JFrame {
         }
     }
     
+    /**
+     * Update Wave Log Panel
+     * @param str Wave Log
+     */
     public static void addText_Wjtp(String str){
         if(!testFlag){
             Wjtp.append(str);

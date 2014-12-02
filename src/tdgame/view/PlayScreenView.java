@@ -140,7 +140,7 @@ public class PlayScreenView extends JPanel implements Runnable {
      */
     public boolean initCreatures(){
         if(configModel.level ==1){
-            System.out.println("initCreatures");
+            
             LogGenerator.addLog("First Level get started");
             LogGenerator.addLog(creaturesNo+" New Creatures Created.");
             LogGenerator.addWaveLog("First Level get started");
@@ -154,7 +154,7 @@ public class PlayScreenView extends JPanel implements Runnable {
                 }
                 isFirst = false;
             } else {
-                System.out.println("psCont not initialized");
+                
             }
         } else if(GameLoadFlag) {
             configModel.creaturesNo = configModel.creaturesLevel[configModel.level];
@@ -170,11 +170,10 @@ public class PlayScreenView extends JPanel implements Runnable {
             if(psCont != null){
                 for(int i=0;i<Creatures.length;i++){
                     Creatures[i] = new CreatureModel(psCont.getCcModel(),psCont.getCcCont());
-                    //mobs[i].spawnMob(0);
                 }
                 isFirst = false;
             } else {
-                System.out.println("psCont not initialized");
+                
             }
         }
         if(psCont != null){
@@ -188,7 +187,7 @@ public class PlayScreenView extends JPanel implements Runnable {
             gamePause = true;
             PauseState pauseState = new PauseState();
             pauseState.doAction(c);
-            System.out.println("GamePaused");
+            
             LogGenerator.addLog("Game Saved");
             saveGameFile.initFile();
             GridCellModel[][] gcm = psCont.getCcModel().getGcModel();
@@ -307,7 +306,6 @@ public class PlayScreenView extends JPanel implements Runnable {
      * @param g the Graphics
      */
     public void paintComponent(Graphics g){
-        //System.out.println("xyz");
         w=g;
         if(isFirst)
         {

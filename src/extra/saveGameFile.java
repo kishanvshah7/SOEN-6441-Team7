@@ -35,6 +35,9 @@ public class saveGameFile {
     public static Element rootElement;
     public static File f;
 
+    /**
+     * File Initiator
+     */
     public static void initFile() {
         docFactory = DocumentBuilderFactory.newInstance();
         try {
@@ -49,94 +52,89 @@ public class saveGameFile {
 
     }
 
+    /**
+     * MapInfo Saving
+     *
+     * @param gcm Grid Object
+     */
     public static void mapInfo(GridCellModel[][] gcm) {
         Element mapinfo = doc.createElement("mapinfo");
         rootElement.appendChild(mapinfo);
 
         Element map = doc.createElement("map");
         mapinfo.appendChild(map);
-        
-        // set attribute to map element
-        map.setAttribute("y", gcm.length+"");
-        map.setAttribute("x", gcm[0].length+"");
+
+        map.setAttribute("y", gcm.length + "");
+        map.setAttribute("x", gcm[0].length + "");
         map.setAttribute("file", f.getName());
 
-        //loop start
-        for(int x=0;x<gcm[0].length;x++){
-            for(int y=0;y<gcm.length;y++){
-                //System.out.println("("+y+", "+x+")="+gcm[y][x].getAirID());
-                // tile elements
+        for (int x = 0; x < gcm[0].length; x++) {
+            for (int y = 0; y < gcm.length; y++) {
                 Element tile = doc.createElement("tile");
                 map.appendChild(tile);
-                // set attribute to tile element
-                tile.setAttribute("y", (y+1)+"");
-                tile.setAttribute("x", (x+1)+"");
-                if(gcm[y][x].getAirID() == 7 || gcm[y][x].getAirID() ==8)
-                    tile.setAttribute("value", gcm[y][x].getAirID()+""); 
-                else if(gcm[y][x].getAirID() == -1 && gcm[y][x].getgID() != 1)
-                    tile.setAttribute("value", 0+"");
-                else if(gcm[y][x].getgID()== 1)
-                    tile.setAttribute("value", 1+""); 
-                else
-                    tile.setAttribute("value", gcm[y][x].getAirID()+""); 
+                tile.setAttribute("y", (y + 1) + "");
+                tile.setAttribute("x", (x + 1) + "");
+                if (gcm[y][x].getAirID() == 7 || gcm[y][x].getAirID() == 8) {
+                    tile.setAttribute("value", gcm[y][x].getAirID() + "");
+                } else if (gcm[y][x].getAirID() == -1 && gcm[y][x].getgID() != 1) {
+                    tile.setAttribute("value", 0 + "");
+                } else if (gcm[y][x].getgID() == 1) {
+                    tile.setAttribute("value", 1 + "");
+                } else {
+                    tile.setAttribute("value", gcm[y][x].getAirID() + "");
+                }
             }
             System.out.println("\n");
         }
     }
 
+    /**
+     * Save Tower Info
+     */
     public static void towerInfo() {
-        // towerinfo elements
         Element towerinfo = doc.createElement("towerinfo");
         rootElement.appendChild(towerinfo);
-
-        //loop start
         for (int i = 0; i < TowerLevel.length; i++) {
-            // tower elements
             Element tower = doc.createElement("tower");
             towerinfo.appendChild(tower);
-            // set attribute to tower element
-            tower.setAttribute("level", TowerLevel[i]+"");
-            tower.setAttribute("id", (i + 3)+"");
-//            System.out.println("T ID+Level" + (i + 3) + "+" + TowerLevel[i]);
+            tower.setAttribute("level", TowerLevel[i] + "");
+            tower.setAttribute("id", (i + 3) + "");
         }
-        //loop end
     }
 
+    /**
+     * Save Game Info
+     */
     public static void gameInfo() {
-        // gameinfo elements
         Element gameinfo = doc.createElement("gameinfo");
         rootElement.appendChild(gameinfo);
-
-        // level elements
         Element level = doc.createElement("level");
         gameinfo.appendChild(level);
-        level.appendChild(doc.createTextNode(configModel.level+""));
-        // health elements
+        level.appendChild(doc.createTextNode(configModel.level + ""));
         Element health = doc.createElement("health");
         gameinfo.appendChild(health);
-        health.appendChild(doc.createTextNode(configModel.health+""));
-        // money elements
+        health.appendChild(doc.createTextNode(configModel.health + ""));
         Element money = doc.createElement("money");
         gameinfo.appendChild(money);
-        money.appendChild(doc.createTextNode(configModel.money+""));
+        money.appendChild(doc.createTextNode(configModel.money + ""));
     }
 
+    /**
+     * Save Log Info
+     */
     public static void lofInfo() {
-        // gameinfo elements
         Element loginfo = doc.createElement("loginfo");
         rootElement.appendChild(loginfo);
-
-        //loop start
-        // item elements
         Element item = doc.createElement("item");
         loginfo.appendChild(item);
-        // set attribute to item element
         item.setAttribute("type", "T");
         item.setAttribute("time", "12");
         item.appendChild(doc.createTextNode("asdfasdf"));
-        //loop end
     }
 
+    /**
+     * Save File
+     */
     public static void saveFile() {
         // write the content into xml file
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -147,8 +145,6 @@ public class saveGameFile {
             StreamResult result = new StreamResult(f);
 
             try {
-                // Output to console for testing
-                // StreamResult result = new StreamResult(System.out);
                 transformer.transform(source, result);
             } catch (TransformerException ex) {
                 Logger.getLogger(saveGameFile.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,14 +154,5 @@ public class saveGameFile {
         }
 
         System.out.println("File saved!");
-    }
-
-    public static void main(String argv[]) {
-        saveGameFile sgf = new saveGameFile();
-        sgf.initFile();
-        //sgf.mapInfo();
-        sgf.towerInfo();
-        sgf.gameInfo();
-        sgf.saveFile();
     }
 }

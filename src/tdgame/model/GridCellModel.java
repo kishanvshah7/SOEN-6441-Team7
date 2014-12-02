@@ -60,7 +60,7 @@ public class GridCellModel extends Rectangle {
 
         towerLog = new String[configModel.airTowerLaser.length];
         towerCKilled = new int[configModel.airTowerLaser.length];
-        
+
         for (int i = 0; i < configModel.airTowerLaser.length; i++) {
             towers[i] = new TowerModel();
             towers[i].towerRange = new Rectangle(x - ((configModel.airTowerRanger[i]) / 2), y - ((configModel.airTowerRanger[i]) / 2), width + configModel.airTowerRanger[i], height + configModel.airTowerRanger[i]);
@@ -73,56 +73,23 @@ public class GridCellModel extends Rectangle {
     }
 
     public void physic(CreatureModel[] cModel) {
-        
-        shotMob = towers[gID].getShotMobID(this, cModel);
 
-//        for (int i = 0; i < configModel.airTowerLaser.length; i++) {
-//            if (getShotMob() != -1 && getTowerRange()[gID].intersects(cModel[getShotMob()])) {
-//                setFiring(true);
-//            } else {
-//                setFiring(false);
-//            }
-//        }
-//        for (int tid = 0; tid < configModel.airTowerLaser.length; tid++) {
-//            if (airID == 5) {
-//                for (int i = 0; i < cModel.length; i++) {
-//                    if (cModel[i].isInGame()) {
-//                        if (getTowerRange()[tid].contains(cModel[i])) {
-//                            setFiring(false);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        if (!isFiring()) {
-//            for (int tid = 0; tid < configModel.airTowerLaser.length; tid++) {
-//                if (airID == configModel.airTowerLaser[tid]) {
-//                    for (int i = 0; i < cModel.length; i++) {
-//                        if (cModel[i].isInGame()) {
-//                            if (getTowerRange()[tid].intersects(cModel[i])) {
-//                                setFiring(true);
-//                                setShotMob(i);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        shotMob = towers[gID].getShotMobID(this, cModel);
 
         if (getShotMob() != -1 && isFiring() && getAirID() != -1) {
             if (loseFrame >= loseTime) {
                 if (getAirID() != 5) {
-                    //System.out.println("Air Id: "+getAirID()+" Rate:"+configModel.TowerFiringRate[getAirID()-3]);
                     cModel[getShotMob()].loseHealth(configModel.TowerFiringRate[getAirID() - 3]);
-                } else if (getAirID() == 5) {
-                    System.out.println("Mob " + getShotMob() + " Freezed : "+cModel[getShotMob()].walkSpeed);
-                    if (cModel[getShotMob()].walkSpeed < 20 + configModel.TowerFiringRate[getAirID() - 3]) {
-                        cModel[getShotMob()].walkSpeed++;
+                    if (getAirID() == 4) {
                         if (!cModel[getShotMob()].isFreezed()) {
                             cModel[getShotMob()].setFreezed(true);
                             cModel[getShotMob()].setTimeNow(System.currentTimeMillis());
-                            
+
                         }
+                    }
+                } else if (getAirID() == 5) {
+                    if (cModel[getShotMob()].walkSpeed < 20 + configModel.TowerFiringRate[getAirID() - 3]) {
+                        cModel[getShotMob()].walkSpeed++;
                     } else {
                         setFiring(false);
                         setShotMob(-1);
@@ -142,7 +109,7 @@ public class GridCellModel extends Rectangle {
 
         for (int i = 0; i < cModel.length; i++) {
             if (cModel[i].isFreezed()) {
-                if (cModel[i].getTimeNow() + (1000 * configModel.TowerLevel[2]) < System.currentTimeMillis()) {
+                if (cModel[i].getTimeNow() + (1000 * configModel.TowerLevel[1]) < System.currentTimeMillis()) {
                     System.out.println("Mob " + i + " unFreezed");
                     cModel[i].setFreezed(false);
                 }
@@ -187,7 +154,6 @@ public class GridCellModel extends Rectangle {
     }
 
     public void getMoney(int mobID) {
-        System.out.println("Money Is increased");
         configModel.money += configModel.deathReward[0];
     }
 
@@ -212,7 +178,6 @@ public class GridCellModel extends Rectangle {
         this.firing = firing;
     }
 
-
     /**
      * @param towerRange the towerRange to set
      * @param i the towerRange ID
@@ -221,6 +186,11 @@ public class GridCellModel extends Rectangle {
         this.towers[i].towerRange = towerRange;
     }
 
+    /**
+     * Get current Time
+     *
+     * @return time in string
+     */
     public String getCurrentTime() {
         Calendar cal = Calendar.getInstance();
         cal.getTime();
