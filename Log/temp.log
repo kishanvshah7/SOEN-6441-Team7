@@ -1,83 +1,32 @@
-[02/12/2014 05:17:31 PM] : Game Initialized.
-[02/12/2014 05:17:33 PM] : Create Map button clicked.
-[02/12/2014 05:17:33 PM] : Map Creation Window Opened
-[02/12/2014 05:17:38 PM] : Map Grid Generated.
-[02/12/2014 05:17:40 PM] : Entry Point Set : (0,0)
-[02/12/2014 05:17:41 PM] : Exit Point Set : (9,7)
-[02/12/2014 05:17:43 PM] : Path Point Set : (1,0)
-[02/12/2014 05:17:43 PM] : Path Point Set : (2,0)
-[02/12/2014 05:17:43 PM] : Path Point Set : (2,1)
-[02/12/2014 05:17:44 PM] : Path Point Set : (2,2)
-[02/12/2014 05:17:44 PM] : Path Point Set : (3,2)
-[02/12/2014 05:17:45 PM] : Path Point Set : (3,3)
-[02/12/2014 05:17:45 PM] : Path Point Set : (3,4)
-[02/12/2014 05:17:45 PM] : Path Point Set : (3,4)
-[02/12/2014 05:17:46 PM] : Path Point Set : (3,4)
-[02/12/2014 05:17:46 PM] : Path Point Set : (3,5)
-[02/12/2014 05:17:47 PM] : Path Point Set : (3,6)
-[02/12/2014 05:17:48 PM] : Path Point Set : (3,7)
-[02/12/2014 05:17:48 PM] : Path Point Set : (3,8)
-[02/12/2014 05:17:49 PM] : Path Point Set : (3,9)
-[02/12/2014 05:17:49 PM] : Path Point Set : (4,9)
-[02/12/2014 05:17:50 PM] : Path Point Set : (5,9)
-[02/12/2014 05:17:50 PM] : Path Point Set : (5,8)
-[02/12/2014 05:17:50 PM] : Path Point Set : (5,7)
-[02/12/2014 05:17:51 PM] : Path Point Set : (6,7)
-[02/12/2014 05:17:51 PM] : Path Point Set : (7,7)
-[02/12/2014 05:17:52 PM] : Path Point Set : (8,7)
-[02/12/2014 05:17:53 PM] : User wants to save map.
-[02/12/2014 05:17:53 PM] : Map Validation
-[02/12/2014 05:17:53 PM] : Valid Map
-[02/12/2014 05:17:53 PM] : User edited map is valid.
-[02/12/2014 05:17:58 PM] : MapFile saved as : 10_12
-[02/12/2014 05:18:07 PM] : Play button clicked.
-[02/12/2014 05:18:07 PM] : MapChooser Screen open
-[02/12/2014 05:18:07 PM] : Listed all mapfiles from MapFiel folder
-[02/12/2014 05:18:11 PM] : Let's Play clicked.
-[02/12/2014 05:18:11 PM] : User's map file:10_12.team7
-[02/12/2014 05:18:11 PM] : Game Play Started.
-[02/12/2014 05:18:11 PM] : Game Play Screen initialized.
-[02/12/2014 05:18:12 PM] : Basic Images are loaded successfully.
-[02/12/2014 05:18:12 PM] : First Level get started
-[02/12/2014 05:18:12 PM] : 5 New Creatures Created.
-[02/12/2014 05:18:12 PM] : First Level get started
-[02/12/2014 05:18:12 PM] : 5 New Creatures Created.
-[02/12/2014 05:18:12 PM] : Game Play Start
-[02/12/2014 05:18:14 PM] : Mob Id:0 get started moving.
-[02/12/2014 05:18:15 PM] : Tower Id:3 placed at (2,4)
-[02/12/2014 05:18:15 PM] : Tower Inspection window showed for Tower:3 at (2,4)
-[02/12/2014 05:18:16 PM] : Mob Id:1 get started moving.
-[02/12/2014 05:18:17 PM] : Mob Id:2 get started moving.
-[02/12/2014 05:18:18 PM] : Tower Id:4 placed at (5,2)
-[02/12/2014 05:18:18 PM] : Tower Inspection window showed for Tower:4 at (5,2)
-[02/12/2014 05:18:19 PM] : Mob Id:3 get started moving.
-[02/12/2014 05:18:20 PM] : Tower Id:5 placed at (7,4)
-[02/12/2014 05:18:20 PM] : Tower Inspection window showed for Tower:5 at (7,4)
-[02/12/2014 05:18:20 PM] : Mob Id:4 get started moving.
-[02/12/2014 05:18:22 PM] : Tower Id:6 placed at (8,6)
-[02/12/2014 05:18:22 PM] : Tower Inspection window showed for Tower:6 at (8,6)
-[02/12/2014 05:18:25 PM] : Tower Inspection window showed for Tower:4 at (5,2)
-[02/12/2014 05:18:35 PM] : Mob Killed, Mob Id :4
-[02/12/2014 05:18:35 PM] : Mob killing reward added to main amount.
-[02/12/2014 05:18:37 PM] : Mob Killed, Mob Id :0
-[02/12/2014 05:18:37 PM] : Mob killing reward added to main amount.
-[02/12/2014 05:18:39 PM] : Mob Killed, Mob Id :1
-[02/12/2014 05:18:39 PM] : Mob killing reward added to main amount.
-[02/12/2014 05:18:41 PM] : Mob Killed, Mob Id :2
-[02/12/2014 05:18:41 PM] : Mob killing reward added to main amount.
-[02/12/2014 05:18:43 PM] : Mob Killed, Mob Id :3
-[02/12/2014 05:18:43 PM] : Mob killing reward added to main amount.
-[02/12/2014 05:18:43 PM] : Game Saved
-[02/12/2014 05:18:43 PM] : Game Level Upgraded to : 2
-[02/12/2014 05:18:43 PM] : new Creatures : 10
-[02/12/2014 05:18:43 PM] : Mob Id:0 get started moving.
-[02/12/2014 05:18:45 PM] : Mob Id:1 get started moving.
-[02/12/2014 05:18:46 PM] : Mob Id:2 get started moving.
-[02/12/2014 05:18:47 PM] : Mob Id:3 get started moving.
-[02/12/2014 05:18:49 PM] : Mob Id:4 get started moving.
-[02/12/2014 05:18:50 PM] : Mob Id:5 get started moving.
-[02/12/2014 05:18:51 PM] : Mob Id:6 get started moving.
-[02/12/2014 05:18:53 PM] : Mob Id:7 get started moving.
-[02/12/2014 05:18:54 PM] : Mob Id:8 get started moving.
-[02/12/2014 05:18:55 PM] : Game Play Window Closed.
-[02/12/2014 05:18:55 PM] : Game Closed
+[02/12/2014 06:00:49 PM] : Game Initialized.
+[02/12/2014 06:00:51 PM] : Play button clicked.
+[02/12/2014 06:00:51 PM] : MapChooser Screen open
+[02/12/2014 06:00:52 PM] : Listed all mapfiles from MapFiel folder
+[02/12/2014 06:00:54 PM] : Let's Play clicked.
+[02/12/2014 06:00:54 PM] : User's map file:10_12.team7
+[02/12/2014 06:00:54 PM] : Game Play Started.
+[02/12/2014 06:00:54 PM] : Game Play Screen initialized.
+[02/12/2014 06:00:54 PM] : Basic Images are loaded successfully.
+[02/12/2014 06:00:54 PM] : First Level get started
+[02/12/2014 06:00:54 PM] : 5 New Creatures Created.
+[02/12/2014 06:00:55 PM] : Game Play Start
+[02/12/2014 06:00:57 PM] : Mob Id:0 get started moving.
+[02/12/2014 06:00:57 PM] : Tower Id:3 placed at (3,4)
+[02/12/2014 06:00:57 PM] : Tower Id:3 Purchased
+[02/12/2014 06:00:57 PM] : Money: Balance: 150$ | TowerCost: 10$ | Final Balance: 140$
+[02/12/2014 06:00:57 PM] : Tower Inspection window showed for Tower:3 at (3,4)
+[02/12/2014 06:00:58 PM] : Mob Id:1 get started moving.
+[02/12/2014 06:00:59 PM] : Tower Id:0 Starategy Upgraded to Max Health
+[02/12/2014 06:00:59 PM] : Mob Id:2 get started moving.
+[02/12/2014 06:01:01 PM] : Tower Id:0 Starategy Upgraded to Min Health
+[02/12/2014 06:01:01 PM] : Mob Id:3 get started moving.
+[02/12/2014 06:01:02 PM] : Tower Id:0 Starategy Upgraded to Nearer To Tower
+[02/12/2014 06:01:02 PM] : Mob Id:4 get started moving.
+[02/12/2014 06:01:03 PM] : Tower Id:0 Starategy Upgraded to FirstComeFirstServe
+[02/12/2014 06:01:04 PM] : Tower Id:0 Starategy Upgraded to FirstComeFirstServe
+[02/12/2014 06:01:09 PM] : Tower Id:0 Starategy Upgraded to Max Health
+[02/12/2014 06:01:10 PM] : Tower Id:0 Starategy Upgraded to Max Health
+[02/12/2014 06:01:13 PM] : Tower Id:0 Starategy Upgraded to Min Health
+[02/12/2014 06:01:14 PM] : Tower Id:0 Starategy Upgraded to Nearer To Tower
+[02/12/2014 06:01:20 PM] : Game Play Window Closed.
+[02/12/2014 06:01:20 PM] : Game Closed

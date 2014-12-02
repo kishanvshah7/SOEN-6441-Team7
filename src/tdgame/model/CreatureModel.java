@@ -88,6 +88,7 @@ public class CreatureModel extends Rectangle {
             configModel.killed += 1;
             configModel.total_killed += 1;
             LogGenerator.addLog("Mob Killed, Mob Id :" + getMobID());
+            LogGenerator.addLog("Money: Balance: "+(configModel.money-configModel.deathReward[0])+"$ | Creature Reward: "+configModel.deathReward[0]+"$ | Final Balance: "+configModel.money+"$");
             LogGenerator.addLog("Mob killing reward added to main amount.");
         }
         this.setHealth(0);

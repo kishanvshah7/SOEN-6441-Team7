@@ -7,11 +7,7 @@ package tdgame.controller;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.text.ParseException;
 import java.util.Observable;
-import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import tdgame.model.ShopModel;
 import tdgame.model.configModel;
 import tdgame.view.ShopView;
@@ -106,10 +102,8 @@ public class ShopController extends Observable {
 
             if (sModel.towerUpgrade.contains(configModel.mse)) {
                 if (sModel.isTowerInfo()) {
-                    //System.out.println("Tower Info");
                     if (configModel.TowerLevel[sModel.getTowerID()] < 5) {
                         if (configModel.money >= configModel.TowerPrice[sModel.getTowerID()]) {
-                            //System.out.println("Tower Upgrade: "+sModel.getTowerID());
 
                             if (sModel.getTowerID() == 2) {
                                 configModel.TowerFiringRate[sModel.getTowerID()] += 5;
@@ -147,8 +141,55 @@ public class ShopController extends Observable {
 
             for (int i = 0; i < 4; i++) {
                 if (sModel.buttonST[i].contains(configModel.mse)) {
-                    System.out.println("BTN "+i);
                     configModel.TowerST[sModel.getTowerID()] = i;
+                    int tid = sModel.getTowerID();
+                    if (i == 0) {
+                        LogGenerator.addLog("Tower Id:" + tid + " Starategy Upgraded to FirstComeFirstServe");
+                        LogGenerator.addCollectiveTowerLog("Tower Id:" + tid + " Starategy Upgraded to FirstComeFirstServe");
+                        for (int y = 0; y < ccCont.getyC(); y++) {
+                            for (int x = 0; x < ccCont.getxC(); x++) {
+                                if (ccCont.getgcModelObj(y, x).getAirID() == 3) {
+                                    ccCont.getgcModelObj(y, x).towerLog[tid] += LogGenerator.getLogTime() + "Tower Starategy Upgraded to FirstComeFirstServe";                                    
+                                    LogGenerator.addIndividualTowerLog(ccCont.getgcModelObj(y, x).towerLog[tid]);
+                                }
+                            }
+                        }
+                    } else if (i == 1) {
+
+                        LogGenerator.addLog("Tower Id:" + tid + " Starategy Upgraded to Max Health");
+                        LogGenerator.addCollectiveTowerLog("Tower Id:" + tid + " Starategy Upgraded to Max Health");
+                        for (int y = 0; y < ccCont.getyC(); y++) {
+                            for (int x = 0; x < ccCont.getxC(); x++) {
+                                if (ccCont.getgcModelObj(y, x).getAirID() == 4) {
+                                    ccCont.getgcModelObj(y, x).towerLog[tid] += LogGenerator.getLogTime() + "Tower Starategy Upgraded to FirstComeFirstServe";                                    
+                                    LogGenerator.addIndividualTowerLog(ccCont.getgcModelObj(y, x).towerLog[tid]);
+                                }
+                            }
+                        }
+                    } else if (i == 2) {
+
+                        LogGenerator.addLog("Tower Id:" + tid + " Starategy Upgraded to Min Health");
+                        LogGenerator.addCollectiveTowerLog("Tower Id:" + tid + " Starategy Upgraded to Min Health");
+                        for (int y = 0; y < ccCont.getyC(); y++) {
+                            for (int x = 0; x < ccCont.getxC(); x++) {
+                                if (ccCont.getgcModelObj(y, x).getAirID() == 5) {
+                                    ccCont.getgcModelObj(y, x).towerLog[tid] += LogGenerator.getLogTime() + "Tower Starategy Upgraded to FirstComeFirstServe";                                    
+                                    LogGenerator.addIndividualTowerLog(ccCont.getgcModelObj(y, x).towerLog[tid]);
+                                }
+                            }
+                        }
+                    } else if (i == 3) {
+                        LogGenerator.addLog("Tower Id:" + tid + " Starategy Upgraded to Nearer To Tower");
+                        LogGenerator.addCollectiveTowerLog("Tower Id:" + tid + " Starategy Upgraded to Nearer To Tower");
+                        for (int y = 0; y < ccCont.getyC(); y++) {
+                            for (int x = 0; x < ccCont.getxC(); x++) {
+                                if (ccCont.getgcModelObj(y, x).getAirID() == 6) {
+                                    ccCont.getgcModelObj(y, x).towerLog[tid] += LogGenerator.getLogTime() + "Tower Starategy Upgraded to FirstComeFirstServe";                                    
+                                    LogGenerator.addIndividualTowerLog(ccCont.getgcModelObj(y, x).towerLog[tid]);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         } else if (button == 0 && sModel.isHoldsItem()) {
@@ -175,11 +216,18 @@ public class ShopController extends Observable {
     public boolean placeTower(int y, int x, int priceID) {
         if (ccCont.getgcModelObj(y, x).getgID() != 11 && ccCont.getgcModelObj(y, x).getgID() != configModel.groundRoad && ccCont.getgcModelObj(y, x).getAirID() == configModel.airAir) {
             ccCont.getgcModelObj(y, x).setAirID(sModel.getHeldID());
-            configModel.money = configModel.money - sModel.getButtonPrice(priceID);
-            //System.out.println("Tower Placed"+sModel.getHeldID());
+
             LogGenerator.addLog("Tower Id:" + sModel.getHeldID() + " placed at (" + y + "," + x + ")");
+            LogGenerator.addCollectiveTowerLog("Tower Id:" + sModel.getHeldID() + " Placed at (" + y + "," + x + ")\n");
             ccCont.getgcModelObj(y, x).towerLog[sModel.getHeldID() - 3] = LogGenerator.getLogTime() + "Tower Placed at (" + y + "," + x + ")\n";
-            LogGenerator.addCollectiveTowerLog("Tower Placed at (" + y + "," + x + ")\n");
+
+            LogGenerator.addLog("Tower Id:" + sModel.getHeldID() + " Purchased");
+            LogGenerator.addCollectiveTowerLog("Tower Id:" + sModel.getHeldID() + " Purchased");
+
+            LogGenerator.addLog("Money: Balance: " + configModel.money + "$ | TowerCost: " + sModel.getButtonPrice(priceID) + "$ | Final Balance: " + (configModel.money - sModel.getButtonPrice(priceID)) + "$");
+
+            configModel.money = configModel.money - sModel.getButtonPrice(priceID);
+
             ccCont.getgcModelObj(y, x).setTowerRange(sModel.getTowerID(), new Rectangle(ccCont.getgcModelObj(y, x).x - ((configModel.airTowerRanger[sModel.getTowerID()]) / 2), ccCont.getgcModelObj(y, x).y - ((configModel.airTowerRanger[sModel.getTowerID()]) / 2), ccCont.getgcModelObj(y, x).width + configModel.airTowerRanger[sModel.getTowerID()], ccCont.getgcModelObj(y, x).height + configModel.airTowerRanger[sModel.getTowerID()]));
             sModel.setHoldsItem(false);
             LogGenerator.addIndividualTowerLog(ccCont.getgcModelObj(y, x).towerLog[sModel.getHeldID() - 3]);
@@ -207,11 +255,17 @@ public class ShopController extends Observable {
                 double refund_amount = sModel.getButtonPrice(i) * 0.8;
                 sModel.setMoney(configModel.money + (int) refund_amount);
                 configModel.money = configModel.money + (int) refund_amount;
+
                 ccCont.getgcModelObj(y, x).towerLog[i] += LogGenerator.getLogTime() + "Tower Removed from (" + y + "," + x + ")\n";
-                LogGenerator.addCollectiveTowerLog("Tower Removed from (" + y + "," + x + ")");
-                LogGenerator.addLog("Tower Id:" + sModel.getHeldID() + " removed from (" + y + "," + x + ")");
+                LogGenerator.addCollectiveTowerLog("Tower TD: " + sModel.getHeldID() + " Removed from (" + y + "," + x + ")");
+
+                LogGenerator.addLog("Tower Id: " + sModel.getHeldID() + " removed from (" + y + "," + x + ")");
+
+                LogGenerator.addLog("Money: Balance: " + (configModel.money - (int) refund_amount) + "$ | Tower Refund: " + ((int) refund_amount) + "$ | Final Balance: " + configModel.money + "$");
                 LogGenerator.addLog("Tower Sell reward done.");
+
                 LogGenerator.addIndividualTowerLog(ccCont.getgcModelObj(y, x).towerLog[i]);
+
                 setChanged();
                 notifyObservers(9);
                 return true;
@@ -229,9 +283,7 @@ public class ShopController extends Observable {
      */
     public boolean isTowerHere(int y, int x) {
         for (int i = 0; i < configModel.airTowerLaser.length; i++) {
-            //System.out.println("Tower Id: "+ccCont.getgcModelObj(y, x).getAirID()+"-"+configModel.airTowerLaser[i]);
             if (ccCont.getgcModelObj(y, x).getAirID() == configModel.airTowerLaser[i]) {
-                //System.out.println("Tower Is Here");
                 LogGenerator.addLog("Tower Inspection window showed for Tower:" + configModel.airTowerLaser[i] + " at (" + y + "," + x + ")");
                 sModel.setTowerID(i);
                 sModel.setTowerInfo(true);
