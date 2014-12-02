@@ -37,7 +37,6 @@ public class LoadGame extends JFrame implements WindowListener {
     private ReadXMLFile gameFile;
     /**
      * This method will initialize JFrame and set some basic properties(Title, Size, Background Color, Location).
-     * @param f Map file which is selected by user from list box.
      * @param w Width of Play screen based on map size
      * @param h Height of Play screen based on map size
      */
@@ -60,7 +59,6 @@ public class LoadGame extends JFrame implements WindowListener {
     
     /**
      * This method will check the Map file and based on the type of map, it will bind the model to the controller and create the play view using the View.
-     * @param f Map file which is selected by user from list box.
      */
     public void init_elements()
     {

@@ -43,6 +43,7 @@ public class GamePlay extends JFrame implements WindowListener {
      * @param f Map file which is selected by user from list box.
      * @param w Width of Play screen based on map size
      * @param h Height of Play screen based on map size
+     * @param type GameLoad and Play Type
      */
     public GamePlay(File f, int w, int h, String type)
     {

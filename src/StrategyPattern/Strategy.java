@@ -11,7 +11,7 @@ import tdgame.model.GridCellModel;
 import tdgame.model.TowerModel;
 
 /**
- *
+ * Strategy Interface
  * @author Rahul K Kikani
  */
 public interface Strategy {

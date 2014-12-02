@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import statePattern.Context;
+import statePattern.StartState;
 
 import tdgame.model.CreatureModel;
 import tdgame.model.PlayScreenModel;
@@ -17,9 +20,18 @@ import towerdefensegame.GamePlay;
 public class PlayScreenViewTest {
 	
 	
-	GamePlay gptest = new GamePlay(new File("MapFilesTest/Path4.team7"), 5, 5, "GamePlay");
+	static GamePlay gptest = new GamePlay(new File("MapFilesTest/Path4.team7"), 5, 5, "GamePlay");
 	
-	PlayScreenView psviewtest = new PlayScreenView(gptest);
+        static Context context = new Context();
+        static StartState startState = new StartState();
+        static PlayScreenView psviewtest;
+        
+        @BeforeClass
+        public static void onlyOnce() {
+            GameLogViewer.testFlag = true;
+            startState.doAction(context);
+            psviewtest = new PlayScreenView(gptest, startState, context);
+        }
 	
 	@Before
         public void setup(){

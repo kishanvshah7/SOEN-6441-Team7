@@ -15,7 +15,13 @@ import tdgame.model.TowerModel;
  * @author Rahul K Kikani
  */
 public class NearToTower  implements Strategy{
-    
+    /**
+     * Strategy Algorithm
+     * @param tm Tower Object
+     * @param gcModel Grid 
+     * @param cModel
+     * @return 
+     */
    @Override
     public int doOperation(TowerModel tm, GridCellModel gcModel, CreatureModel[] cModel) {
         double temp_health = 1000;

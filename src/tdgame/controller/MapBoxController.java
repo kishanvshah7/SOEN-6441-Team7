@@ -267,6 +267,7 @@ public class MapBoxController {
      * This method will save map in file.
      *
      * @param str file name
+     * @param type Map Loading Type
      */
     public void saveMap_XML(String str, String type) {
         mapReader sem = new mapReader();

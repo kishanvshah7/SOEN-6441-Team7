@@ -43,7 +43,6 @@ public class GameChooser extends JFrame implements ActionListener{
     /**
      * This method will initialize GUI components for Map Chooser.
      * @param msView the view object Main Screen
-     * @param fileList array of map files
      */
     public GameChooser(MainScreenView msView){
         
@@ -69,7 +68,6 @@ public class GameChooser extends JFrame implements ActionListener{
     
     /**
      * this method will read all files from MapFiles folder and list in JList Box.
-     * @param fileList the array of map files
      */
     public void listMapFiles(){
         
